@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>@yield('title')</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700|Work+Sans:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="{{asset('frontend/fonts/icomoon/style.css')}}">
+
+  <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('frontend/css/magnific-popup.css')}}">
+  <link rel="stylesheet" href="{{asset('frontend/css/jquery-ui.css')}}">
+  <link rel="stylesheet" href="{{asset('frontend/css/owl.carousel.min.css')}}">
+  <link rel="stylesheet" href="{{asset('frontend/css/owl.theme.default.min.css')}}">
+  <link rel="stylesheet" href="{{asset('frontend/css/bootstrap-datepicker.css')}}">
+  <link rel="stylesheet" href="{{asset('frontend/css/animate.css')}}">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
+
+
+
+  <link rel="stylesheet" href="{{asset('frontend/fonts/flaticon/font/flaticon.css')}}">
+
+  <link rel="stylesheet" href="{{asset('frontend/css/aos.css')}}">
+
+  <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
+  @yield('style_css')
+</head>
+<body>
+
+<div class="site-wrap">
+
+  <div class="site-mobile-menu">
+    <div class="site-mobile-menu-header">
+      <div class="site-mobile-menu-close mt-3">
+        <span class="icon-close2 js-menu-toggle"></span>
+      </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+  </div> <!-- .site-mobile-menu -->
+
+
+  <div class="site-navbar-wrap js-site-navbar bg-white">
+
+    <div class="container">
+      <div class="site-navbar bg-light">
+        <div class="py-1">
+          <div class="row align-items-center">
+            <div class="col-3">
+              <h2 class="mb-0 site-logo"><a href="{{route('home')}}">Bani Girls Hostel</a></h2>
+            </div>
+            <div class="col-9">
+              <nav class="site-navigation text-right" role="navigation">
+                <div class="container">
+
+                  <div class="d-inline-block d-lg-none  ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu h3"></span></a></div>
+                  <ul class="site-menu js-clone-nav d-none d-lg-block">
+                    <li class="{{(request()->segment(1) == '') ? 'active' :''}}">
+                      <a href="{{route('home')}}">Home</a>
+                    </li>
+
+                      @foreach($contents as $content)
+                        @if($content->child->isEmpty() && $content->parent_id == '' )
+
+                        <li class="{{Request::segment(1) == 'content' && (Request::segment(2) == $content->slug) ? 'active' : '' }}" >
+                          <a href="{{route('content.show',[$content->slug])}}">{{$content->title}}</a>
+                        </li>
+
+                          @else
+                          @if($content->child->isNotEmpty() && $content->parent_id == '' )
+                          <?php $sub_menus = $content->child()->pluck('slug')->toArray();?>
+                          <li class="has-children {{ Request::segment(1) == 'content' && (Request::segment(2) == $content->slug || in_array(Request::segment(2), $sub_menus)) ? 'active' : '' }}">
+                            <a href="javascript:void(0)">{{$content->title}}</a>
+                            <ul class="dropdown arrow-top">
+                              @foreach($content->child as $firstchild)
+
+
+                               <li><a href="{{route('content.show',[$firstchild->slug])}}">{{$firstchild->title}}</a></li>
+
+
+                                @endforeach
+                            </ul>
+                          @endif
+                        @endif
+                        @endforeach
+                    </li>
+
+                    <li class="{{ (request()->segment(1) == 'contact-us') ? 'active' : '' }}"><a href="{{route('contact.index')}}">Contact</a></li>
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+@yield('main')
+
+<!-- start footer -->
+  @include('layouts.footer')
+</div>
+
+<script src="{{asset('frontend/js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{asset('frontend/js/jquery-migrate-3.0.1.min.js')}}"></script>
+<script src="{{asset('frontend/js/jquery-ui.js')}}"></script>
+<script src="{{asset('frontend/js/popper.min.js')}}"></script>
+<script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('frontend/js/owl.carousel.min.js')}}"></script>
+<script src="{{asset('frontend/js/jquery.stellar.min.js')}}"></script>
+<script src="{{asset('frontend/js/jquery.countdown.min.js')}}"></script>
+<script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}}"></script>
+<script src="{{asset('frontend/js/bootstrap-datepicker.min.js')}}"></script>
+<script src="{{asset('frontend/js/aos.js')}}"></script>
+
+
+<script src="{{asset('frontend/js/mediaelement-and-player.min.js')}}"></script>
+
+<script src="{{asset('frontend/js/main.js')}}"></script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
+
+    for (var i = 0; i < total; i++) {
+      new MediaElementPlayer(mediaElements[i], {
+        pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/',
+        shimScriptAccess: 'always',
+        success: function () {
+          var target = document.body.querySelectorAll('.player'), targetTotal = target.length;
+          for (var j = 0; j < targetTotal; j++) {
+            target[j].style.visibility = 'visible';
+          }
+        }
+      });
+    }
+  });
+
+</script>
+
+</body>
+</html>

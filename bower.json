@@ -1,0 +1,32 @@
+{
+  "name": "peacenepal.com",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Contact PNDC <contact@peacenepal.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ckeditor": "4.9.2",
+    "sweetalert2": "^7.24.4",
+    "form.validation": "*",
+    "font-awesome-animation": "^0.1.0",
+    "bootstrap-datepicker": "^1.7.0",
+    "jquery-locationpicker-plugin": "^0.1.16",
+    "jquery-ui": "^1.12.1",
+    "Font-Awesome": "5.1.0",
+    "es6-shim": "^0.35.3",
+    "jquery-pjax": "^2.0.1",
+    "cropperjs": "^1.5.1",
+    "glyphicons": "^0.0.2",
+    "Croppie": "croppie#^2.6.3"
+  }
+}

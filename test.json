@@ -1,0 +1,31 @@
+{
+  "@attributes": {
+    "date": "11\/10\/2018 11:32:49"
+  },
+  "Version": "1.0",
+  "OrderID": "16037",
+  "SessionID": "1602A4F8918ECD45877E12A9EC84D884",
+  "OrderIDEncrypted": "@encrypted@1@D9FAD9D78200527C",
+  "TransactionType": "Purchase",
+  "PAN": "413545XXXXXX0212",
+  "PurchaseAmount": "100",
+  "Currency": "524",
+  "TranDateTime": "11\/10\/2018 11:32:49",
+  "ResponseCode": "00",
+  "ResponseDescription": "Authentication Failed! Order Declined!",
+  "CardHolderName": "RAJIV",
+  "Brand": "VISA",
+  "OrderStatus": "DECLINED",
+  "ApprovalCode": {},
+  "MerchantTranID": "3135333932333638363139323530303030303030",
+  "OrderDescription": "Flight Ticket (KTM - PKR (oneway ) )",
+  "ApprovalCodeScr": {},
+  "PurchaseAmountScr": "1,00",
+  "AcqFee": "0",
+  "AcqFeeScr": "0,00",
+  "CurrencyScr": "NPR",
+  "OrderStatusScr": "DECLINED",
+  "Name": "RAJIV",
+  "ThreeDSVerificaion": "N",
+  "ThreeDSStatus": "Declined"
+}
