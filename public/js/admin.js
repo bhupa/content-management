@@ -6010,6 +6010,7 @@ $(function () {
         height: 300,
         allowedContent: true
     };
+    alert(options)
     $('.editor').ckeditor(options);
     $('.mini-editor').ckeditor({height: 150});
 });

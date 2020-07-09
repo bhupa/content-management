@@ -16,10 +16,9 @@ class AppComposer
      */
     protected $image_resize;
 
-    public function __construct(ImageResizeRepository $image_resize)
+    public function __construct()
     {
         auth()->shouldUse('admin');
-        $this->image_resize = $image_resize;
     }
 
     /**

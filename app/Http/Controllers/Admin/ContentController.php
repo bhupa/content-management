@@ -31,7 +31,7 @@ class ContentController extends Controller
      */
     public function index()
     {
-        $this->authorize('master-policy.perform', ['content', 'view']);
+        auth()->user()->can('master-policy.perform', ['content', 'view']);
         $title = $this->title;
         $contents = $this->content->orderBy('created_at', 'desc')->paginate('20');
         return view('admin.content.index')
@@ -47,9 +47,9 @@ class ContentController extends Controller
      */
     public function create()
     {
-        $this->authorize('master-policy.perform', ['content', 'add']);
+        auth()->user()->can('master-policy.perform', ['content', 'add']);
         $title = 'Add Content';
-        $parents = $this->content->whereNull('parent_id')->orderBy('display_order','asc')->where('footer','0')->where('edit','0')->get();
+        $parents = $this->content->whereNull('parent_id')->orderBy('display_order','asc')->where('display_in','header')->get();
         return view('admin.content.create')
             ->withParents($parents)
             ->withTitle($title);
@@ -64,7 +64,7 @@ class ContentController extends Controller
      */
     public function store(ContentRequest $request)
     {
-        $this->authorize('master-policy.perform', ['content', 'add']);
+        auth()->user()->can('master-policy.perform', ['content', 'add']);
         $data = $request->except(['image']);
         if ($request->get('image')) {
             $saveName = sha1(date('YmdHis') . str_random(3));
@@ -108,13 +108,13 @@ class ContentController extends Controller
      */
     public function edit($id)
     {
-        $this->authorize('master-policy.perform', ['content', 'edit']);
+        auth()->user()->can('master-policy.perform', ['content', 'edit']);
         $title = 'Edit Content';
         $content = $this->content->find($id);
 //        $parents = $this->content->where('id', '!=', $id)->orwhereHas('child', function($query) use($id){
 //
 //        })->get();
-        $patenr= $this->content->where('footer','0')->where('edit','0')->where('id', '!=', $id)->with('allchild')->whereNull('parent_id')->get();
+        $patenr= $this->content->where('display_in','header')->where('id', '!=', $id)->with('allchild')->whereNull('parent_id')->get();
         $parents =  $patenr->where('parent_id', '!=', $id)->all();
 
         return view('admin.content.edit')
@@ -134,7 +134,7 @@ class ContentController extends Controller
     public function update(ContentUpdateRequest $request, $id)
     {
 
-        $this->authorize('master-policy.perform', ['content', 'edit']);
+        auth()->user()->can('master-policy.perform', ['content', 'edit']);
         $content = $this->content->find($id);
         $data = $request->except(['image']);
         if ($request->get('image')) {
@@ -151,9 +151,7 @@ class ContentController extends Controller
         }
 
         $data['is_active'] = isset($request['is_active']) ? 1 : 0;
-        $data['edit'] = isset($request['edit']) ? 1 : 0;
-        $data['header'] = isset($data['header']) ? 1 : 0;
-        $data['footer'] = isset($data['footer']) ? 1 : 0;
+
 
         $data['updated_by'] = auth()->id();
         if($this->content->update($content->id, $data)){
@@ -173,7 +171,7 @@ class ContentController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $this->authorize('master-policy.perform', ['content', 'delete']);
+        auth()->user()->can('master-policy.perform', ['content', 'delete']);
         $content = $this->content->find($id);
         if($this->content->destroy($content->id)){
             $message = 'Content deleted successfully.';
@@ -190,7 +188,7 @@ class ContentController extends Controller
      */
     public function changeStatus(Request $request)
     {
-        $this->authorize('master-policy.perform', ['content', 'changeStatus']);
+        auth()->user()->can('master-policy.perform', ['content', 'changeStatus']);
         $content = $this->content->find($request->get('id'));
         if ($content->is_active == 0) {
             $status = 1;

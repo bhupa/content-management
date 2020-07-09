@@ -20,8 +20,6 @@ class Content extends Model
 
 
     protected $fillable = [
-        'meta_keys',
-        'meta_desc',
         'parent_id',
         'display_in',
         'title',
@@ -36,9 +34,7 @@ class Content extends Model
         'updated_by',
         'status_by',
         'deleted_by',
-        'edit',
-        'header',
-        'footer'
+        'display_in'
     ];
 
     public function parent()

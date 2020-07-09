@@ -58,25 +58,7 @@
                 <br>
 
                 <div class="clearfix"></div>
-                <div class="form-group">
-                    <label class="control-label col-lg-2">Header</label>
-                    <div class="col-lg-10">
-                        <input type="checkbox" name="header">
-                    </div>
-                </div>
-                <div class="clearfix"></div> <div class="form-group">
-                    <label class="control-label col-lg-2">Footer</label>
-                    <div class="col-lg-10">
-                        <input type="checkbox" name="footer">
 
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-lg-2">Editable ?</label>
-                    <div class="col-lg-10">
-                        <input type="checkbox" name="edit">
-                    </div>
-                </div>
                 <div class="clearfix"></div>
                 <div class="form-group">
                     <label class="control-label col-lg-2">Title <span class="text-danger">*</span></label>
@@ -90,36 +72,12 @@
                     <label class="control-label col-lg-2">Image</label>
                     <div class="col-lg-10">
 
-                        <input name="image" type="hidden" class="fileimage">
-                        <div id="form1" runat="server">
-                            <input type='file' id="imgInp" /></br> </br>
-                            <img id="my-image" src="#" />
-                        </div>
-                        {{--<button class="use">Upload</button>--}}
-                        <input type="button" class="use" value="Crop" >
-                       <input type="button" class="cancle-btn" value="Delete" ></br> </br>
-                        <div class="result"></div>
+
                     </div>
 
 
                 </div>
 
-                <div class="form-group">
-                    <label class="control-label col-lg-2">Meta Keys <span class="text-danger"></span></label>
-
-                    <div class="col-lg-6">
-                        {!! Form::text('meta_keys', null, array('class'=>'form-control','placeholder'=>'Meta Keys')) !!}
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-
-                <div class="form-group">
-                    <label class="control-label col-lg-2">Meta Description <span class="text-danger"></span></label>
-
-                    <div class="col-lg-6">
-                        {!! Form::text('meta_desc', null, array('class'=>'form-control','placeholder'=>'Meta Description')) !!}
-                    </div>
-                </div>
                 <div class="clearfix"></div>
                 <div class="form-group row {{ $errors->has('short_description') ? 'has-errors'  : ''}}">
                     <label class="control-label col-lg-2">Short Description </label>
