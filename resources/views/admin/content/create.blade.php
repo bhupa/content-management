@@ -57,7 +57,18 @@
                 </div>
                 <br>
 
-                <div class="clearfix"></div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2">Parent<span class="text-danger">*</span></label>
+                    <div class="col-lg-6">
+
+                        <select name="parent_id" class="form-control">
+                            <option value="">Parent Itself</option>
+                            @include('admin.content.recursive_options', ['parents' => $parents, 'selected_id' => ""])
+                        </select>
+
+                    </div>
+                </div>
+                <br>
 
                 <div class="clearfix"></div>
                 <div class="form-group">

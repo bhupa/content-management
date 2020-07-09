@@ -27,9 +27,9 @@ class HomeController extends Controller
      */
 
 
-        protected $roomlist, $gallery, $testimonial, $banner, $content;
+        protected $gallery, $testimonial, $banner, $content;
 
-    public  function __construct(RoomlistRepository $roomlist,
+    public  function __construct(
                                  GalleryRepository $gallery,
                                  TestimonialsRepository $testimonial,
             BannerRepository $banner,
@@ -37,7 +37,6 @@ class HomeController extends Controller
 
     )
     {
-      $this->roomlist = $roomlist;
       $this->gallery = $gallery;
       $this->testimonial = $testimonial;
       $this->banner = $banner;

@@ -57,7 +57,18 @@
                 </div>
                 <br>
 
-                <div class="clearfix"></div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2">Parent<span class="text-danger">*</span></label>
+                    <div class="col-lg-6">
+
+                        <select name="parent_id" class="form-control">
+                            <option value="">Parent Itself</option>
+                            <?php echo $__env->make('admin.content.recursive_options', ['parents' => $parents, 'selected_id' => ""], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                        </select>
+
+                    </div>
+                </div>
+                <br>
 
                 <div class="clearfix"></div>
                 <div class="form-group">
