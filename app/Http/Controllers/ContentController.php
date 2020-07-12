@@ -6,32 +6,32 @@ use App\Repositories\ContentBannerRepository;
 use App\Repositories\ContentRepository;
 use App\Repositories\RoomlistRepository;
 use App\Repositories\ServicesRepository;
+use App\Repositories\SettingRepository;
 use Illuminate\Http\Request;
 use App\Repositories\NewsRepository;
 
 class ContentController extends Controller
 {
 
-    protected $content, $contentbanner, $roomlist;
+    protected $content, $setting;
 	
-    public function __construct( ContentRepository $content, ContentBannerRepository $contentbanner, RoomlistRepository $roomlist
+    public function __construct( ContentRepository $content, SettingRepository $setting
                                  )
     {
         $this->content = $content;
-        $this->contentbanner = $contentbanner;
-        $this->roomlist = $roomlist;
+        $this->setting = $setting;
     }
 
     public function show($slug){
-        $roomlists =$this->roomlist->where('is_active', '1')->get();
-        $contentbanner = $this->contentbanner->where('title','Content')->where('is_active', '1')->first();
+
+        $setting = $this->setting->where('slug','banner-image')->first();
 
         $content = $this->content->where('is_active','1')->where('slug', $slug)->first();
         if(empty($content)){
             abort(404);
         }
         return view('content.show')
-        ->withContent( $content)->withContentbanner ($contentbanner )->withRoomlists($roomlists);
+        ->withContent( $content)->withSetting($setting);
     }
     public function about(){
         $about = $this->content->where('title','About')->where('is_active','1')->first();

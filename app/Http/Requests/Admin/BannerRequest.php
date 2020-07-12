@@ -24,16 +24,20 @@ class BannerRequest extends FormRequest
     public function rules()
     {
 
-        $rules = ['image' => 'required',
-                  'title'=>'required',
-                    'description'=>'required|max:30'
-            
+       return [
+           'title' => 'required',
+           'short_description'=>'required',
+           'description'=>'required',
+           'image'=>'required|mimes:jpeg,png,jpg,svg|dimensions:min_width=1920,min_height=680',
+
+       ];
+    }
+
+    public function messages()
+    {
+        return [
+            'image.dimensions' =>'Please upload image min-width:1920 and min-height:680'
         ];
 
-        if($this->id){
-            $rules = [];
-        }
-
-        return $rules;
     }
 }

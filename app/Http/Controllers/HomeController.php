@@ -58,7 +58,7 @@ class HomeController extends Controller
 //             ->withBanners($banners)
 //             ->withContent($content);
 
-        return view('frontend.test');
+        return view('frontend.home');
 
     }
 

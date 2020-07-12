@@ -16,6 +16,8 @@ class Blog extends Model
      *
      * @return array
      */
+
+
     public function sluggable()
     {
         return [
@@ -30,8 +32,10 @@ class Blog extends Model
      *
      * @var array
      */
+
+    protected $table ='blog';
     protected $fillable = [
-        'title', 'slug', 'image', 'description', 'is_active','keywords','meta_title'
+        'title', 'slug', 'image','short_description', 'description', 'is_active','keywords','meta_title','category_id'
     ];
 
     /**

@@ -65,6 +65,15 @@ class ViewComposerServiceProvider extends ServiceProvider
             ],
             'App\Http\ViewComposers\Frontend\SidebarComposer'
         );
+        view()->composer(
+            [
+                'frontend.home','frontend.inc.sidebar',
+            ],
+            'App\Http\ViewComposers\Frontend\BlogComposer'
+        );
+
+
+
 
     }
 

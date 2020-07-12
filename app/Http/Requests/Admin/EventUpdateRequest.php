@@ -25,9 +25,13 @@ class EventUpdateRequest extends FormRequest
     {
         return [
             'title' =>'required',
-            'image' =>'nullable',
+            'image'=>'nullable|mimes:jpeg,png,jpg,svg|dimensions:min_width=1200,min_height=900',
+
             'short_description' =>'required',
             'description' =>'required',
+            'location'=>'required',
+            'date'=>'required|date_format:Y-m-d',
+            'location'=>'required'
         ];
     }
 }

@@ -18,6 +18,8 @@ class GalleryController extends Controller
     public function __construct(GalleryRepository $gallery){
         $this->gallery = $gallery;
         auth()->shouldUse('admin');
+        $this->upload_path = DIRECTORY_SEPARATOR.'gallery'.DIRECTORY_SEPARATOR;
+        $this->storage = Storage::disk('public');
     }
 
     /**
@@ -27,8 +29,10 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $this->authorize('master-policy.perform',['gallery','view']);
+        auth()->user()->can('master-policy.perform',['gallery','view']);
         $title = $this->title;
+
+
         $galleries = $this->gallery->orderBy('created_at', 'desc')->paginate('20');
         return view('admin.gallery.index')->withGalleries($galleries)->withTitle($title);
     }
@@ -40,7 +44,7 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        $this->authorize('master-policy.perform',['gallery','add']);
+        auth()->user()->can('master-policy.perform',['gallery','add']);
         $title = 'Add Gallery';
         return view('admin.gallery.create')->withTitle($title);
     }
@@ -54,14 +58,11 @@ class GalleryController extends Controller
     public function store(GalleryStoreRequest $request)
     {
         $data = $request->except(['image']);
-        if($request->get('image')){
-            $saveName=sha1(date('YmdHis').str_random(3));
-            $image = $request->get('image');
-            $image = str_replace('data:image/png;base64','',$image);
-            $image = str_replace('','+', $image);
-            $imageData = base64_decode(   $image);
-            $data['image'] = 'gallery/'.$saveName.'png';
-            Storage::put($data['image'],   $imageData);
+        if($request->file('image')){
+            $image= $request->file('image');
+            $fileName = time().$image->getClientOriginalName();
+            $this->storage->put($this->upload_path. $fileName, file_get_contents($image->getRealPath()));
+            $data['image'] = 'gallery/'.$fileName;
 
         }
         $data['is_active'] = isset($request->is_active) ? 1:0;
@@ -93,7 +94,7 @@ class GalleryController extends Controller
      */
     public function edit($id)
     {
-        $this->authorize('master-policy.perform',['gallery','edit']);
+        auth()->user()->can('master-policy.perform',['gallery','edit']);
         $title = 'Edit Gallery';
         $gallery = $this->gallery->find($id);
         return view('admin.gallery.edit')->withGallery($gallery)->withTitle($title);
@@ -108,20 +109,14 @@ class GalleryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('master-policy.perform',['gallery','edit']);
+        auth()->user()->can('master-policy.perform',['gallery','edit']);
         $gallery = $this->gallery->find($id);
         $data= $request->except(['image']);
-        if($request->get('image')){
-            $saveName = sha1(date('YmdHis').str_random(3));
-            $image = $request->get('image');
-            $image = str_replace('data:image/png;base64','',$image);
-            $image = str_replace('','+', $image);
-            $imageData =base64_decode($image);
-            $data['image']= 'gallery/'.$saveName.'png';
-            Storage::put($data['image'], $imageData);
-            if(Storage::exists($gallery->image)){
-                Storage::delete($gallery->image);
-            }
+        if($request->file('image')){
+            $image= $request->file('image');
+            $fileName = time().$image->getClientOriginalName();
+            $this->storage->put($this->upload_path. $fileName, file_get_contents($image->getRealPath()));
+            $data['image'] = 'gallery/'.$fileName;
 
         }
 
@@ -144,8 +139,11 @@ class GalleryController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $this->authorize('master-policy.perform',['gallery','delete']);
+        auth()->user()->can('master-policy.perform',['gallery','delete']);
+
         $gallery = $this->gallery->find($request->get('id'));
+
+        $gallery->images()->delete();
         if($this->gallery->destroy($gallery->id)){
             $message = 'Gallery deleted successfully.';
             return response()->json(['status' => 'ok', 'message' => $message], 200);
@@ -156,7 +154,7 @@ class GalleryController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $this->authorize('master-policy.perform',['gallery','changeStatus']);
+        auth()->user()->can('master-policy.perform',['gallery','changeStatus']);
         $gallery = $this->gallery->find($request->get('id'));
         if ($gallery->is_active == 0) {
             $status = 1;
@@ -174,7 +172,6 @@ class GalleryController extends Controller
 
     public function sort(Request $request){
 
-        dd($request->order);
         $exploded = explode('&', str_replace('item[]=', '', $request->order));
         for ($i=0; $i < count($exploded) ; $i++) {
             $this->gallery->update($exploded[$i], ['display_order' => $i]);

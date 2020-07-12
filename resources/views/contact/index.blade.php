@@ -1,151 +1,114 @@
 @extends('layouts.app')
 @section('title', 'Contact Us')
-@section('style_css')
-    <style >
-        .site-blocks-cover, .site-blocks-cover .row { min-height:250px !important; height:auto !important; padding-top: 40px;}
-        .site-blocks-cover h1 {font-size: 2rem}
-    </style>
-@endsection
-@section('header_js') 
-<script type="text/javascript">
-
-        $('div.alert').delay(3000).slideUp(300);
-
-
-    </script> 
+@section('header_js')
 @endsection
 @section('main')
 
-    @if($contentbanner['image']  !=='')
-    <div class="site-blocks-cover overlay" style="background-image: url('{{asset('storage/'.$contentbanner['image'])}}')" data-aos="fade" data-stellar-background-ratio="0.5" >
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-md-7 text-center" data-aos="fade">
-
-                    <h1 class="">Contact Us</h1>
-                    <span class="caption mb-3">Contact us page</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endif
-
-  <div class="site-section site-section-sm">
-    <div class="container">
-      <div class="row">
-
-        <div class="col-md-12 col-lg-8 mb-5">
-
-
-         {{Form::open(array('route'=>'contact.store', 'class'=>'p-5 bg-white','id'=>'contact-form'))}}
-
-            @if(session()->has('success'))
-                <div class="alert alert-success" > {{ session()->get('success') }} </div>
+    <div id="custom-header"
+         @if(file_exists('storage/'.$setting->value) && $setting->value != '')
+         style="background-image: url('{{asset('storage/'.$setting->value)}}')"
             @endif
-            <div class="row form-group {{ $errors->has('fullname') ? 'has-error' : '' }}">
-              <div class="col-md-12 mb-3 mb-md-0">
-                <label class="font-weight-bold" for="fullname">Full Name <span>*</span></label>
-                <input type="text" name="fullname" id="fullname" class="form-control" placeholder="Full Name">
-              </div>
-                @if($errors->has('fullname'))
-                    <span class="alert alert-danger">
-                            <strong>
-                                {{$errors->first('fullname')}}
-                            </strong>
-                        </span>
-                @endif
-            </div>
-            <div class="row form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-              <div class="col-md-12">
-                <label class="font-weight-bold" for="email">Email <span>*</span></label>
-                <input type="email" name="email" id="email" class="form-control" placeholder="Email Address">
-              </div>
-                @if($errors->has('email'))
-                    <span class="alert alert-danger">
-                            <strong>
-                                {{$errors->first('email')}}
-                            </strong>
-                        </span>
-                @endif
-            </div>
-
-
-            <div class="row form-group {{ $errors->has('phone') ? 'has-error': '' }}">
-              <div class="col-md-12 mb-3 mb-md-0">
-                <label class="font-weight-bold" for="phone">Phone <span>*</span></label>
-                <input type="text" name="phone" id="phone" class="form-control" placeholder="Phone No">
-              </div>
-                @if($errors->has('phone'))
-                    <span class="alert alert-danger">
-                            <strong>
-                                {{$errors->first('phone')}}
-                            </strong>
-                        </span>
-                @endif
-            </div>
-
-            <div class="row form-group {{ $errors->has('message') ? 'has-error' : '' }}">
-              <div class="col-md-12">
-                <label class="font-weight-bold" for="message">Message <span>*</span></label>
-                <textarea name="message" id="message" cols="30" rows="5" class="form-control" placeholder="Leave your Message/Questions"></textarea>
-              </div>
-                @if($errors->has('message'))
-                    <span class="alert alert-danger">
-                            <strong>
-                                {{$errors->first('message')}}
-                            </strong>
-                        </span>
-                @endif
-            </div>
-            <div class="row form-group {{ $errors->has('g-recaptcha-response') ? 'has-error' : '' }}">
-                <div class="col-md-12">
-                    <label class="font-weight-bold" for="message"></label>
-                    {!! \NoCaptcha::renderJs() !!}
-                    {!! \NoCaptcha::display() !!}
-                    @if ($errors->has('g-recaptcha-response')) <span class="alert alert-danger"> <strong>{{ $errors->first('g-recaptcha-response') }}</strong> @endif </span> </label>
-
-                </div>
-
-            </div>
-
-            <div class="row form-group">
-              <div class="col-md-12">
-                <input type="submit" value="Send Message" class="btn btn-primary pill px-4 py-2">
-              </div>
-            </div>
-
-
-          {!! Form::close() !!}
-        </div>
-
-        <div class="col-lg-4">
-          <div class="p-4 mb-3 bg-white">
-            <h3 class="h5 text-black mb-3">Contact Info</h3>
-            @foreach($settings as $setting)
-
-                  @if($setting->name == 'Address')
-                <p class="mb-0 font-weight-bold">Address</p>
-                  <p class="mb-4">{{$setting->value}}</p>
-                  @endif
-
-              @if($setting->name == 'Phone')
-                      <p class="mb-0 font-weight-bold">Phone</p>
-                  <p class="mb-4"><a href="JavaScript:Void(0)">{{$setting->value}}</a></p>
-                 @endif
-
-
-                @if($setting->name == 'Email')
-                      <p class="mb-0 font-weight-bold">Email Address</p>
-                  <p class="mb-0"><a href="mailto:{{$setting->value}}">{{$setting->value}}</a></p>
-                   @endif
-              @endforeach
-
-          </div>
-
-
-        </div>
-      </div>
+    >
+        <div class="custom-header-content">
+            <div class="container">
+                <h1 class="page-title">Contact Us</h1>
+                <div id="breadcrumb">
+                    <div aria-label="Breadcrumbs" class="breadcrumbs breadcrumb-trail">
+                        <ul class="trail-items">
+                            <li class="trail-item trail-begin"><a href="{{route('home')}}" rel="home"><span>Home</span></a></li>
+                            <li class="trail-item trail-end"><span>Contact Us</span></li>
+                        </ul>
+                    </div> <!-- .breadcrumbs -->
+                </div> <!-- #breadcrumb -->
+            </div> <!-- .container -->
+        </div>  <!-- .custom-header-content -->
     </div>
-  </div>
+    <!-- .custom-header -->
+    <section class="contact-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="contact-map">
+                        <div class="map-inner-wrapper">
+                            <iframe style="border:0;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14132.557418569479!2d85.3106242!3d27.6820875!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe7ff208549dfe1ca!2sFair+Trade+Group+Nepal!5e0!3m2!1sen!2snp!4v1554706599732!5m2!1sen!2snp" width="700" height="490px"></iframe>
+                        </div> <!-- .map-inner-wrapper -->
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="contact-form-area contactdesc">
+                        <h3 class="contact-title">Contact Us</h3>
+                        <div id="contact-form" class="contact-form">
+                            <div id="message">
+                            </div>
+                            {{--<form method="POST" action="{{route('contact.store')}}" accept-charset="UTF-8" class="form-horizontal" id="validator" enctype="multipart/form-data"><input name="_token" type="hidden" value="qBIHZNqTNiS2QI4rmuVDzQZScfT6uO6S8cjVvpC1">--}}
 
+                                {!! Form::open(['route'=>'contact.store','id'=>'contact-form']) !!}
+                            @if (\Session::has('success'))
+                                <div class="alert alert-success">
+                                    <span>{!! \Session::get('success') !!}</span>
+                                </div>
+
+                            @endif
+                                <input type="text" name="name" id="name" class="form-control" placeholder="Name *" style="width: 100%;">
+
+                            @if($errors->has('name'))
+                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                            @endif
+                                <div style="margin-bottom: 30px;"></div>
+                                <input type="text" name="email" id="email" class="form-control" placeholder="Email *" style="width: 100%;">
+
+                            @if($errors->has('email'))
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                            @endif<br>
+
+                                <textarea class="form-control" name="message" id="comments" rows="3" placeholder="Message *" style="resize:none;"></textarea>
+
+                            @if($errors->has('message'))
+                                <span class="text-danger">{{ $errors->first('message') }}</span>
+                            @endif
+                                <div style="margin-bottom: 20px;"></div>
+                                {{--<div>--}}
+                                    {{--<script src="https://www.google.com/recaptcha/api.js?" async="" defer=""></script>--}}
+
+                                    {{--<div data-sitekey="6Ley3K0UAAAAAEPLFEz4f8BRsHurKpnr5_93p3zj" class="g-recaptcha"><div style="width: 304px; height: 78px;"><div><iframe src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6Ley3K0UAAAAAEPLFEz4f8BRsHurKpnr5_93p3zj&amp;co=aHR0cHM6Ly9mYWlydHJhZGVncm91cG5lcGFsLm9yZzo0NDM.&amp;hl=en&amp;v=nuX0GNR875hMLA1LR7ayD9tc&amp;size=normal&amp;cb=39i89nf3v3k6" width="304" height="78" role="presentation" name="a-wg0px2u61s5e" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div><iframe style="display: none;"></iframe></div>--}}
+                                {{--</div>--}}
+                                <div style="margin-bottom: 30px;"></div>
+
+                                <button type="submit" value="SEND" id="submit">Submit</button>
+
+                            {!! Form::close(); !!}
+                        </div><!-- .contact-form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
+@section('script')
+
+    <script>
+
+        jQuery(document).ready(function() {
+            // $("#contact-form").on('submit',function(){
+            //     var e = $(this).attr("action");
+            //     return $("#message").slideUp(750, function() {
+            //         $("#message").hide(), $("#submit").attr("disabled", "disabled"), $.post(e, {
+            //             name: $("#name").val(),
+            //             email: $("#email").val(),
+            //             comments: $("#comments").val(),
+            //             verify: $("#verify").val()
+            //         }, function(e) {
+            //             document.getElementById("message").innerHTML = e;
+            //             $("#message").slideDown("slow");
+            //             $("#contactform img.loader").fadeOut("slow", function() {
+            //                 $(this).remove();
+            //             });
+            //             $("#submit").removeAttr("disabled");
+            //             null != e.match("success") && $("#contactform").slideUp("slow");
+            //         })
+            //     }), !1
+            // });
+
+        });
+    </script>
 @endsection

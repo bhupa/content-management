@@ -1,170 +1,57 @@
-@extends('backend.app')
-@section('title','Tour-images-Lists')
-@section('content')
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Dashboard</h1>
-                        @if (\Session::has('success'))
-                            <div class="alert alert-success">
-                                <ul>
-                                    <li>{!! \Session::get('success') !!}</li>
-                                </ul>
-                            </div>
-
-                        @endif
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('tours.index')}}">View Tour Lists</a></li>
-                            <li class="breadcrumb-item active">Dashboard </li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
-
-        <!-- Main content -->
-        <div class="content">
-            <div class="container-fluid">
-            {{--                <div class="single-table">--}}
+@extends('layouts.admin.app')
+@section('scripts')
 
 
-            {{--                <div class="row justify-content-center">--}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
-            {{--                            @if($images->isNotEmpty())--}}
-            {{--                        <div class="col-10" >--}}
-
-            {{--                            <div class="row">--}}
-            {{--                                @foreach($images as $image)--}}
-
-            {{--                                    <div class="col-4">--}}
-            {{--                                        <div class="card">--}}
-            {{--                                                                                        <div class="card-img-actions m-1">--}}
-            {{--                                                                                            <img class="card-img img-fluid" src="{{ asset('storage/'.$image->image) }}" alt=""--}}
-            {{--                                                                                                 style="width: 300px; height:150px;">--}}
-            {{--                                                                                            <div class="card-img-actions-overlay card-img">--}}
-            {{--                                                                                                <a href="{{ asset('storage/'.$image->image) }}"--}}
-            {{--                                                                                                   class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round"--}}
-            {{--                                                                                                   data-popup="lightbox" rel="group">--}}
-            {{--                                                                                                    <i class="fa fa-eye"></i>--}}
-            {{--                                                                                                </a>--}}
-
-            {{--                                                                                                <a href="javascript:void(0)" data-type="{{ $image->id  }}" data-tour-image = "{{ $tour-image->id }}"--}}
-            {{--                                                                                                   class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2 delete-galleries-image">--}}
-            {{--                                                                                                    <i class="fa fa-trash"></i>--}}
-
-            {{--                                                                                                </a>--}}
-            {{--                                                                                            </div>--}}
-            {{--                                                                                        </div>--}}
-
-
-            {{--                                    </div>--}}
-            {{--                                </div>--}}
-
-
-            {{--                                @endforeach--}}
-            {{--                            </div>--}}
-            {{--                         </div>--}}
-            {{--                            @else--}}
-
-            {{--                                    <div class="col-sm-10 col-lg-10">--}}
-            {{--                                        <div class="card">--}}
-            {{--                                            <p style="text-align: center; padding:50px 50px;">--}}
-            {{--                                            Sorry, no image has been uploaded yet.--}}
-            {{--                                            </p>--}}
-            {{--                                        </div>--}}
-            {{--                                    </div>--}}
-
-
-            {{--                            @endif--}}
-            {{--                        </div>--}}
-
-
-            {{--                </div>--}}
-            <!-- /.row -->
-                <div class="row">
-                    <!-- table primary start -->
-                    <div class="col-lg-12 mt-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title">View tour-image Images</h4>
-                                <a href="{{route('tour-image.create',[$tour->slug])}}" class="btn btn-success float-right" style="margin-top: -44px;display: inline-block;margin-bottom: 22px;">Upload Images</a>
-                                <div class="single-table">
-                                    <div class="row">
-                                        <div class="panel panel-flat" style="width:100%">
-
-
-                                            <div class="panel-body tour-image">
-
-                                                <div class="row">
-                                                    @if($images->isNotEmpty())
-                                                        @foreach($images as $image)
-                                                            <div class=" col-3" id="imageItem-{{$image->id}}">
-                                                                <div class="card">
-                                                                    <div class="card-img-actions m-1">
-                                                                        <img class="card-img img-fluid" src="{{asset('storage/'.$image->image)}}"  alt="{{$image->tour->title}}" style="width: 300px; height:150px;">
-
-                                                                        <div class="card-img-actions-overlay card-img">
-                                                                            <a href="{{asset('storage/'.$image->image)}}" data-toggle="lightbox" data-tour-image="tour-image" class=" tour-image-image btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round">
-
-                                                                                {{--                                                            <a href="{{asset('storage/'.$image->image)}}" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">--}}
-                                                                                <i class="fa fa-eye"></i>
-                                                                            </a>
-
-                                                                            <a href="javascript:void(0)" data-type="{{$image->id}}" data-tour-image="{{$tour->id}}" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2 delete-galleries-image">
-                                                                                <i class="fa fa-trash"></i>
-
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @endforeach
-                                                    @else
-                                                        <div class="card" style="width: 100%">
-                                                            <p style="display: block;text-align: center;padding:50px 50px;">Sorry, no image has been uploaded yet.</p>
-                                                        </div>
-                                                    @endif
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- table primary end -->
-                    <!-- table success start -->
-
-                    <!-- Contextual Classes end -->
-                </div>
-
-            </div>
-            <!-- /.container-fluid -->
-        </div>
-        <!-- /.content -->
-    </div>
-
-@endsection
-@section('js_script')
     <script>
-        $(document).ready( function () {
-
-            $('.tour-image').on('click','.delete-galleries-image',function(event){
-                event.preventDefault();
+        $(document).ready(function () {
+            $(".defaultTable").on("click", ".change-status", function () {
                 $object = $(this);
-                console.log($object);
-                var id  = $(this).attr('data-type');
-                var tour_id = $object.attr('data-tour-image');
-                swal({
+                var id = $object.attr('id');
+                Swal({
+                    title: 'Are you sure?',
+                    text: 'Do you want to change the status',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, change it!',
+                    cancelButtonText: 'No, keep it'
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ route('admin.gallery.change-status') }}",
+                            data: {
+                                'id': id,
+                            },
+                            dataType: 'json',
+                            success: function (response) {
+                                console.log(response);
+                                swal("Thank You!", response.message, "success");
+                                if (response.response.is_active == 1) {
+                                    $($object).children().removeClass('icon-minus2');
+                                    $($object).children().addClass('icon-checkmark3');
+                                } else {
+                                    $($object).children().removeClass('icon-checkmark3');
+                                    $($object).children().addClass('icon-minus2');
+                                }
+                            },
+                            error: function (e) {
+                                if (e.responseJSON.message) {
+                                    Swal('Error', e.responseJSON.message, 'error');
+                                } else {
+                                    Swal('Error', 'Something went wrong while processing your request.', 'error')
+                                }
+                            }
+                        });
+                    }
+                })
+            });
+            $(".gallery").on("click", ".delete", function () {
+                $object = $(this);
+                var id = $object.attr('id');
+                var gallery = $object.data('gallery');
+                Swal({
                     title: 'Are you sure?',
                     text: 'You will not be able to recover this !',
                     type: 'warning',
@@ -172,43 +59,103 @@
                     confirmButtonText: 'Yes, delete it!',
                     cancelButtonText: 'No, keep it'
                 }).then((result) => {
-                    if (result.value
-                    )
-                    {
-
+                    if (result.value) {
                         $.ajax({
-                            type: "Delete",
-                            url: baseUrl + "/admin/tour-image/" +tour_id + "/"  + id,
+                            type: "POST",
+                            url: baseUrl + "/admin/gallery/image" + "/" + gallery + "/" + id,
                             data: {
                                 id: id,
                                 _method: 'DELETE'
                             },
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
                             success: function (response) {
                                 swal("Deleted!", response.message, "success");
-
-
-                                $('#imageItem-'+id).remove();
+                                $("#imageItem-"+id).empty();
                             },
                             error: function (e) {
                                 if (e.responseJSON.message) {
-                                    swal('Error', e.responseJSON.message, 'error');
+                                    Swal('Error', e.responseJSON.message, 'error');
                                 } else {
-                                    swal('Error', 'Something went wrong while processing your request.', 'error')
+                                    Swal('Error', 'Something went wrong while processing your request.', 'error')
                                 }
                             }
                         });
                     }
                 })
-            })
-
-
-
-
-
+            });
         });
-
     </script>
+@endsection
+@section('page-header')
+    <div class="page-header page-header-default">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> -
+                    Gallery Images</h4>
+            </div>
+
+        </div>
+        <div class="breadcrumb-line">
+            <ul class="breadcrumb">
+                <li><a href="{{ route('admin.dashboard') }}"><i class="icon-home2 position-left"></i> Home</a>
+                </li>
+                <li class="active">Gallery Images</li>
+            </ul>
+        </div>
+    </div>
+@endsection
+@section('content')
+
+    <link href="{{ asset('backend/css/bootstrap_limitless.min.css') }}" rel="stylesheet" type="text/css">
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title"><i class="icon-grid3 position-left"></i>Gallery Images</h5>
+            <div class="heading-elements">
+                @can('master-policy.perform',['gallery','add'])
+                    <a href="{{ route('admin.gallery-image.create', [$gallery->id]) }}"
+                       class="btn btn-default legitRipple pull-right">
+                        <i class="icon-file-plus position-left"></i>
+                        Upload Images
+                        <span class="legitRipple-ripple"></span>
+                    </a>
+                @endif
+            </div>
+        </div>
+
+        <div class="panel-body gallery">
+
+            <div class="row">
+                @forelse($images as $image)
+                    <div class="col-sm-6 col-lg-3" id="imageItem-{{ $image->id }}">
+                        <div class="card">
+                            <div class="card-img-actions m-1">
+                                <img class="card-img img-fluid" src="{{ asset('storage/'.$image->image) }}" alt=""
+                                     style="width: 221px; height:165px;">
+                                <div class="card-img-actions-overlay card-img">
+                                    <a href="{{ asset('storage/'.$image->image) }}"
+                                       target="_blank"
+                                       class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round"
+                                       data-popup="lightbox" rel="group">
+                                        <i class="icon-plus3"></i>
+                                    </a>
+
+                                    <a href="javascript:void(0)" id="{{ $image->id  }}" data-gallery = "{{ $gallery->id }}"
+                                       class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2 delete">
+                                        <i class="icon-trash"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card">
+                            Sorry, no image has been uploaded yet.
+                        </div>
+                    </div>
+                @endforelse
+
+            </div>
+        </div>
+
+    </div>
 @endsection

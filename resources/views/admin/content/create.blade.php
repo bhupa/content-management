@@ -58,12 +58,14 @@
                 <br>
 
                 <div class="form-group">
-                    <label class="control-label col-lg-2">Parent<span class="text-danger">*</span></label>
+                    <label class="control-label col-lg-2">Display In<span class="text-danger">*</span></label>
                     <div class="col-lg-6">
 
-                        <select name="parent_id" class="form-control">
-                            <option value="">Parent Itself</option>
-                            @include('admin.content.recursive_options', ['parents' => $parents, 'selected_id' => ""])
+                        <select name="display_in" class="form-control">
+                            <option value="">Selecet Display In</option>
+                            <option value="header" @if(old('display-in') == 'header') selected  @endif>Header</option>
+                            <option value="content" @if(old('display-in') == 'content') selected  @endif>Content</option>
+                            <option value="footer" @if(old('display-in') == 'footer') selected  @endif>Footer</option>
                         </select>
 
                     </div>
@@ -81,9 +83,11 @@
                 <div class="clearfix"></div>
                 <div class="form-group">
                     <label class="control-label col-lg-2">Image</label>
-                    <div class="col-lg-10">
-
-
+                    <div class="col-lg-5">
+                        <input type="file" id="upload-file" accept="image/*"  name="image"/>
+                    </div>
+                    <div class="col-lg-5">
+                        <div id="thumbnail"></div>
                     </div>
 
 
@@ -102,10 +106,15 @@
                         @endif
                     </div>
                     <div class="clearfix"></div>
-                <div class="form-group">
+                <div class="form-group mt-2">
                     <label class="control-label col-lg-2">Description <span class="text-danger">*</span></label>
                     <div class="col-lg-10">
                         {!! Form::textarea('description', null, array('class'=>'form-control editor', 'id'=>'editor', 'required' => 'true')) !!}
+                        @if($errors->has('description'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('description')}}</strong>
+                            </span>
+                        @endif
                     </div>
                 </div>
                 <div class="clearfix"></div>

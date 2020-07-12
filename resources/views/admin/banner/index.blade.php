@@ -162,7 +162,6 @@
                     <th>Image</th>
                     <th>Status</th>
                     <th>Action</th>
-                    <th></th>
                 </tr>
                 </thead>
                 <tbody id="sortable">
@@ -212,7 +211,6 @@
                                 </a>
                                 @endif
                         </td>
-                        <td></td>
 
                     </tr>
                 @endforeach
@@ -226,7 +224,6 @@
                     <th>Image</th>
                     <th>Status</th>
                     <th>Action</th>
-                    <th></th>
                 </tr>
                 </tfoot>
             </table>

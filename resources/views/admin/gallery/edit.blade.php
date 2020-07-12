@@ -43,28 +43,22 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-
                 <div class="form-group">
                     <label class="control-label col-lg-2">Image</label>
-                    <div class="col-lg-10">
+                    <div class="col-lg-5">
+                        <input type="file" id="upload-file" accept="image/*"  name="image"/>
+                    </div>
+                    <div class="col-lg-5">
+                        <div id="thumbnail"></div>
                         @if(file_exists('storage/'.$gallery->image) && $gallery->image !== '')
                             <img src="{{ asset('storage/'.$gallery->image)}}" class="displayimage" style="width:100px; height:100px; margin-bottom: 15px;" alt=""></br>
 
                         @endif
-
-                        <input name="image" type="hidden" class="fileimage">
-                        <div id="form1" runat="server">
-                            <input type='file' id="imgInp" /></br> </br>
-                            <img id="my-image" src="#" />
-                        </div>
-                        {{--<button class="use">Upload</button>--}}
-                        <input type="button" class="use" value="Crop" >
-                       <input type="button" class="cancle-btn" value="Delete" ></br> </br>
-                        <div class="result"></div>
                     </div>
 
 
                 </div>
+
 
                 <div class="clearfix"></div>
 

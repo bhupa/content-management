@@ -21,6 +21,8 @@ class GalleryImageController extends Controller
         $this->gallery = $gallery;
         $this->image = $image;
         auth()->shouldUse('admin');
+        $this->upload_path = DIRECTORY_SEPARATOR.'gallery_image'.DIRECTORY_SEPARATOR;
+        $this->storage = Storage::disk('public');
     }
 
     /**
@@ -30,7 +32,7 @@ class GalleryImageController extends Controller
      */
     public function index($id)
     {
-        $this->authorize('master-policy.perform',['gallery','view']);
+        auth()->user()->can('master-policy.perform',['gallery','view']);
         $gallery = $this->gallery->find($id);
         $images = $this->image->where('gallery_id', $id)->get();
         return view('admin.gallery.image')->withGallery($gallery)->withImages($images);
@@ -43,7 +45,7 @@ class GalleryImageController extends Controller
      */
     public function create($id)
     {
-        $this->authorize('master-policy.perform',['gallery','add']);
+        auth()->user()->can('master-policy.perform',['gallery','add']);
         $gallery = $this->gallery->find($id);
         return view('admin.gallery.uploadImages')->withGallery($gallery);
     }
@@ -56,7 +58,7 @@ class GalleryImageController extends Controller
      */
     public function store(Request $request, $id)
     {
-        $this->authorize('master-policy.perform',['gallery','add']);
+        auth()->user()->can('master-policy.perform',['gallery','add']);
         $data = $request->except(['file']);
         $file = $request->file('file');
         $file_name = time()."_".$file->getClientOriginalName();
@@ -110,7 +112,7 @@ class GalleryImageController extends Controller
      */
     public function destroy(Request $request, $gallery_id, $id)
     {
-        $this->authorize('master-policy.perform',['gallery','delete']);
+        auth()->user()->can('master-policy.perform',['gallery','delete']);
         $galleryImage = $this->image->find($id);
         if($this->image->destroy($galleryImage->id)) {
             if (Storage::exists($galleryImage->image)) {

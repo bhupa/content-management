@@ -144,8 +144,8 @@
         <div class="panel-heading">
             <h5 class="panel-title"><i class="icon-grid3 position-left"></i> Blogs</h5>
             <div class="heading-elements">
-                @can('master-policy.perform', ['partner', 'add'])
-                    <a href="{{ route('admin.partner.create') }}" class="btn btn-default legitRipple pull-right">
+                @can('master-policy.perform', ['blog', 'add'])
+                    <a href="{{ route('admin.blog.create') }}" class="btn btn-default legitRipple pull-right">
                         <i class="icon-file-plus position-left"></i>
                         Create New
                         <span class="legitRipple-ripple"></span>

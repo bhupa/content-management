@@ -1,154 +1,336 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>@yield('title')</title>
+  <title> KHASHA SAMAJA |@yield('title') </title>
   <meta charset="utf-8">
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700|Work+Sans:300,400,700" rel="stylesheet">
-  <link rel="stylesheet" href="{{asset('frontend/fonts/icomoon/style.css')}}">
-
+  {{--<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,700|Anton" rel="stylesheet">--}}
   <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
-  <link rel="stylesheet" href="{{asset('frontend/css/magnific-popup.css')}}">
-  <link rel="stylesheet" href="{{asset('frontend/css/jquery-ui.css')}}">
+  {{--<link rel="stylesheet" href="{{ asset('frontend/css/font-awesome.min.css')}}">--}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{asset('frontend/css/owl.carousel.min.css')}}">
-  <link rel="stylesheet" href="{{asset('frontend/css/owl.theme.default.min.css')}}">
-  <link rel="stylesheet" href="{{asset('frontend/css/bootstrap-datepicker.css')}}">
-  <link rel="stylesheet" href="{{asset('frontend/css/animate.css')}}">
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
-
-
-
-  <link rel="stylesheet" href="{{asset('frontend/fonts/flaticon/font/flaticon.css')}}">
-
-  <link rel="stylesheet" href="{{asset('frontend/css/aos.css')}}">
-
-  <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
+  <link rel="stylesheet" href="{{asset('frontend/css/custom.css')}}">
   @yield('style_css')
 </head>
-<body>
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
-<div class="site-wrap">
+<div id="topbar" class="d-none d-lg-flex">
+  <div class="container d-flex">
+    <div class="contact-info mr-auto">
+      @foreach($settings as $setting)
+        @if($setting->slug =='email')
+      <i class="fa fa-envelope"></i> <a href="mailto:contact@example.com">{{$setting->value}}</a>
+        @endif
+          @if($setting->slug =='contact')
+      <i class="fa fa-phone"></i> {{$setting->value}}
+          @endif
 
-  <div class="site-mobile-menu">
-    <div class="site-mobile-menu-header">
-      <div class="site-mobile-menu-close mt-3">
-        <span class="icon-close2 js-menu-toggle"></span>
-      </div>
+        @endforeach
     </div>
-    <div class="site-mobile-menu-body"></div>
-  </div> <!-- .site-mobile-menu -->
-
-
-  <div class="site-navbar-wrap js-site-navbar bg-white">
-
-    <div class="container">
-      <div class="site-navbar bg-light">
-        <div class="py-1">
-          <div class="row align-items-center">
-            <div class="col-3">
-              <h2 class="mb-0 site-logo"><a href="{{route('home')}}">Bani Girls Hostel</a></h2>
-            </div>
-            <div class="col-9">
-              <nav class="site-navigation text-right" role="navigation">
-                <div class="container">
-
-                  <div class="d-inline-block d-lg-none  ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu h3"></span></a></div>
-                  <ul class="site-menu js-clone-nav d-none d-lg-block">
-                    <li class="{{(request()->segment(1) == '') ? 'active' :''}}">
-                      <a href="{{route('home')}}">Home</a>
-                    </li>
-
-                      @foreach($contents as $content)
-                        @if($content->child->isEmpty() && $content->parent_id == '' )
-
-                        <li class="{{Request::segment(1) == 'content' && (Request::segment(2) == $content->slug) ? 'active' : '' }}" >
-                          <a href="{{route('content.show',[$content->slug])}}">{{$content->title}}</a>
-                        </li>
-
-                          @else
-                          @if($content->child->isNotEmpty() && $content->parent_id == '' )
-                          <?php $sub_menus = $content->child()->pluck('slug')->toArray();?>
-                          <li class="has-children {{ Request::segment(1) == 'content' && (Request::segment(2) == $content->slug || in_array(Request::segment(2), $sub_menus)) ? 'active' : '' }}">
-                            <a href="javascript:void(0)">{{$content->title}}</a>
-                            <ul class="dropdown arrow-top">
-                              @foreach($content->child as $firstchild)
-
-
-                               <li><a href="{{route('content.show',[$firstchild->slug])}}">{{$firstchild->title}}</a></li>
-
-
-                                @endforeach
-                            </ul>
-                          @endif
-                        @endif
-                        @endforeach
-                    </li>
-
-                    <li class="{{ (request()->segment(1) == 'contact-us') ? 'active' : '' }}"><a href="{{route('contact.index')}}">Contact</a></li>
-                  </ul>
-                </div>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="social-links">
+      @foreach($settings as $setting)
+        @if($setting->slug =='twitter')
+      <a href="{{$setting->value}}" class="twitter"><i class="fa fa-twitter"></i></a>
+        @endif
+          @if($setting->slug =='facebook')
+      <a href="{{$setting->value}}" class="facebook"><i class="fa fa-facebook"></i></a>
+          @endif
+            @if($setting->slug =='instagram')
+      <a href="{{$setting->value}}" class="instagram"><i class="fa fa-instagram"></i></a>
+            @endif
+              @if($setting->slug =='linkedin')
+      <a href="{{$setting->value}}" class="linkedin"><i class="fa fa-linkedin"></i></a>
+              @endif
+        @endforeach
     </div>
   </div>
+</div>
+
+<div class="top-logo">
+  <div class="row m0">
+    <div class="col-md-7">
+      <div class="logo-image">
+        @foreach($settings as $setting)
+          @if($setting->slug =='menu-banner')
+        <img  src="{{asset('storage/'.$setting->value)}}" alt="{{$setting->name}}">
+            @endif
+          @endforeach
+      </div>
+    </div>
+    <div class="col-md-5">
+     <div class="top-side-men">
+       @foreach($settings as $setting)
+         @if($setting->slug =='menu-banner-side-one')
+       <img  src="{{asset('storage/'.$setting->value)}}" alt="{{$setting->name}}">
+         @endif
+         @endforeach
+     </div>
+      <div class="top-side-men">
+        @foreach($settings as $setting)
+          @if($setting->slug =='menu-banner-side-one')
+            <img  src="{{asset('storage/'.$setting->value)}}" alt="{{$setting->name}}">
+          @endif
+        @endforeach
+      </div>
+      {{--<div class="logo-image second-image">--}}
+        {{--<img  src="{{asset('frontend/img/khas2.jpg')}}" alt="">--}}
+      {{--</div>--}}
+    {{--</div>--}}
+    {{--<div class="col-md-3">--}}
+      {{--<div class="logo-image third-image">--}}
+        {{--<img  src="{{asset('frontend/img/khas3.jpg')}}" alt="">--}}
+      {{--</div>--}}
+    </div>
+
+  </div>
+</div>
+<header role="banner">
+  <nav class="navbar navbar-expand-lg ">
+    <div class="container">
+
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse" id="navbarsExample05" style="">
+        <ul class="navbar-nav ">
+          <li class="nav-item">
+            <a class="nav-link " href="{{route('home')}}">Home</a>
+          </li>
+
+          @foreach($contents as $content)
+            @if($content->child->isEmpty() && $content->parent_id == '' )
+
+              <li class="nav-item"  >
+                <a class="nav-link " href="{{route('content.show',[$content->slug])}}">{{$content->title}}</a>
+              </li>
+
+            @else
+              @if($content->child->isNotEmpty() && $content->parent_id == '' )
+                        <?php $sub_menus = $content->child()->pluck('slug')->toArray();?>
+                <li class="nav-item dropdown ">
+                  <a class="nav-link dropdown-toggle" href="javascript:void(0)">{{$content->title}}</a>
+                  <div class="dropdown-menu">
+                    @foreach($content->child as $firstchild)
 
 
+                      <a class="dropdown-item" href="{{route('content.show',[$firstchild->slug])}}">{{$firstchild->title}}</a>
 
 
+                    @endforeach
+                  </div>
+              @endif
+            @endif
+          @endforeach
+          {{--<li class="nav-item dropdown">--}}
+          {{--<a class="nav-link dropdown-toggle" href="services.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Adoption</a>--}}
+          {{--<div class="dropdown-menu" aria-labelledby="dropdown04">--}}
+          {{--<a class="dropdown-item" href="adoption.html">Adoption</a>--}}
+          {{--<a class="dropdown-item" href="adoption.html">Waiting Children</a>--}}
+          {{--<a class="dropdown-item" href="adoption-how-to.html">How to Adopt</a>--}}
+          {{--</div>--}}
+          {{--</li>--}}
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('executive-committee.index')}}">Executive Committee</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('event.index')}}">Event</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('blogs.index')}}">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('gallery.index')}}">Gallery</a>
+          </li>
 
-
-
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('contact.index')}}">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
 
 
 
 @yield('main')
 
 <!-- start footer -->
-  @include('layouts.footer')
-</div>
+@include('layouts.footer')
+<script src="{{asset('frontend/js/jquery-3.3.1.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('frontend/js/bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('frontend/js/owl.carousel.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('frontend/js/jquery-equal-height.min.js')}}"></script>
 
-<script src="{{asset('frontend/js/jquery-3.3.1.min.js')}}"></script>
-<script src="{{asset('frontend/js/jquery-migrate-3.0.1.min.js')}}"></script>
-<script src="{{asset('frontend/js/jquery-ui.js')}}"></script>
-<script src="{{asset('frontend/js/popper.min.js')}}"></script>
-<script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('frontend/js/owl.carousel.min.js')}}"></script>
-<script src="{{asset('frontend/js/jquery.stellar.min.js')}}"></script>
-<script src="{{asset('frontend/js/jquery.countdown.min.js')}}"></script>
-<script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}}"></script>
-<script src="{{asset('frontend/js/bootstrap-datepicker.min.js')}}"></script>
-<script src="{{asset('frontend/js/aos.js')}}"></script>
-
-
-<script src="{{asset('frontend/js/mediaelement-and-player.min.js')}}"></script>
-
-<script src="{{asset('frontend/js/main.js')}}"></script>
 
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
+    let modalId = $('#image-gallery');
+    $(document).ready( function () {
+        $('#banner-carsoule').owlCarousel({
+            items: 1,
+            loop:true,
+            dots: false,
+            nav: true,
+            autoplay:false,
+            autoplayTimeout:3000,
+            navText: ["<i class='fa fa-chevron-left '></i>","<i class='fa fa-chevron-right'></i>"],
+            responsive: {
+                480: {
+                    items: 1
+                },
+                765: {
+                    items: 1
+                },
+                991: {
+                    items: 1
+                },
+                1200: {
+                    items: 1
+                }
+            }
+        });
+        $(document).on('change','#executive-select-btn',function(){
+            var date = $(this).find('option:selected').val();
+            $.ajax({
+                type: "POST",
+                url: "{{ route('executive-committee.list') }}",
+                data: {
+                    'date': date,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: 'html',
+                success: function (teams) {
+                    setTimeout(function(){
+                        $("#overlay-load").fadeOut(300);
+                        $('.executive-lists').html(teams)
+                    },500);
 
-    for (var i = 0; i < total; i++) {
-      new MediaElementPlayer(mediaElements[i], {
-        pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/',
-        shimScriptAccess: 'always',
-        success: function () {
-          var target = document.body.querySelectorAll('.player'), targetTotal = target.length;
-          for (var j = 0; j < targetTotal; j++) {
-            target[j].style.visibility = 'visible';
-          }
+
+                },
+                error: function (e) {
+                    if (e.responseJSON.message) {
+                        swal('Error', e.responseJSON.message, 'error');
+                    } else {
+                        swal('Error', 'Something went wrong while processing your request.', 'error')
+                    }
+                }
+            });
+
+        })
+
+
+        function equal_height() {
+// Equal Card Height
+
+            $('.home-blog').jQueryEqualHeight('.post-entry');
+            $('.home-blog').jQueryEqualHeight('.card-img-top');
+            $('#our-events').jQueryEqualHeight('.event');
+
+            // $('.event').jQueryEqualHeight('.event-image');
+
+            $('.blogs-sider-bar ').jQueryEqualHeight('.side-bar-image');
+
+            $('.blogs-sider-bar ').jQueryEqualHeight('.row');
+
+
+
+            $('.team-section').jQueryEqualHeight('.team-top');
+            $('.team-section').jQueryEqualHeight('.team-image');
+
+            $('.features_area').jQueryEqualHeight('.features_item p');
+
+            $('.gallery').jQueryEqualHeight('.img-thumbnail');
+            $('.gallery').jQueryEqualHeight('.gallery-title');
+
+            $('#gallery-index-page').jQueryEqualHeight('.card-img');
+
+
+
+
+
+
+
+            // $('#gallery-index-page .thumbnail').jQueryEqualHeight('.img-thumbnail');
+
+
+
+// $('.jQueryEqualHeight3').jQueryEqualHeight('.card');
         }
-      });
-    }
-  });
+
+        $(window).on('load', function (event) {
+            equal_height();
+        });
+        $(window).resize(function (event) {
+            equal_height();
+        });
+
+
+        // gallery image js
+
+        loadGallery(true, 'a.thumbnail');
+
+        //This function disables buttons when needed
+        function disableButtons(counter_max, counter_current) {
+            $('#show-previous-image, #show-next-image')
+                .show();
+            if (counter_max === counter_current) {
+                $('#show-next-image')
+                    .hide();
+            } else if (counter_current === 1) {
+                $('#show-previous-image')
+                    .hide();
+            }
+        }
+
+        function loadGallery(setIDs, setClickAttr) {
+            let current_image,
+                selector,
+                counter = 0;
+
+            $('#show-next-image, #show-previous-image')
+                .click(function () {
+                    if ($(this)
+                        .attr('id') === 'show-previous-image') {
+                        current_image--;
+                    } else {
+                        current_image++;
+                    }
+
+                    selector = $('[data-image-id="' + current_image + '"]');
+                    updateGallery(selector);
+                });
+
+            function updateGallery(selector) {
+                let $sel = selector;
+                current_image = $sel.data('image-id');
+                $('#image-gallery-title')
+                    .text($sel.data('title'));
+                $('#image-gallery-image')
+                    .attr('src', $sel.data('image'));
+                disableButtons(counter, $sel.data('image-id'));
+            }
+
+            if (setIDs == true) {
+                $('[data-image-id]')
+                    .each(function () {
+                        counter++;
+                        $(this)
+                            .attr('data-image-id', counter);
+                    });
+            }
+            $(setClickAttr)
+                .on('click', function () {
+                    updateGallery($(this));
+                });
+        }
+
+    });
 
 </script>
 
-</body>
 </html>

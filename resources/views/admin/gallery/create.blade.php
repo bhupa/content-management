@@ -46,18 +46,11 @@
 
                 <div class="form-group">
                     <label class="control-label col-lg-2">Image</label>
-                    <div class="col-lg-10">
-
-                        <input name="image" type="hidden" class="fileimage">
-                        <div id="form1" runat="server">
-                            <input type='file' id="imgInp" /></br> </br>
-                            <img id="my-image" src="#" />
-                        </div>
-                        {{--<button class="use">Upload</button>--}}
-                        <input type="button" class="use" value="Crop" >
-                       <input type="button" class="cancle-btn" value="Delete" ></br> </br>
-                       
-                        <div class="result"></div>
+                    <div class="col-lg-5">
+                        <input type="file" id="upload-file" accept="image/*"  name="image"/>
+                    </div>
+                    <div class="col-lg-5">
+                        <div id="thumbnail"></div>
                     </div>
 
 

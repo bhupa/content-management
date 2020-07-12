@@ -87,41 +87,45 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="form-group">
-                    <label class="control-label col-lg-2">Keywords <span class="text-danger">*</span></label>
+                    <label class="control-label col-lg-2">Category <span class="text-danger">*</span></label>
 
                     <div class="col-lg-6">
-                        {!! Form::text('keywords', null, array('class'=>'form-control','placeholder'=>'Post keywords')) !!}
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="form-group">
-                    <label class="control-label col-lg-2">Meta Title <span class="text-danger">*</span></label>
+                        <select name="category_id" id="" class="form-control">
+                            <option value="">Select Category</option>
+                            @foreach($category as $cat)
 
-                    <div class="col-lg-6">
-                        {!! Form::text('meta_title', null, array('class'=>'form-control','placeholder'=>'Meta  title')) !!}
+                                <option value="{{$cat->id}}" @if(old('category_id') == $cat->id) selected @endif  >{{$cat->name}}</option>
+                                @endforeach
+                        </select>
                     </div>
                 </div>
+
                 <div class="clearfix"></div>
 
                 <div class="form-group">
                     <label class="control-label col-lg-2">Image</label>
-                    <div class="col-lg-10">
-
-                        <input name="image" type="hidden" class="fileimage">
-
-                        <div id="form1" runat="server">
-                            <input type='file' id="imgInp" placeholder="Upload Image"/> </br> </br>
-                            <img id="my-image" src="#" />
-                        </div>
-                        {{--<button class="use">Upload</button>--}}
-                        <input type="button" class="use" value="Crop" >
-                        <input type="button" class="cancle-btn" value="Delete" ></br> </br>
-                        <div class="result"></div>
+                    <div class="col-lg-5">
+                        <input type="file" id="upload-file" accept="image/*"  name="image"/>
+                    </div>
+                    <div class="col-lg-5">
+                        <div id="thumbnail"></div>
                     </div>
 
 
                 </div>
                 <div class="clearfix"></div>
+                <div class="form-group row {{ $errors->has('short_description') ? 'has-errors'  : ''}}">
+                    <label class="control-label col-lg-2">Short Description </label>
+
+                    <div class="col-lg-10">
+                        {!! Form::textarea('short_description', null, array('class'=>'form-control mini-editor','id'=>'editor', )) !!}
+                        @if($errors->has('short_description'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('short_description')}}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="clearfix"></div>
                 <div class="form-group">
                     <label class="control-label col-lg-2">Description <span class="text-danger">*</span></label>
                     <div class="col-lg-10">

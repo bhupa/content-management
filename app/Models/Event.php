@@ -28,7 +28,9 @@ class Event extends Model
         'image',
         'short_description',
         'description',
-        'is_active'
+        'is_active',
+        'location',
+        'date'
 
     ];
 }

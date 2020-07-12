@@ -125,6 +125,10 @@ abstract class Repository
     {
         return $this->model->orderBy($prop, $type);
     }
+    public function orderByRaw($prop, $type = null)
+    {
+        return $this->model->orderByRaw($prop, $type);
+    }
 
     public function where($column, $opOrVal, $value = "")
     {

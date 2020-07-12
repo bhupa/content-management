@@ -17,34 +17,38 @@ class EventController extends Controller
     public function __construct(EventRepository $event)
     {
         $this->event = $event;
+        $this->upload_path = DIRECTORY_SEPARATOR.'events'.DIRECTORY_SEPARATOR;
+        $this->storage = Storage::disk('public');
     }
 
 
     public function index(){
 
+        auth()->user()->can('master-policy.perform', ['event', 'view']);
         $events = $this->event->OrderBy('created_at','desc')->paginate('100');
         return view('admin.event.index')->withEvents($events);
     }
 
     public function create(){
+        auth()->user()->can('master-policy.perform', ['event', 'add']);
         return view('admin.event.create');
     }
 
 
     public  function store(EventRequest $request){
 
+        auth()->user()->can('master-policy.perform', ['event', 'add']);
         $data = $request->except('_token','image');
-        if($request->get('image')){
-            $saveName=sha1(date('YmdHis').str_random(3));
-            $image = $request->get('image');
-            $image = str_replace('data:image/png;base64','',$image);
-            $image = str_replace('','+', $image);
-            $imageData = base64_decode(   $image);
-            $data['image'] = 'event/'.$saveName.'png';
-            Storage::put($data['image'],   $imageData);
+        if($request->file('image')){
+            $image= $request->file('image');
+            $fileName = time().$image->getClientOriginalName();
+            $this->storage->put($this->upload_path. $fileName, file_get_contents($image->getRealPath()));
+            $data['image'] = 'events/'.$fileName;
 
         }
         $data['is_active'] = isset($request->is_active) ? 1:0;
+        $data['created_by'] = auth()->user()->id;
+
         if($this->event->create($data)){
             return redirect()->route('admin.event.index')
                 ->with('flash_notice', 'Event Created Successfully.');
@@ -55,7 +59,7 @@ class EventController extends Controller
     }
     public function edit($id)
     {
-        $this->authorize('master-policy.perform',['event','edit']);
+        auth()->user()->can('master-policy.perform',['event','edit']);
         $title = 'Edit event';
         $event = $this->event->find($id);
         return view('admin.event.edit')->withEvent($event)->withTitle($title);
@@ -70,24 +74,20 @@ class EventController extends Controller
      */
     public function update(EventUpdateRequest $request, $id)
     {
-        $this->authorize('master-policy.perform',['event','edit']);
+        auth()->user()->can('master-policy.perform',['event','edit']);
         $event = $this->event->find($id);
         $data= $request->except(['image']);
-        if($request->get('image')){
-            $saveName = sha1(date('YmdHis').str_random(3));
-            $image = $request->get('image');
-            $image = str_replace('data:image/png;base64','',$image);
-            $image = str_replace('','+', $image);
-            $imageData =base64_decode($image);
-            $data['image']= 'ecd/'.$saveName.'png';
-            Storage::put($data['image'], $imageData);
-            if(Storage::exists($event->image)){
-                Storage::delete($event->image);
-            }
+        if($request->file('image')){
+            $image= $request->file('image');
+            $fileName = time().$image->getClientOriginalName();
+            $this->storage->put($this->upload_path. $fileName, file_get_contents($image->getRealPath()));
+            $data['image'] = 'events/'.$fileName;
 
         }
 
         $data['is_active'] = isset($data['is_active']) ? 1 : 0;
+        $data['updated_by'] = auth()->user()->id;
+
         if($this->event->update($event->id, $data)){
             return redirect()->route('admin.event.index')
                 ->with('flash_notice', 'Event Updated Successfully.');
@@ -105,7 +105,7 @@ class EventController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $this->authorize('master-policy.perform',['event','delete']);
+        auth()->user()->can('master-policy.perform',['event','delete']);
         $event = $this->event->find($id);
 
         if($this->event->destroy($event->id)){
@@ -118,7 +118,7 @@ class EventController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $this->authorize('master-policy.perform',['event','changeStatus']);
+        auth()->user()->can('master-policy.perform',['event','changeStatus']);
         $event = $this->event->find($request->get('id'));
         if ($event->is_active == 0) {
             $status = 1;

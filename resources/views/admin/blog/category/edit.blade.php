@@ -77,28 +77,28 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="form-group">
-                    <label class="control-label col-lg-2">Image</label>
-                    <div class="col-lg-10">
-                        <a href="/file-manager?type=Images" id="feature-img-container">
-                            <img @if(!empty($category->image)) title="Change Image" src="{{ asset($category->image) }}"
-                                 height="100"
-                                 @else src="{{ asset('backend/images/if_document_image_add_103475.png') }}"
-                                 title="Choose Image"
-                                    @endif
-                            >
-                        </a>
-                        <input name="image" type="hidden" id="thumbnail">
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="form-group">
-                    <label class="control-label col-lg-2">Description <span class="text-danger">*</span></label>
-                    <div class="col-lg-10">
-                        {!! Form::textarea('description', $category->description, array('class'=>'form-control editor')) !!}
-                    </div>
-                </div>
-                <div class="clearfix"></div>
+                {{--<div class="form-group">--}}
+                    {{--<label class="control-label col-lg-2">Image</label>--}}
+                    {{--<div class="col-lg-10">--}}
+                        {{--<a href="/file-manager?type=Images" id="feature-img-container">--}}
+                            {{--<img @if(!empty($category->image)) title="Change Image" src="{{ asset($category->image) }}"--}}
+                                 {{--height="100"--}}
+                                 {{--@else src="{{ asset('backend/images/if_document_image_add_103475.png') }}"--}}
+                                 {{--title="Choose Image"--}}
+                                    {{--@endif--}}
+                            {{-->--}}
+                        {{--</a>--}}
+                        {{--<input name="image" type="hidden" id="thumbnail">--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="clearfix"></div>--}}
+                {{--<div class="form-group">--}}
+                    {{--<label class="control-label col-lg-2">Description <span class="text-danger">*</span></label>--}}
+                    {{--<div class="col-lg-10">--}}
+                        {{--{!! Form::textarea('description', $category->description, array('class'=>'form-control editor')) !!}--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="clearfix"></div>--}}
                 <div class="form-group">
                     <label class="control-label col-lg-2">Publish ?</label>
                     <div class="col-lg-10">

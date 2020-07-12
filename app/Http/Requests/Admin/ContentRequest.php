@@ -25,7 +25,12 @@ class ContentRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'description' => 'required',
+            'short_description' => 'required',
+            'display_in'=>'in:header,footer,content',
+            'short_description'=>'required',
+            'description'=>'required',
+            'image'=>'nullable|mimes:jpeg,png,jpg,svg',
+
 
         ];
     }

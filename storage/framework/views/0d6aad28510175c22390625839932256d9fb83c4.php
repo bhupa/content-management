@@ -58,12 +58,14 @@
                 <br>
 
                 <div class="form-group">
-                    <label class="control-label col-lg-2">Parent<span class="text-danger">*</span></label>
+                    <label class="control-label col-lg-2">Display In<span class="text-danger">*</span></label>
                     <div class="col-lg-6">
 
-                        <select name="parent_id" class="form-control">
-                            <option value="">Parent Itself</option>
-                            <?php echo $__env->make('admin.content.recursive_options', ['parents' => $parents, 'selected_id' => ""], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                        <select name="display_in" class="form-control">
+                            <option value="">Selecet Display In</option>
+                            <option value="header" <?php if(old('display-in') == 'header'): ?> selected  <?php endif; ?>>Header</option>
+                            <option value="content" <?php if(old('display-in') == 'content'): ?> selected  <?php endif; ?>>Content</option>
+                            <option value="footer" <?php if(old('display-in') == 'footer'): ?> selected  <?php endif; ?>>Footer</option>
                         </select>
 
                     </div>
@@ -82,9 +84,11 @@
                 <div class="clearfix"></div>
                 <div class="form-group">
                     <label class="control-label col-lg-2">Image</label>
-                    <div class="col-lg-10">
-
-
+                    <div class="col-lg-5">
+                        <input type="file" id="upload-file" accept="image/*"  name="image"/>
+                    </div>
+                    <div class="col-lg-5">
+                        <div id="thumbnail"></div>
                     </div>
 
 
@@ -104,11 +108,16 @@
                         <?php endif; ?>
                     </div>
                     <div class="clearfix"></div>
-                <div class="form-group">
+                <div class="form-group mt-2">
                     <label class="control-label col-lg-2">Description <span class="text-danger">*</span></label>
                     <div class="col-lg-10">
                         <?php echo Form::textarea('description', null, array('class'=>'form-control editor', 'id'=>'editor', 'required' => 'true')); ?>
 
+                        <?php if($errors->has('description')): ?>
+                            <span class="help-block">
+                                <strong><?php echo e($errors->first('description')); ?></strong>
+                            </span>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="clearfix"></div>

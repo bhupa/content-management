@@ -10,7 +10,6 @@
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('css/admin.css')); ?>">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.3/croppie.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
     <style>
         img {
@@ -135,6 +134,72 @@
                 }
             });
         });
+
+
+        $('div').on('click', '.closeDiv', function () {
+            $(this).prev().remove();
+            $(this).remove();
+            $('#upload-file').val("");
+            $('.displayimage').css('display','block');
+        });
+
+        var fileInput = document.getElementById("upload-file");
+
+        fileInput.addEventListener("change", function (e) {
+
+            var filesVAR = this.files;
+            $('.displayimage').css('display','none');
+
+            showThumbnail(filesVAR);
+
+        }, false);
+
+
+
+        function showThumbnail(files) {
+            var file = files[0]
+
+            var $thumbnail = $('#thumbnail').get(0);
+
+            var $image = $("<img>", {
+                class: "imgThumbnail upload-image-frame"
+            });
+            var $pDiv = $("<div>", {
+                class: "divThumbnail",
+                style: "float: left"
+            });
+            var $div = $("<div>", {
+                class: "closeDiv",
+                style: "float: right"
+            }).html('X');
+
+            $pDiv.append($image, $div).appendTo($thumbnail);
+            var reader = new FileReader()
+            reader.onload = function (e) {
+                $image[0].src = e.target.result;
+            }
+            var ret = reader.readAsDataURL(file);
+            var canvas = document.createElement("canvas");
+            ctx = canvas.getContext("2d");
+            $image.on('load', function () {
+                ctx.drawImage($image[0], 100, 100);
+            })
+        }
+
+        let today = new Date(),
+            day = today.getDate(),
+            month = today.getMonth()+1, //January is 0
+            year = today.getFullYear();
+        if(day<10){
+            day='0'+day
+        }
+        if(month<10){
+            month='0'+month
+        }
+        today = year+'-'+month+'-'+day;
+
+        document.getElementById("event-date").setAttribute("min", today);
+        document.getElementById("event-date").setAttribute("value", today);
 
     });
 </script>

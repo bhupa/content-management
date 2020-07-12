@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\ContentBannerRepository;
 use App\Repositories\EventRepository;
+use App\Repositories\SettingRepository;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -14,20 +15,19 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    protected $event, $contentbanner;
+    protected $event, $setting;
 
-    public function __construct(EventRepository $event, ContentBannerRepository $contentbanner)
+    public function __construct(EventRepository $event,SettingRepository $setting)
     {
         $this->event = $event;
-        $this->contentbanner = $contentbanner;
+        $this->setting = $setting;
     }
 
     public function index()
     {
-        $contentbanner = $this->contentbanner->where('title','Event')->where('is_active', '1')->first();
-
+        $setting = $this->setting->where('slug','banner-image')->first();
         $events = $this->event->where('is_active','1')->orderBy('created_at','desc')->latest()->take(6)->get();
-       return view('event.index')->withEvents($events)->withContentbanner($contentbanner);
+       return view('event.index')->withEvents($events)->withSetting($setting);
     }
 
     /**
@@ -59,11 +59,12 @@ class EventController extends Controller
      */
     public function show($slug)
     {
-        $contentbanner = $this->contentbanner->where('title','Event')->where('is_active', '1')->first();
+        $setting = $this->setting->where('slug','banner-image')->first();
+
         $event = $this->event->where('slug',$slug)->where('is_active','1')->first();
         $events = $this->event->where('is_active','1')->get();
 
-        return view('event.show')->withEvent($event)->withEvents($events)->withContentbanner($contentbanner);
+        return view('event.show')->withEvent($event)->withEvents($events)->withSetting($setting);
     }
 
     /**

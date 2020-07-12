@@ -85,30 +85,48 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2">Category <span class="text-danger">*</span></label>
 
+                    <div class="col-lg-6">
+                        <select name="category_id" id="" class="form-control">
+                            <option value="">Select Category</option>
+                            @foreach($category as $cat)
 
+                                <option value="{{$cat->id}}" @if($blog->category_id == $cat->id) selected @endif  >{{$cat->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
                 <div class="form-group">
                     <label class="control-label col-lg-2">Image</label>
-                    <div class="col-lg-10">
+                    <div class="col-lg-5">
+                        <input type="file" id="upload-file" accept="image/*"  name="image"/>
+                    </div>
+                    <div class="col-lg-5">
+                        <div id="thumbnail"></div>
                         @if(file_exists('storage/'.$blog->image) && $blog->image !== '')
                             <img src="{{ asset('storage/'.$blog->image)}}" class="displayimage" style="width:100px; height:100px; margin-bottom: 15px;" alt=""></br>
 
                         @endif
-
-                        <input name="image" type="hidden" class="fileimage">
-                        <div id="form1" runat="server">
-                            <input type='file' id="imgInp" /></br> </br>
-                            <img id="my-image" src="#" />
-                        </div>
-                        {{--<button class="use">Upload</button>--}}
-                        <input type="button" class="use" value="Crop" >
-                            <input type="button" class="cancle-btn" value="Delete" ></br> </br>
-                        <div class="result"></div>
                     </div>
 
 
                 </div>
                 <div class="clearfix"></div>
+                <div class="form-group row {{ $errors->has('short_description') ? 'has-errors'  : ''}}">
+                    <label class="control-label col-lg-2">Short Description </label>
+
+                    <div class="col-lg-10">
+                        {!! Form::textarea('short_description', $blog->short_description, array('class'=>'form-control mini-editor','id'=>'editor', )) !!}
+                        @if($errors->has('short_description'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('short_description')}}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="clearfix"></div>
                 <div class="form-group">
                     <label class="control-label col-lg-2">Description <span class="text-danger">*</span></label>
                     <div class="col-lg-10">

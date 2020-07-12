@@ -22,41 +22,39 @@ class SettingUpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(Request $request)
+    public function rules()
     {
 
-        if($this->type =='1'){
+
+        if($this->type =='Link'){
             return [
-                'name' => 'required|unique:site_settings,name,'.$this->id,
-                'slug' => 'required',
+                'name' => 'required|unique:settings,name,'.$this->id,
                 'type' => 'required|not_in:0',
                 'url' =>'required|url'
             ];
         }
-        else if($this->type == '3'){
+        else if($this->type == 'image'){
             return [
-                'name' => 'required|unique:site_settings,name,'.$this->id,
-                'slug' => 'required',
+                'name' => 'required|unique:settings,name,'.$this->id,
                 'type' => 'required|not_in:0',
-                'image' =>'nullable',
-                'description'=>'required'
+                'image' =>'nullable|mimes:jpeg,png,jpg,svg',
             ];
         }
         else{
             return [
-                'name' => 'required|unique:site_settings,name,'.$this->id,
-                'slug' => 'required',
+                'name' => 'required|unique:settings,name,'.$this->id,
                 'type' => 'required|not_in:0',
                 'url' =>'required',
             ];
         }
+
     }
     public function messages(){
         return [
             'name.required' => 'please Insert then Name',
             'slug.required' => 'please Insert then Slug',
-            'url.required' => 'please Insert then Link on link text on text and Image on image',
-            'image.required' => 'please Insert then iamge of jpge,png,jpg',
+            'value.required' => 'please Insert then Link on link text on text and Image on image',
+            'image.required' => 'please Insert then image of jpge,png,jpg',
         ];
     }
 }

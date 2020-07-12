@@ -8,13 +8,12 @@
 
 namespace App\Repositories;
 
-use App\Models\Services;
-use App\Models\Team;
+use App\Models\Members;
 
 class TeamRepository extends Repository
 {
-    public  function __construct(Team $team)
+    public  function __construct(Members $member)
     {
-        $this->model =  $team;
+        $this->model =  $member;
     }
 }

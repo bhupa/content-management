@@ -21,6 +21,8 @@ class ContentController extends Controller
     ){
         $this->content = $content;
         auth()->shouldUse('admin');
+        $this->upload_path = DIRECTORY_SEPARATOR.'contents'.DIRECTORY_SEPARATOR;
+        $this->storage = Storage::disk('public');
     }
 
     /**
@@ -66,14 +68,12 @@ class ContentController extends Controller
     {
         auth()->user()->can('master-policy.perform', ['content', 'add']);
         $data = $request->except(['image']);
-        if ($request->get('image')) {
-            $saveName = sha1(date('YmdHis') . str_random(3));
-            $image = $request->get('image');
-            $image = str_replace('data:image/png;base64,', '', $image);
-            $image = str_replace(' ', '+', $image);
-            $imageData = base64_decode($image);
-            $data['image'] = 'content/'. $saveName . '.png';
-            Storage::put($data['image'], $imageData);
+        if($request->file('image')){
+            $image= $request->file('image');
+            $fileName = time().$image->getClientOriginalName();
+            $this->storage->put($this->upload_path. $fileName, file_get_contents($image->getRealPath()));
+            $data['image'] = 'contents/'.$fileName;
+
         }
         $data['is_active'] = isset($data['is_active']) ? 1 : 0;
         $data['edit'] = isset($data['edit']) ? 1 : 0;
@@ -110,7 +110,7 @@ class ContentController extends Controller
     {
         auth()->user()->can('master-policy.perform', ['content', 'edit']);
         $title = 'Edit Content';
-        $content = $this->content->find($id);
+        $content = $this->content->where('slug',$id)->first();
 //        $parents = $this->content->where('id', '!=', $id)->orwhereHas('child', function($query) use($id){
 //
 //        })->get();
@@ -137,17 +137,16 @@ class ContentController extends Controller
         auth()->user()->can('master-policy.perform', ['content', 'edit']);
         $content = $this->content->find($id);
         $data = $request->except(['image']);
-        if ($request->get('image')) {
-            $saveName = sha1(date('YmdHis') . str_random(3));
-            $image = $request->get('image');
-            $image = str_replace('data:image/png;base64,', '', $image);
-            $image = str_replace(' ', '+', $image);
-            $imageData = base64_decode($image);
-            $data['image'] = 'content/'. $saveName . '.png';
-            Storage::put($data['image'], $imageData);
+
+        if($request->file('image')){
+            $image= $request->file('image');
+            $fileName = time().$image->getClientOriginalName();
+            $this->storage->put($this->upload_path. $fileName, file_get_contents($image->getRealPath()));
+            $data['image'] = 'contents/'.$fileName;
             if(Storage::exists($content->image)){
                 Storage::delete($content->image);
             }
+
         }
 
         $data['is_active'] = isset($request['is_active']) ? 1 : 0;

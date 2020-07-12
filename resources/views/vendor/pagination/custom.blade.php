@@ -1,23 +1,31 @@
 @if ($paginator->hasPages())
-<ul class="navigation pagination">
-    <div class="nav-links">
+    <div class="nav-links" role="navigation">
         {{-- Previous Page Link --}}
+        @if ($paginator->onFirstPage())
+            <span class="page-numbers disabled" aria-disabled="true" aria-label="@lang('pagination.next')">«</span>
 
+        @else
+
+            <a class="page-numbers" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">
+                «
+            </a>
+
+        @endif
 
         {{-- Pagination Elements --}}
         @foreach ($elements as $element)
             {{-- "Three Dots" Separator --}}
             @if (is_string($element))
-                <li class="page-numbers disabled"><span class="page-link">{{ $element }}</span></li>
+                <li class="disabled" aria-disabled="true"><span>{{ $element }}</span></li>
             @endif
 
             {{-- Array Of Links --}}
             @if (is_array($element))
                 @foreach ($element as $page => $url)
                     @if ($page == $paginator->currentPage())
-                        <li class="page-numbers current"><span class="page-link">{{ $page }}</span></li>
+                        <span class="page-numbers current" >{{ $page }}</span>
                     @else
-                        <li class="page-numbers"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                        <a class="page-numbers" href="{{ $url }}">{{ $page }}</a>
                     @endif
                 @endforeach
             @endif
@@ -25,12 +33,11 @@
 
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
-            <a class="page-numbers next" href="{{ $paginator->nextPageUrl() }}" rel="next">Next</a>
+            <a class="next page-numbers" href="{{ $paginator->nextPageUrl() }}" rel="next">»</a>
+
         @else
-            <li class="page-numbers next"><span class="page-link">next</span></li>
+            <span class="page-numbers disabled" aria-disabled="true" aria-label="@lang('pagination.next')">»</span>
 
         @endif
     </div>
-
-</ul>
 @endif

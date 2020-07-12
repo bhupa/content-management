@@ -117,23 +117,24 @@ Route::group(['middleware' => ['auth:admin', 'preventBackHistory'], 'prefix' => 
 
 
 
-    Route::resource('memberType', 'MemberTypeController', ['as' => 'admin']);
-    Route::post('member/change-status', array('as' => 'admin.members.change-status', 'uses' => 'ArticleController@changeStatus'));
-    Route::get('/','MemberTypeController@index')->name('admin.memberType.index');
-    Route::get('/create', 'MemberTypeController@create')->name('admin.memberType.create');
-    Route::post('/store', 'MemberTypeController@store')->name('admin.memberType.store');
-    Route::delete('destroy/{image_id}', 'MemberTypeController@destroy')->name('admin.memberType.destroy');
-    Route::get('edit/{id}', 'MemberTypeController@edit')->name('admin.memberType.edit');
-    Route::post('update/{id}', 'MemberTypeController@update')->name('admin.memberType.update');
+    Route::resource('member-type', 'MemberTypeController', ['as' => 'admin']);
+    Route::post('member-type/change-status', array('as' => 'admin.member-type.change-status', 'uses' => 'MemberTypeController@changeStatus'));
+    Route::get('/','MemberTypeController@index')->name('admin.member-type.index');
+    Route::get('/create', 'MemberTypeController@create')->name('admin.member-type.create');
+    Route::post('/store', 'MemberTypeController@store')->name('admin.member-type.store');
+    Route::delete('destroy/{image_id}', 'MemberTypeController@destroy')->name('admin.member-type.destroy');
+    Route::get('edit/{id}', 'MemberTypeController@edit')->name('admin.member-type.edit');
+    Route::post('update/{id}', 'MemberTypeController@update')->name('admin.member-type.update');
 
-    Route::resource('members', 'MembersController', ['as' => 'admin']);
-    Route::post('members/change-status', array('as' => 'admin.members.change-status', 'uses' => 'MembersController@changeStatus'));
-    Route::get('/','MembersController@index')->name('admin.members.index');
-    Route::get('/create', 'MembersController@create')->name('admin.members.create');
-    Route::post('/store', 'MembersController@store')->name('admin.members.store');
-    Route::delete('destroy/{id}', 'MembersController@destroy')->name('admin.members.destroy');
-    Route::get('edit/{id}', 'MembersController@edit')->name('admin.members.edit');
-    Route::post('update/{id}', 'MembersController@update')->name('admin.members.update');
+    Route::resource('member', 'MembersController', ['as' => 'admin']);
+    Route::post('member/change-status', array('as' => 'admin.member.change-status', 'uses' => 'MembersController@changeStatus'));
+    Route::get('/','MemberControllers@index')->name('admin.member.index');
+    Route::get('/create', 'MemberControllers@create')->name('admin.member.create');
+    Route::post('/store', 'MemberControllers@store')->name('admin.member.store');
+    Route::delete('destroy/{id}', 'MemberControllers@destroy')->name('admin.member.destroy');
+    Route::get('edit/{id}', 'MemberControllers@edit')->name('admin.member.edit');
+    Route::post('update/{id}', 'MemberControllers@update')->name('admin.member.update');
+    Route::post('member/sort', array('as' => 'admin.member.sort', 'uses' => 'MembersController@sort'));
 
 
   Route::resource('setting', 'SiteSettingController', ['as' => 'admin']);
@@ -164,6 +165,11 @@ Route::group(['middleware' => ['auth:admin', 'preventBackHistory'], 'prefix' => 
 
 
 
+
+    Route::group(['prefix' => 'blog'], function () {
+        Route::resource('category', 'BlogCategoryController', ['as' => 'admin.blog']);
+        Route::post('blog/category/change-status', array('as' => 'admin.blog.category.change-status', 'uses' => 'BlogCategoryController@changeStatus'));
+    });
 
 
     Route::resource('blog', 'BlogController', ['as' => 'admin']);

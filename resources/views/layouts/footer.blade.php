@@ -1,70 +1,82 @@
-<footer class="site-footer">
+
+<footer class="site-footer" role="contentinfo">
   <div class="container">
-
-
-    <div class="row">
+    <div class="row ">
       <div class="col-md-4">
-        <h3 class="footer-heading mb-4 text-white">About</h3>
-        <p>{!! str_limit($about->short_description,'200','....') !!} </p>
-        <p><a href="{{route('about-us.index')}}" class="btn btn-primary pill text-white px-4">Read More</a></p>
-      </div>
-      <div class="col-md-5">
-        <div class="row">
-          <div class="col-md-6">
-            <h3 class="footer-heading mb-4 text-white">Quick Menu</h3>
-            <ul class="list-unstyled">
-                @foreach($latestcontents as $latestcontent)
-              <li><a href="{{route('content.show',[$latestcontent->slug])}}">{{$latestcontent->title}}</a></li>
-              @endforeach
+        <h3>About Us</h3>
+        <p class="mb-5">
 
-            </ul>
-          </div>
-          <div class="col-md-6">
-            <h3 class="footer-heading mb-4 text-white">&nbsp;</h3>
-            <ul class="list-unstyled">
-                @foreach($contentmenus as $contentmenu)
-                    <li><a href="{{route('content.show',[$contentmenu->slug])}}">{{$contentmenu->title}}</a></li>
-                @endforeach
-            </ul>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col-md-3">
-        <div class="col-md-12"><h3 class="footer-heading mb-4 text-white">Contact Information</h3></div>
-        <div class="col-md-12">
-          <p>
-            @foreach($settings as $setting)
-
-              @if($setting->name == 'Instagram')
-                <a href="{{$setting->value}}" class="p-2"><span class="icon-instagram"></span></a>
+          {!! str_limit($about->short_description,'200','...') !!}
+        <ul class="list-unstyled footer-link d-flex footer-social">
+          @foreach($settings as $setting)
+            @if($setting->slug =='twitter')
+          <li><a href="{{$setting->value}}" class="p-2"><span class="fa fa-twitter"></span></a></li>
+            @endif
+           @if($setting->slug =='facebook')
+          <li><a href="{{$setting->value}}" class="p-2"><span class="fa fa-facebook"></span></a></li>
               @endif
-              @if($setting->name == 'Vimeo')
-                <a href="{{$setting->value}}" class="p-2"><span class="icon-vimeo"></span></a>
-              @endif
-                @if($setting->name == 'Twitter')
-                  <a href="{{$setting->value}}" class="p-2"><span class="icon-twitter"></span></a>
+             @if($setting->slug =='linkedin')
+          <li><a href="{{$setting->value}}" class="p-2"><span class="fa fa-linkedin"></span></a></li>
                 @endif
-              @if($setting->name == 'Facebook')
-            <a href="{{$setting->value}}" class="pb-2 pr-2 pl-0"><span class="icon-facebook"></span></a>
+                  @if($setting->slug =='instagram')
+          <li><a href="{{$setting->value}}" class="p-2"><span class="fa fa-instagram"></span></a></li>
               @endif
+            @endforeach
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h3>Menu</h3>
+        <ul class="list-unstyled footer-link">
+          <li><a href="{{route('content.show',[$about->slug])}}">About Us</a></li>
+          <li><a href="{{route('executive-committee.index')}}">Team</a></li>
+          <li><a href="{{route('event.index')}}">Events</a></li>
+          <li><a href="{{route('contact.index')}}">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <h3>Links</h3>
+        <ul class="list-unstyled footer-link">
+          @foreach($footermenu as $menu)
+          <li><a href="{{route('content.show',[$menu->slug])}}">{{$menu->title}}</a></li>
+          @endforeach
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h3>Contacts</h3>
+        <ul class="list-unstyled footer-link">
 
+          <li class="d-block">
+            <span class="d-block">Address:</span>
+            @foreach($settings as $setting)
+            @if($setting->slug =='address')
+            <span class="text-white">{{$setting->value}}</span>
+            @endif
               @endforeach
+          </li>
+          <li class="d-block">
+            <span class="d-block">Telephone:</span>
+              @foreach($settings as $setting)
+            @if($setting->slug =='contact')
+            <span class="text-white">{{$setting->value}}</span>
+            @endif
+            @endforeach
+          </li>
+          <li class="d-block">
+            <span class="d-block">Email:</span>
+              @foreach($settings as $setting)
+            @if($setting->slug =='email')
+            <span class="text-white">{{$setting->value}}</span>
 
-          </p>
-        </div>
+            @endif
+            @endforeach
+          </li>
+
+        </ul>
       </div>
     </div>
-    <div class="row  mt-5 text-center">
-      <div class="col-md-12">
+    <p>
+      Copyright ©<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript">document.write(new Date().getFullYear());</script>2020 All rights reserved |  by <a href="http://www.genstechnology.com/" target="_blank">Gens Technology</a></p>
 
 
-        Copyright &copy; <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All Rights Reserved
-
-
-      </div>
-
-    </div>
   </div>
 </footer>

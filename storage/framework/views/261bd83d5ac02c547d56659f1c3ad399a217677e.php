@@ -74,11 +74,19 @@
                             </a>
                         </li>
                     <?php endif; ?>
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('master-policy.perform', ['booking', 'view'])): ?>
-                        <li class="<?php echo e($secondParam == 'booking' ? 'active':''); ?>">
-                            <a href="<?php echo e(route('admin.booking.index')); ?>">
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('master-policy.perform', ['blog_categories', 'view'])): ?>
+                        <li class="<?php echo e($secondParam == 'blog_categories' ? 'active':''); ?>">
+                            <a href="<?php echo e(route('admin.blog.category.index')); ?>">
                                 <i class=" icon-image3"></i>
-                                <span>Booking</span>
+                                <span>Blog Categories</span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('master-policy.perform', ['blog', 'view'])): ?>
+                        <li class="<?php echo e($secondParam == 'blog' ? 'active':''); ?>">
+                            <a href="<?php echo e(route('admin.blog.index')); ?>">
+                                <i class=" icon-image3"></i>
+                                <span>Blog</span>
                             </a>
                         </li>
                     <?php endif; ?>
@@ -186,18 +194,18 @@
 
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('master-policy.perform', ['member-type', 'view'])): ?>
                         <li class="<?php echo e($thirdParam == 'member-type' ? 'active':''); ?>">
-                            <a href="<?php echo e(route('admin.memberType.index')); ?>">
+                            <a href="<?php echo e(route('admin.member-type.index')); ?>">
                                 <i class=" icon-cog2"></i>
                                 <span>Member Type</span>
                             </a>
                         </li>
                     <?php endif; ?>
 
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('master-policy.perform', ['team', 'view'])): ?>
-                        <li class="<?php echo e($thirdParam == 'team' ? 'active':''); ?>">
-                            <a href="<?php echo e(route('admin.team.index')); ?>">
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('master-policy.perform', ['member', 'view'])): ?>
+                        <li class="<?php echo e($thirdParam == 'member' ? 'active':''); ?>">
+                            <a href="<?php echo e(route('admin.member.index')); ?>">
                                 <i class=" icon-cog2"></i>
-                                <span>Team</span>
+                                <span>Members</span>
                             </a>
                         </li>
                     <?php endif; ?>

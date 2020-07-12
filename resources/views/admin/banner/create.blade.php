@@ -51,40 +51,42 @@
                     @endif
                 </div>
                 <div class="clearfix"></div>
-                <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
-                    <label class="control-label col-lg-2">Description <span class="text-danger">*</span></label>
-
-                    <div class="col-lg-6 ">
-                        {!! Form::text('description', null, array('class'=>'form-control ', 'placeholder'=>'Description')) !!}
-
-                    </div>
-                    @if ($errors->has('description'))
-                        <span class="help-block">
-                                        <strong>{{ $errors->first('description') }}</strong>
-                                    </span>
-                    @endif
-                </div>
-                <div class="clearfix"></div>
-             
 
                 <div class="form-group">
                     <label class="control-label col-lg-2">Image</label>
-                    <div class="col-lg-10">
-
-                        <input name="image" type="hidden" class="fileimage">
-
-                        <div id="form1" runat="server">
-                            <input type='file' id="imgInp" placeholder="Upload Image"/> </br> </br>
-                            <img id="my-image" src="#" />
-                        </div>
-                        {{--<button class="use">Upload</button>--}}
-                        <input type="button" class="use" value="Crop" > 
-                        <input type="button" class="cancle-btn" value="Delete" ></br> </br>
-                        <div class="result"></div>
+                    <div class="col-lg-5">
+                        <input type="file" id="upload-file" accept="image/*"  name="image"/>
+                    </div>
+                    <div class="col-lg-5">
+                        <div id="thumbnail"></div>
                     </div>
 
 
                 </div>
+                <div class="form-group row {{ $errors->has('short_description') ? 'has-errors'  : ''}}">
+                    <label class="control-label col-lg-2">Short Description </label>
+
+                    <div class="col-lg-10">
+                        {!! Form::textarea('short_description', null, array('class'=>'form-control mini-editor','id'=>'editor', )) !!}
+                        @if($errors->has('short_description'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('short_description')}}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group mt-2">
+                        <label class="control-label col-lg-2">Description <span class="text-danger">*</span></label>
+                        <div class="col-lg-10">
+                            {!! Form::textarea('description', null, array('class'=>'form-control editor', 'id'=>'editor', 'required' => 'true')) !!}
+                            @if($errors->has('description'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('description')}}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
 
                 <div class="clearfix"></div>
                 <div class="form-group">

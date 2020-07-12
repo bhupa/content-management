@@ -3,62 +3,24 @@
 
 @section('scripts')
     <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#my-image').attr('src', e.target.result);
-                    var resize = new Croppie($('#my-image')[0], {
-                        viewport: { width: 300, height: 300 },
-                        boundary: { width: 500, height: 500 },
-                        showZoomer: true,
-                        enableResize: false,
-                        enableOrientation: false,
-                        format:'jpeg'
-
-                    });
-
-                    $('.use').fadeIn();
-                    $('.use').on('click', function() {
-
-                        resize.result({type: 'canvas', size: { width:300,height:300}}).then(function(dataImg) {
-                            var data = [{ image: dataImg }, { name: 'myimgage.jpg' }];
-
-                            // use ajax to send data to php
-
-                            $('.result').empty();
-                            $('.result').append('<img src="'+dataImg+'" style="width:200px; height:200px"    >');
-                            $('.fileimage').val(dataImg);
 
 
-                        });
+        $(window).load(function() {
 
-                    })
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
+            var itemText = $('#select  option:selected').text();
 
-        $("#imgInp").change(function() {
-            readURL(this);
-        });
-
-        onload = function()
-        {
-            var itemText = $('#select  option:selected').val();
             select_drop(itemText);
-            debugger
-        };
+        });
 
 
 
         function select_drop(itemText){
 
-            if (itemText == '1') {
+            if (itemText == 'Link') {
                 $('#text').css("display", "none");
                 $('#image').css("display", "none");
                 $('#link').css("display", "block");
-            }else if(itemText == '3'){
+            }else if(itemText == 'image'){
                 $('#text').css("display", "none");
                 $('#image').css("display", "block");
                 $('#link').css("display", "none");
@@ -76,7 +38,7 @@
                     $('#text').css("display", "none");
                     $('#image').css("display", "none");
                     $('#link').css("display", "block");
-                }else if(itemText == 'Image'){
+                }else if(itemText == 'image'){
                     $('#text').css("display", "none");
                     $('#image').css("display", "block");
                     $('#link').css("display", "none");
@@ -92,7 +54,7 @@
                     $('#text').remove();
                     $('#image').remove();
 
-                }else if(itemText == 'Image'){
+                }else if(itemText == 'image'){
                     $('#text').remove();
                     $('#link').remove();
                 } else {
@@ -145,29 +107,29 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="form-group">
-                    <label class="control-label col-lg-2">Slug <span class="text-danger">*</span></label>
-
-                    <div class="col-lg-10">
-                        {!! Form::text('slug',  $setting->slug, array('class'=>'form-control','placeholder'=>'Name')) !!}
-                    </div>
-                </div>
-                <div class="clearfix"></div>
 
                 <div class="form-group">
                     <label class="control-label col-lg-2">Type <span class="text-danger"></span></label>
 
 
                     <div class="col-lg-10">
-                        {!! Form::select('type', $type, $setting->type, array('class'=>'form-control','id' =>'select','placeholder'=>'Types')) !!}
+
+                        <select name="type" class="form-control" id="select">
+                            
+                            @foreach($type as $key)
+                                <option value="{{$key}}" @if($key == $setting->type) selected @endif>{{$key}}</option>
+                            @endforeach
+                        </select>
+                        {{--{!! Form::select('type', $type, $setting->type, array('class'=>'form-control','id' =>'select','placeholder'=>'Types')) !!}--}}
                     </div>
                 </div>
                 <div class="clearfix"></div>
 
+
                 <div class="form-group fg-line" id="link">
                     <label class="control-label col-lg-2" for="exampleInputEmail2">Link *</label>
                     <div class="col-lg-10">
-                        @if($setting->type == '1')
+                        @if($setting->type == 'Link')
                             <input type="text" class="form-control input-sm" name="url" id=""
                                    placeholder="Enter Link" value="{{$setting->value}}">
                         @else
@@ -182,7 +144,7 @@
                 <div class="form-group fg-line" id="text">
                     <label  class="control-label col-lg-2">text *</label>
                     <div class="col-lg-10">
-                        @if($setting->type == '2')
+                        @if($setting->type == 'text')
                             <input type="text" class="form-control input-sm" name="url" id=""
                                    placeholder="Enter Text" value="{{$setting->value}}">
                         @else
@@ -192,42 +154,20 @@
 
                     </div>
                 </div>
+
                 <div id="image">
                     <div class="form-group fg-line" >
-                        <label  class="control-label col-lg-2">Image *</label>
-                        <div class="col-lg-10">
-                            @if($setting->type == '3')
-                                @if(file_exists('storage/'.$setting->value) && $setting->value !== '')
-                                    <img src="{{ asset('storage/'.$setting->value)}}" class="displayimage" style="width:100px; height:100px; margin-bottom: 15px;" alt=""></br>
+                        <label class="control-label col-lg-2">Image</label>
+                        <div class="col-lg-5">
+                            <input type="file" id="upload-file" accept="image/*"  name="image"/>
+                        </div>
+                        <div class="col-lg-5">
+                            <div id="thumbnail"></div>
+                            @if(file_exists('storage/'.$setting->value) && $setting->value !== '')
+                                <img src="{{ asset('storage/'.$setting->value)}}" class="displayimage" style="width:100px; height:100px; margin-bottom: 15px;" alt=""></br>
 
-                                @endif
-                                <input name="image" type="hidden" class="fileimage">
-                                <div id="form1" runat="server">
-                                    <input type='file' id="imgInp" /></br> </br>
-                                    <img id="my-image" src="#" />
-                                </div>
-                                {{--<button class="use">Upload</button>--}}
-                                <input type="button" class="use" value="Crop" ></br> </br>
-                                <div class="result"></div>
-                            @else
-                                <input name="image" type="hidden" class="fileimage">
-                                <div id="form1" runat="server">
-                                    <input type='file' id="imgInp" /></br> </br>
-                                    <img id="my-image" src="#" />
-                                </div>
-                                {{--<button class="use">Upload</button>--}}
-                                <input type="button" class="use" value="Crop" ></br> </br>
-                                <div class="result"></div>
                             @endif
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-lg-2">Description <span class="text-danger">*</span></label>
-                        <div class="col-lg-10">
-                            {!! Form::textarea('description', $setting->description, array('class'=>'form-control editor', 'id'=>'editor', 'required' => 'true')) !!}
-
-                        </div>
-                    </div>
                 </div>
 
                 <div class="form-group">

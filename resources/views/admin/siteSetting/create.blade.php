@@ -17,12 +17,11 @@
     <script>
         $(document).ready(function(){
 
-            onload = function()
-            {
-                var itemText = $('#select  option:selected').val();
+            $(window).load(function() {
+
+                var itemText = $('#select  option:selected').text();
                 select_drop(itemText);
-                debugger
-            };
+            });
 
 
 
@@ -32,13 +31,19 @@
                     $('#text').css("display", "none");
                     $('#image').css("display", "none");
                     $('#link').css("display", "block");
-                }else {
+                }
+                else if(itemText == 'image') {
+                $('#link').css("display", "none");
+                $('#text').css("display", "none");
+                $('#image').css("display", "block");
+                }
+                else {
                     $('#link').css("display", "none");
                     $('#text').css("display", "block");
                     $('#image').css("display", "none");
                 }
             }
-            $(function() {
+
                 $('#select').on('change', function () {
 
                     var itemText = $(this).find('option:selected').text();
@@ -46,7 +51,11 @@
                         $('#text').css("display", "none");
                         $('#image').css("display", "none");
                         $('#link').css("display", "block");
-                    } else {
+                    } else if(itemText == 'image') {
+                        $('#link').css("display", "none");
+                        $('#text').css("display", "none");
+                        $('#image').css("display", "block");
+                    }else {
                         $('#link').css("display", "none");
                         $('#text').css("display", "block");
                         $('#image').css("display", "none");
@@ -58,13 +67,17 @@
                         $('#text').remove();
                         $('#image').remove();
 
-                    } else {
+                    } else if (itemText == 'image') {
+                        $('#text').remove();
+                        $('#link').remove();
+                    }
+                    else {
                         $('#link').remove();
                         $('#image').remove();
 
                     }
                 });
-            });
+
         });
     </script>
 @endsection
@@ -109,19 +122,13 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="form-group">
-                    <label class="control-label col-lg-2">Slug <span class="text-danger">*</span></label>
 
-                    <div class="col-lg-10">
-                        {!! Form::text('slug', null, array('class'=>'form-control','placeholder'=>'Slug')) !!}
-                    </div>
-                </div>
                 <div class="clearfix"></div>
                 <div class="form-group">
                     <label class="control-label col-lg-2">Type <span class="text-danger"></span></label>
 
                     <div class="col-lg-10">
-                        {!! Form::select('type', $type, null, array('class'=>'form-control','id' =>'select','placeholder'=>'Types')) !!}
+                        {!! Form::select('type', $type, old('type'), array('class'=>'form-control','id' =>'select','placeholder'=>'Types')) !!}
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -144,27 +151,18 @@
                     </div>
                 </div>
                 <div id="image">
-                    <div class="form-group fg-line" >
-                        <label  class="control-label col-lg-2">Image *</label>
-                        <div class="col-lg-10">
-                            <input name="image" type="hidden" class="fileimage">
-                            <div id="form1" runat="server">
-                                <input type='file' id="imgInp" /></br> </br>
-                                <img id="my-image" src="#" />
-                            </div>
-                            {{--<button class="use">Upload</button>--}}
-                            <input type="button" class="use" value="Crop" ></br> </br>
-                            <div class="result"></div>
-                        </div>
-                    </div>
                     <div class="form-group">
-                        <label class="control-label col-lg-2">Description <span class="text-danger">*</span></label>
-
-                        <div class="col-lg-10">
-                            {!! Form::textarea('description', null, array('class'=>'form-control editor', 'id'=>'editor', 'required' => 'true')) !!}
-
+                        <label class="control-label col-lg-2">Image</label>
+                        <div class="col-lg-5">
+                            <input type="file" id="upload-file" accept="image/*"  name="image"/>
                         </div>
+                        <div class="col-lg-5">
+                            <div id="thumbnail"></div>
+                        </div>
+
+
                     </div>
+
                 </div>
                 <div class="form-group">
                     <label class="control-label col-lg-2">Publish ?</label>

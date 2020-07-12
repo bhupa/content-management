@@ -1,97 +1,117 @@
 @extends('layouts.app')
-@section('title', $gallery->title)
-@section('footer_js')
-
-
+@section('title', $gallery->slug)
+@section('header_js')
 @endsection
 @section('main')
 
-<!-- .custom-header -->
-<div id="content" class="site-content global-layout-right-sidebar">
-  <div class="container">
-    <div class="inner-wrapper">
-      <div id="primary" class="content-area">
-        @if($galleryImages->isNotEmpty())
-        <h1 class="page-title">{{$gallery->title}}</h1>
-        @endif
-        <main id="main" class="site-main">
-          <ul class="gallerylist galleydetail">
-            @foreach($galleryImages as $galleryImage)
-            <li>
-              <div class="item-inner-wrapper"> @if(file_exists('storage/'.$galleryImage->image) && $galleryImage->image !== '') <img class="portfolio-thumb img-border " src="{{asset('storage/'.$galleryImage->image)}}" alt="{{$galleryImage->gallery_id}}"  /> @endif
-                <div class="overlay"></div>
-                <a  class="zoom-icon" data-gal="prettyPhoto[product-gallery]" rel="bookmark" href="{{asset('storage/'.$galleryImage->image)}}"><i class="icon-focus"></i></a>
-              
-              </div>
-            </li>
-            
-            
-            @endforeach
-          </ul>
-          <div class="more-wrapper" style="margin-top: 0"> {{ $galleryImages->render('vendor.pagination.custom')}} </div>
-          <div style="clear:both"></div>
-          @if($videos->isNotEmpty())
-          <h2 style="margin-top: 0">Video</h2>
+  <div id="custom-header"
+       @if(file_exists('storage/'.$setting->value) && $setting->value != '')
+       style="background-image: url('{{asset('storage/'.$setting->value)}}')"
           @endif
-          <div> @foreach($videos as $video)
-            <div class="vdo_grid">
-              
-              <a data-v-aa2be910="" data-modal_name="myModal_{{ $video->id }}" data-fancybox="true" href="#video45" class="video-content video-1 openModal"><img data-v-aa2be910="" src="https://i3.ytimg.com/vi/{{$video->link}}/maxresdefault.jpg" alt="Time Is Money | Buddha Air | Fly With Us" class="img-fluid2"><i data-v-aa2be910="" class="far fa-play-circle play-button"></i></a>
-              <h5>{{$video->title}}</h5>
-              
-             <!-- <div id="myModal_{{ $video->id }}" class="modal">
-                <span class="close" data-modal_name="myModal_{{ $video->id }}">&times;</span>
-                <iframe width="100%" height="200" src="https://www.youtube.com/embed/{{$video->link}}" frameborder="0" allowfullscreen></iframe>
-                </div>
-              </div>-->
-              
-              <div id="myModal_{{ $video->id }}" class="modal">
-              <div class="modal-content">
-                <span class="close" data-modal_name="myModal_{{ $video->id }}">&times;</span>
-                <iframe width="100%" height="400" src="https://www.youtube.com/embed/{{$video->link}}" frameborder="0" allowfullscreen></iframe>
-                       
-                
-              </div>
-
-            </div>
-              
-         
-              
-            </div>
-            @endforeach </div>
-
-          <div class="more-wrapper" style="margin-top: 0"> {{ $videos->render('vendor.pagination.custom')}} </div>
-        </main>
-        <!-- #main --> 
-      </div>
-      <!-- #primary --> 
-      @include('frontend.inc.sidebar') 
-      <!-- .sidebar --> 
-    </div>
-    <!-- #inner-wrapper --> 
+  >
+    <div class="custom-header-content">
+      <div class="container">
+        <h1 class="page-title">{{$gallery->title}}</h1>
+        <div id="breadcrumb">
+          <div aria-label="Breadcrumbs" class="breadcrumbs breadcrumb-trail">
+            <ul class="trail-items">
+              <li class="trail-item trail-begin"><a href="{{route('home')}}" rel="home"><span>Home</span></a></li>
+              <li class="trail-item trail-end"><span>{{$gallery->slug}}</span></li>
+            </ul>
+          </div> <!-- .breadcrumbs -->
+        </div> <!-- #breadcrumb -->
+      </div> <!-- .container -->
+    </div>  <!-- .custom-header-content -->
   </div>
-  <!-- .container --> 
-</div>
+  <!-- .custom-header -->
 
 
-@endsection
+  <div id="content" class="site-content global-layout-right-sidebar">
+    <div class="container">
+      <div class="inner-wrapper">
+        <div id="primary" class="content-area">
+          <main id="main" class="site-main">
+            <h1 class="page-title">Gallery </h1>
+            <section class="home-blog gallery">
+              <div class="container">
+                <div class="row mb-5">
+                  <div class="col-md-12 text-center">
+                    <h2>Gallery</h2>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="row" id="gallery-index-page">
+                    @foreach($galleryImages as $gallery)
+                      <div class="col-lg-3 col-md-4 col-xs-6 ">
+                        <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="{{$gallery->gallery->title}}"
+                           data-image="{{asset('storage/'.$gallery->image)}}"
+                           data-target="#image-gallery">
+
+                          @if(file_exists('storage/'.$gallery->image) && $gallery->image != '')
+                            <img class="card-img"
+                                 src="{{asset('storage/'.$gallery->image)}}"
+                                 alt="{{$gallery->gallery->title}}" >
+                          @endif
+
+                        </a>
 
 
+                      </div>
+                    @endforeach
 
-@section('script') 
+                  </div>
 
-<script>
 
-  $(function(){
-	  $(".openModal").click(function(){
-		  var modal_id = $(this).data("modal_name");
-		  $("#"+modal_id).css("display", "block");
-	  });
-	  
-	  $(".close").click(function(){
-		  var modal_id = $(this).data("modal_name");
-		  $("#"+modal_id).css("display", "none");
-	  });
-  });
-</script>
+                  <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="image-gallery-title"></h4>
+                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <img id="image-gallery-image" class="img-responsive col-md-12" src="">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>
+                          </button>
+
+                          <button type="button" id="show-next-image" class="btn btn-secondary float-right"><i class="fa fa-arrow-right"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="more-wrapper">
+                  <nav class="navigation pagination"> {{$galleryImages->links('vendor.pagination.custom')}}
+                    {{--
+                    <div class="nav-links">--}}
+                    {{--<span class="page-numbers current">1</span>--}}
+                    {{--<a class="page-numbers" href="#">2</a>--}}
+                    {{--<a class="page-numbers" href="#">3</a>--}}
+                    {{--<a class="next page-numbers" href="#">Next »</a>--}}
+                    {{--</div>
+                  <!-- .nav-links -->--}} </nav>
+                  <br>
+                  <br>
+                  <br>
+                </div>
+              </div>
+            </section>
+
+          </main>
+          <!-- #main -->
+        </div>
+        <!-- #primary -->
+      {{--@include('frontend.inc.sidebar') --}}
+      <!-- .sidebar -->
+      </div>
+      <!-- #inner-wrapper -->
+    </div>
+    <!-- .container -->
+  </div>
 @endsection

@@ -38476,3 +38476,31 @@ background: #ccc;
 .cr-rotate-r i:before {
 	content: '↻';
 }
+.upload-image-frame{
+	width:30%;
+	float: left;
+	height: 100px;
+	width: 100px;
+	position:relative;
+}
+.closeDiv {
+	position: absolute;
+	width: 20px;
+	height: 21px;
+	background-color: rgb(35, 179, 119);
+	float: right;
+	cursor: pointer;
+	color: white;
+	box-shadow: 2px 2px 7px rgb(74, 72, 72);
+	text-align: center;
+	margin: 5px;
+	right:0px;
+}
+.pDiv {
+	float:left;
+	width:100%
+}
+.divThumbnail {
+	position: relative;
+}
+

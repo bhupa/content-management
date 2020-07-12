@@ -39,7 +39,7 @@ class Content extends Model
 
     public function parent()
     {
-        return $this->belongsTo('App\Models\Content', 'parent_id')->where('is_active','1')->where('header','1');
+        return $this->belongsTo('App\Models\Content', 'parent_id')->where('is_active','1')->where('display_in','header');
     }
 
     public function allChild()
@@ -49,7 +49,7 @@ class Content extends Model
 
     public function child()
     {
-        return $this->hasMany(Content::class, 'parent_id')->where('is_active','1')->where('header','1');
+        return $this->hasMany(Content::class, 'parent_id')->where('is_active','1')->where('display_in','header');
     }
 
     public function getCreatedAt()

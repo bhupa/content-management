@@ -160,8 +160,8 @@
                     <th>S. No.</th>
                     <th>Title</th>
                     <th>Image</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
+                    <th>Location</th>
+                    <th>Date</th>
                     <th>Status</th>
                     <th style="width: 10%;">Action</th>
                 </tr>
@@ -179,10 +179,10 @@
                             @endif
                         </td>
                         <td>
-                            {{ \Carbon\Carbon::parse($event->created_at)->toFormattedDateString() }}
+                            {{ $event->location }}
                         </td>
                         <td>
-                            {{ \Carbon\Carbon::parse($event->updated_at)->toFormattedDateString() }}
+                            {{ \Carbon\Carbon::parse($event->date)->toFormattedDateString() }}
                         </td>
                         <td>
                             @can('master-policy.perform', ['event', 'changeStatus'])

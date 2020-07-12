@@ -9,11 +9,11 @@
 namespace App\Repositories;
 
 
-use App\Models\SiteSetting;
+use App\Models\Setting;
 
 class SiteSettingRepository extends Repository
 {
-    public function __construct(SiteSetting $setting)
+    public function __construct(Setting $setting)
     {
         $this->model = $setting;
     }

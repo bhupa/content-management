@@ -50,15 +50,11 @@ Route::get('/event-list/show/{slug}','EventController@show')->name('event.show')
     Route::get('content/{slug}/', 'ContentController@show')->name('content.show');
     Route::get('about', 'ContentController@about')->name('content.about');
 
+    Route::resource('executive-committee','TeamController');
+    Route::resource('banner','BannerController');
 
-    Route::resource('services','ServicesController');
-    Route::get('/services/{category}', 'ServicesController@index')->name('services.index');
-    Route::get('services/{slug}/', 'ServicesController@show')->name('services.show');
-    Route::get('service/getsingle', array('as' => 'service.getsingle', 'uses' =>'ServicesController@getsingle'));
-    Route::get('/servicescategory/{category}', 'ServicesController@category')->name('services.category');
-    Route::resource('products','ProductsController');
-    Route::get('/products', 'ProductsController@index')->name('products.index');
-    Route::get('products/{slug}/', 'ProductsController@show')->name('products.show');
+Route::post('executive-committee/list','TeamController@list')->name('executive-committee.list');
+
 
 /*
  * Social Login Routes
@@ -92,14 +88,8 @@ Route::get('blog/show/{slug}', 'BlogController@show')->name('blogs.show');
 ;
 
 
-Route::resource('faqs','FaqController');
-Route::get('/faq', 'FaqController@index')->name('faqs.index');
-
-Route::get('chairman-message/{id}','MessageController@show')->name('message.show');
 
 
 
-Route::get('/board-of-directors', 'TeamController@index')->name('teams.index');
-Route::get('/management','TeamController@list')->name('teams.list');
-Route::get('/central-executive-board/{id}','TeamController@show')->name('teams.show');
+
 

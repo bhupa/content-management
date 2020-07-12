@@ -74,11 +74,19 @@
                             </a>
                         </li>
                     @endcan
-                    @can('master-policy.perform', ['booking', 'view'])
-                        <li class="{{ $secondParam == 'booking' ? 'active':'' }}">
-                            <a href="{{ route('admin.booking.index') }}">
+                    @can('master-policy.perform', ['blog_categories', 'view'])
+                        <li class="{{ $secondParam == 'blog_categories' ? 'active':'' }}">
+                            <a href="{{ route('admin.blog.category.index') }}">
                                 <i class=" icon-image3"></i>
-                                <span>Booking</span>
+                                <span>Blog Categories</span>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('master-policy.perform', ['blog', 'view'])
+                        <li class="{{ $secondParam == 'blog' ? 'active':'' }}">
+                            <a href="{{ route('admin.blog.index') }}">
+                                <i class=" icon-image3"></i>
+                                <span>Blog</span>
                             </a>
                         </li>
                     @endcan
@@ -197,18 +205,18 @@
 
                     @can('master-policy.perform', ['member-type', 'view'])
                         <li class="{{ $thirdParam == 'member-type' ? 'active':'' }}">
-                            <a href="{{ route('admin.memberType.index') }}">
+                            <a href="{{ route('admin.member-type.index') }}">
                                 <i class=" icon-cog2"></i>
                                 <span>Member Type</span>
                             </a>
                         </li>
                     @endcan
 
-                    @can('master-policy.perform', ['team', 'view'])
-                        <li class="{{ $thirdParam == 'team' ? 'active':'' }}">
-                            <a href="{{ route('admin.team.index') }}">
+                    @can('master-policy.perform', ['member', 'view'])
+                        <li class="{{ $thirdParam == 'member' ? 'active':'' }}">
+                            <a href="{{ route('admin.member.index') }}">
                                 <i class=" icon-cog2"></i>
-                                <span>Team</span>
+                                <span>Members</span>
                             </a>
                         </li>
                     @endcan

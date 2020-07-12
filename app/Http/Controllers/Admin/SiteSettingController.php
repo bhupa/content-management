@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\SettingUpdateRequest;
 use App\Repositories\SiteSettingRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class SiteSettingController extends Controller
 {
@@ -14,12 +15,17 @@ class SiteSettingController extends Controller
     protected  $setting;
     protected $type = [
         "1"    => "Link",
-        "2"  =>"Text"
+        "2"  =>"text",
+        "3"=>'image'
     ];
 
     public function __construct(SiteSettingRepository $setting)
     {
         $this->setting = $setting;
+        $this->upload_path = DIRECTORY_SEPARATOR.'setting'.DIRECTORY_SEPARATOR;
+        $this->storage = Storage::disk('public');
+
+
     }
 
     /**
@@ -53,10 +59,22 @@ class SiteSettingController extends Controller
      */
     public function store(SettingStoreRequest $request)
     {
-
         $data = $request->except('_token','image');
         $data['is_active'] = isset($request) ? 1 : 0;
-        $data['value'] =$request->url;
+
+        if($request->type == '3'){
+            if($request->file('image')){
+                $image= $request->file('image');
+                $fileName = time().$image->getClientOriginalName();
+                $this->storage->put($this->upload_path. $fileName, file_get_contents($image->getRealPath()));
+                $data['value'] = 'setting/'.$fileName;
+
+            }
+        }else{
+            $data['value'] =$request->url;
+        }
+
+
         if ($this->setting->create($data)) {
             return redirect()->route('admin.setting.index')
                 ->with('flash_notice', 'Setting Created Successfully.');
@@ -83,9 +101,9 @@ class SiteSettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        $setting = $this->setting->find($id);
+        $setting = $this->setting->where('slug',$slug)->first();
         $type = $this->type;
         return view('admin.siteSetting.edit')->withType($type)->withSetting($setting);
     }
@@ -101,7 +119,15 @@ class SiteSettingController extends Controller
     {
         $setting = $this->setting->find( $id);
         $data=$request->except(['_token','_method']);
-        if(!empty($request->url)){
+        if($request->type == 'image'){
+            if($request->file('image')){
+                $image= $request->file('image');
+                $fileName = time().$image->getClientOriginalName();
+                $this->storage->put($this->upload_path. $fileName, file_get_contents($image->getRealPath()));
+                $data['value'] = 'setting/'.$fileName;
+
+            }
+        }else{
             $data['value'] =$request->url;
         }
         if ($this->setting->update(  $setting->id,$data)) {

@@ -51,7 +51,7 @@
                     if (result.value) {
                         $.ajax({
                             type: "POST",
-                            url: "{{ url('git admin/setting/change-status') }}",
+                            url: "{{ url('admin/setting/change-status') }}",
                             data: {
                                 'id': id,
                             },
@@ -159,11 +159,9 @@
                 <tr>
                     <th>S. No.</th>
                     <th>name</th>
-                    <th>slug</th>
-                    <th>value</th>
+                    <th>Type</th>
                     <th>Status</th>
                     <th>Action</th>
-                    <th>&nbsp;</th>
                 </tr>
                 </thead>
                 <tbody id="sortable">
@@ -171,8 +169,17 @@
                     <tr id="item-{{ $setting->id }}">
                         <td>{{ $key  + $settings->firstItem()}}</td>
                         <td>{{  $setting->name }}</td>
-                        <td>{{  $setting->slug }}</td>
-                        <td>{{  $setting->value }}</td>
+                        <td>
+                            @if($setting->type == 'Link')
+                                <span class="badge badge-success">Link</span>
+                                @elseif($setting->type == 'image')
+                                <span class=" badge badge-warning">Image</span>
+
+                                @else
+                                <span class=" badge badge-danger">Text</span>
+
+                                @endif
+                        </td>
                         <td>
                             {{--                            @can('master-policy.perform',['site-setting', 'changeStatus'])--}}
                             <a href="javascript:void(0)"
@@ -190,7 +197,7 @@
                         </td>
                         <td>
                             {{--                            @can('master-policy.perform',['site-setting', 'edit'])--}}
-                            <a href="{{ route('admin.setting.edit', $setting->id) }}"
+                            <a href="{{ route('admin.setting.edit', $setting->slug) }}"
                                title="Edit-Setting"
                                data-toggle="tooltip"
                                class="btn btn-success btn-icon btn-rounded legitRipple">
@@ -207,7 +214,6 @@
                             {{--                            @endcan--}}
 
                         </td>
-                        <td></td>
 
                     </tr>
                 @endforeach
@@ -218,11 +224,9 @@
                 <tr>
                     <th>S. No.</th>
                     <th>Name</th>
-                    <th>Slug</th>
-                    <th>Value</th>
+                    <th>Type</th>
                     <th>Status</th>
                     <th>Action</th>
-                    <th>&nbsp;</th>
 
                 </tr>
                 </tfoot>

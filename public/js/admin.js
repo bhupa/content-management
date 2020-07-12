@@ -6007,12 +6007,12 @@ $(function () {
         filebrowserImageUploadUrl: '/file-manager/upload?type=Images&_token=',
         filebrowserBrowseUrl: '/file-manager?type=Files',
         filebrowserUploadUrl: '/file-manager/upload?type=Files&_token=',
-        height: 300,
+        height: 250,
         allowedContent: true
     };
 
     $('.editor').ckeditor(options);
-    $('.mini-editor').ckeditor({height: 150});
+    $('.mini-editor').ckeditor({height: 100});
 });
 
 function SetUrl(url) {

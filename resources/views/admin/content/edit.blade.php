@@ -43,7 +43,7 @@
             <fieldset class="content-group">
                 <div class="clearfix"></div>
                 <br>
-                @if($content->edit == 0)
+
                 <div class="form-group">
                     <label class="control-label col-lg-2">Parent<span class="text-danger">*</span></label>
                     <div class="col-lg-6">
@@ -57,28 +57,22 @@
                 </div>
                 <br>
                 <div class="clearfix"></div>
-                @endif
                 <div class="form-group">
-                    <label class="control-label col-lg-2">Header</label>
-                    <div class="col-lg-10">
-                        <input type="checkbox" name="header" <?php if($content->header ==true)  echo 'checked'; ?>>
-                    </div>
-                </div>
-                <div class="clearfix"></div> <div class="form-group">
-                    <label class="control-label col-lg-2">Footer</label>
-                    <div class="col-lg-10">
-                        <input type="checkbox" name="footer" <?php if($content->footer ==true)  echo 'checked'; ?>>
+                    <label class="control-label col-lg-2">Display In<span class="text-danger">*</span></label>
+                    <div class="col-lg-6">
+
+                        <select name="display_in" class="form-control">
+                            <option value="">Selecet Display In</option>
+                            <option value="header" @if($content->display_in == 'header') selected  @endif>Header</option>
+                            <option value="content" @if($content->display_in == 'content') selected  @endif>Content</option>
+                            <option value="footer" @if($content->display_in == 'footer') selected  @endif>Footer</option>
+                        </select>
 
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-lg-2">Editable ?</label>
-                    <div class="col-lg-10">
-                        <input type="checkbox" name="edit" <?php if($content->edit ==true)  echo "checked"; ?>>
-                    </div>
-                </div>
+                <br>
+
                 <div class="clearfix"></div>
-                @if($content->edit == 0)
                 <div class="form-group">
                     <label class="control-label col-lg-2">Title <span class="text-danger">*</span></label>
 
@@ -86,43 +80,21 @@
                         {!! Form::text('title', $content->title ?? "", array('class'=>'form-control','placeholder'=>'Post title')) !!}
                     </div>
                 </div>
-                @endif
                 <div class="clearfix"></div>
                 <div class="form-group">
                     <label class="control-label col-lg-2">Image</label>
-                    <div class="col-lg-10">
+                    <div class="col-lg-5">
+                        <input type="file" id="upload-file" accept="image/*"  name="image"/>
+                    </div>
+                    <div class="col-lg-5">
+                        <div id="thumbnail"></div>
+                        @if(file_exists('storage/'.$content->image) && $content->image !== '')
+                            <img src="{{ asset('storage/'.$content->image)}}" class="displayimage" style="width:100px; height:100px; margin-bottom: 15px;" alt=""></br>
 
-                        @if(file_exists('storage/'.$content->image) && $content->image != '')
-                            <img src="{{ asset('storage/'.$content->image) }}" class="displayimage" style="width:200px; height:200px;" alt="">
                         @endif
-
-                        <input name="image" type="hidden" class="fileimage">
-                        <div id="form1" runat="server">
-                            <input type='file' id="imgInp" /></br> </br>
-                            <img id="my-image" src="#" />
-                        </div>
-                        <input type="button" class="use" value="Crop" >
-                        <input type="button" class="cancle-btn" value="Delete" ></br> </br>
-                        <div class="result"></div>
                     </div>
 
 
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-lg-2">Meta Keys <span class="text-danger"></span></label>
-
-                    <div class="col-lg-6">
-                        {!! Form::text('meta_keys', $content->meta_keys ?? "", array('class'=>'form-control','placeholder'=>'Meta Keys')) !!}
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-
-                <div class="form-group">
-                    <label class="control-label col-lg-2">Meta Description <span class="text-danger"></span></label>
-
-                    <div class="col-lg-6">
-                        {!! Form::text('meta_desc', $content->meta_desc ?? "", array('class'=>'form-control','placeholder'=>'Meta Description')) !!}
-                    </div>
                 </div>
                 <div class="clearfix"></div>
                 <div class="form-group row {{ $errors->has('short_description') ? 'has-errors'  : ''}}">

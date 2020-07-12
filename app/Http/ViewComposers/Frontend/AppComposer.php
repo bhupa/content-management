@@ -27,5 +27,11 @@ class AppComposer {
     }
     public function compose(view $view){
 
+       $settings = $this->setting->where('is_active','1')->get();
+        $about = $this->content->where('slug','about-us')->first();
+        $footermenu = $this->content->where('is_active','1')->where('display_in','footer')->get();
+
+
+        $view->withSettings($settings)->withAbout($about)->withFootermenu($footermenu);
     }
 }

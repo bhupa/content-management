@@ -106,7 +106,10 @@ class ModuleController extends Controller
      */
     public function destroy( Request $request, $id)
     {
-        $this->validate($request, [
+
+
+
+        $request->validate([
             'id' => 'required|exists:modules,id',
         ]);
         $act = $this->module->find($request->get('id'));

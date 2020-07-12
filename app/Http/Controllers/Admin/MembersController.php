@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\MemberSaveRequest;
+use App\Http\Requests\Admin\MemberStoreRequest;
+use App\Http\Requests\Admin\MemberUpdateRequest;
 use App\Models\Members;
 use App\Repositories\MembersRepository;
 use App\Repositories\MemberTypeRepository;
@@ -19,41 +21,41 @@ class MembersController extends Controller
         $this->members = $members;
         $this->memberType = $memberType;
         auth()->shouldUse('admin');
+        $this->upload_path = DIRECTORY_SEPARATOR.'member'.DIRECTORY_SEPARATOR;
+        $this->storage = Storage::disk('public');
     }
 
     public function index()
     {
 
-        $this->authorize('master-policy.perform', ['members', 'view']);
-      $members = $this->members->orderBy('created_at', 'desc')->paginate('10');;
+        auth()->user()->can('master-policy.perform', ['members', 'view']);
+      $members = $this->members->orderBy('display_order', 'asc')->paginate('10');;
         return view('admin.member.index')->withMembers($members);
     }
 
     public function create()
     {
-        $this->authorize('master-policy.perform', ['members', 'add']);
-        $membertypes = $this->memberType->get();
+        auth()->user()->can('master-policy.perform', ['members', 'add']);
+        $membertypes = $this->memberType->where('is_active','1')->get();
 
         return view('admin.member.add')->withMembertypes($membertypes);
     }
 
-    public function store(MemberSaveRequest $request)
+    public function store(MemberStoreRequest $request)
     {
-        $this->authorize('master-policy.perform', ['members', 'add']);
+        auth()->user()->can('master-policy.perform', ['members', 'add']);
         $data = $request->except(['image']);
-        if ($request->get('image')) {
-            $saveName = sha1(date('YmdHis') . str_random(3));
-            $image = $request->get('image');
-            $image = str_replace('data:image/png;base64', '', $image);
-            $image = str_replace('', '+', $image);
-            $imageData = base64_decode($image);
-            $data['image'] = 'members/' . $saveName . 'png';
-            Storage::put($data['image'], $imageData);
+        if($request->file('image')){
+            $image= $request->file('image');
+            $fileName = time().$image->getClientOriginalName();
+            $this->storage->put($this->upload_path. $fileName, file_get_contents($image->getRealPath()));
+            $data['image'] = 'member/'.$fileName;
+
 
         }
         $data['is_active'] = isset($request->is_active) ? 1 : 0;
         if ($this->members->create($data)) {
-            return redirect()->route('admin.members.index')
+            return redirect()->route('admin.member.index')
                 ->with('flash_notice', 'Members Created Successfully.');
         }
         return redirect()->back()->withInput()
@@ -62,31 +64,30 @@ class MembersController extends Controller
 
     public function edit($id)
     {
-        $this->authorize('master-policy.perform', ['members', 'edit']);
-        $membertypes = $this->memberType->get();
+        auth()->user()->can('master-policy.perform', ['members', 'edit']);
+        $membertypes = $this->memberType->where('is_active','1')->get();
+
         $member = $this->members->find($id);
         return view('admin.member.edit')->withMembertypes($membertypes)->withMember($member);
 
     }
 
-    public function update(Request $request, $id)
+    public function update(MemberUpdateRequest $request, $id)
     {
-        $this->authorize('master-policy.perform', ['members', 'add']);
+        auth()->user()->can('master-policy.perform', ['members', 'add']);
         $member = $this->members->find($id);
         $data = $request->except(['image', '_token', '_method']);
-        if ($request->get('image')) {
-            $saveName = sha1(date('YmdHis') . str_random(3));
-            $image = $request->get('image');
-            $image = str_replace('data:image/png;base64', '', $image);
-            $image = str_replace('', '+', $image);
-            $imageData = base64_decode($image);
-            $data['image'] = 'members/' . $saveName . 'png';
-            Storage::put($data['image'], $imageData);
+        if($request->file('image')){
+            $image= $request->file('image');
+            $fileName = time().$image->getClientOriginalName();
+            $this->storage->put($this->upload_path. $fileName, file_get_contents($image->getRealPath()));
+            $data['image'] = 'member/'.$fileName;
+
 
         }
         $data['is_active'] = isset($request->is_active) ? 1 : 0;
         if ($this->members->update($member->id, $data)) {
-            return redirect()->route('admin.members.index')
+            return redirect()->route('admin.member.index')
                 ->with('flash_notice', 'Members Updated Successfully.');
         }
         return redirect()->back()->withInput()
@@ -96,7 +97,7 @@ class MembersController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $this->authorize('master-policy.perform', ['members', 'delete']);
+        auth()->user()->can('master-policy.perform', ['members', 'delete']);
         $member = $this->members->find($request->get('id'));
         if ($this->members->destroy($member->id)) {
             $message = 'Member deleted successfully.';
@@ -109,7 +110,7 @@ class MembersController extends Controller
     public function changeStatus(Request $request)
     {
 
-        $this->authorize('master-policy.perform', ['members', 'changeStatus']);
+        auth()->user()->can('master-policy.perform', ['members', 'changeStatus']);
         $member = $this->members->find($request->get('id'));
         if ($member->is_active == 0) {
             $status = 1;
@@ -123,5 +124,13 @@ class MembersController extends Controller
         $this->members->update($member->id, ['is_active'=> $status ]);
         $updated = $this->members->find($request->get('id'));
         return response()->json(['status' => 'ok', 'message' => $message, 'response' => $updated], 200);
+    }
+    public function sort(Request $request)
+    {
+        $exploded = explode('&', str_replace('item[]=', '', $request->order));
+        for ($i = 0; $i < count($exploded); $i++) {
+            $this->members->update($exploded[$i], ['display_order' => $i]);
+        }
+        return json_encode(['status' => 'success', 'value' => 'Successfully reordered.'], 200);
     }
 }

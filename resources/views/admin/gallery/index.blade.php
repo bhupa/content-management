@@ -162,8 +162,6 @@
                                             <th>Image</th>
                                             <th>Status</th>
                                             <th>Action</th>
-                                            <th style="width: 1%">&nbsp;</th>
-                                            <th style="width: 1%">&nbsp;</th>
                                         </tr>
                 </thead>
                 <tbody id="sortable">
@@ -218,8 +216,6 @@
                             </a>
 
                         </td>
-                        <td style="width: 1%"></td>
-                        <td style="width: 1%"></td>
                     </tr>
                     @endforeach
 
@@ -231,8 +227,6 @@
                                    <th>Image</th>
                                    <th>Status</th>
                                    <th>Action</th>
-                                   <th style="width: 1%">&nbsp;</th>
-                                   <th style="width: 1%">&nbsp;</th>
                                </tr>
 
                 </tfoot>

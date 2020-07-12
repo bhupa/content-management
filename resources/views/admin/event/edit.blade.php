@@ -115,20 +115,32 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="form-group">
+                    <label class="control-label col-lg-2">Location <span class="text-danger">*</span></label>
+
+                    <div class="col-lg-6">
+                        {!! Form::text('location', $event->location, array('class'=>'form-control','placeholder'=>'Event Location')) !!}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2">Date <span class="text-danger">*</span></label>
+
+                    <div class="col-lg-6">
+                        <input type="date" class="form-control" name="date" id="event-date" value="{{$event->date}}">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
                     <label class="control-label col-lg-2">Image</label>
-                    <div class="col-lg-10">
-                        @if(file_exists('storage/'.$event->image) && $event->image != '')
-                            <img src="{{ asset('storage/'.$event->image) }}" class="displayimage" style="width:200px; height:200px;" alt="">
+                    <div class="col-lg-5">
+                        <input type="file" id="upload-file" accept="image/*"  name="image"/>
+                    </div>
+                    <div class="col-lg-5">
+                        <div id="thumbnail"></div>
+                        @if(file_exists('storage/'.$event->image) && $event->image !== '')
+                            <img src="{{ asset('storage/'.$event->image)}}" class="displayimage" style="width:100px; height:100px; margin-bottom: 15px;" alt=""></br>
+
                         @endif
-                        <input name="image" type="hidden" class="fileimage">
-                        <div id="form1" runat="server">
-                            <input type='file' id="imgInp" /></br> </br>
-                            <img id="my-image" src="#" />
-                        </div>
-                        {{--<button class="use">Upload</button>--}}
-                        <input type="button" class="use" value="Crop" >
-                        <input type="button" class="cancle-btn" value="Delete" ></br> </br>
-                        <div class="result"></div>
                     </div>
 
 

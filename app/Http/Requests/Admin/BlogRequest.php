@@ -25,8 +25,11 @@ class BlogRequest extends FormRequest
     {
         $rules = [
             'title' => 'required|max:255',
-//            'category_id' => 'required|array',
+            'category_id' => 'required|exists:blog_categories,id',
             'description' => 'required',
+            'short_description' => 'required',
+            'image'=>'required|mimes:jpeg,png,jpg,svg|dimensions:ration=3/2',
+
         ];
         return $rules;
     }

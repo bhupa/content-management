@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ContactRequest;
 use App\Mail\AdminEmail;
 use App\Mail\UserEmail;
+use App\Repositories\ContactRepository;
 use App\Repositories\ContentBannerRepository;
 use App\Repositories\ContentRepository;
 use Illuminate\Http\Request;
@@ -17,32 +18,28 @@ use Session;
 class ContactController extends Controller
 {
 
-    protected $setting,$content, $contentbanner;
+    protected $setting,$content,$contact;
 
-    public function __construct(SettingRepository $setting, ContentRepository $content,ContentBannerRepository $contentbanner)
+    public function __construct(SettingRepository $setting, ContentRepository $content,ContactRepository $contact)
     {
         $this->setting = $setting;
         $this->content = $content;
-        $this->contentbanner = $contentbanner;
+        $this->contact = $contact;
     }
 
     public function index(){
-        $settings = $this->setting->where('is_active', '1')->get();
-        $contentbanner = $this->contentbanner->where('title','Contact')->where('is_active', '1')->first();
+        $setting = $this->setting->where('slug','banner-image')->first();
 
-        return view('contact.index')
-                ->withSettings($settings)
-                ->withContentbanner($contentbanner );
+        return view('contact.index')->withSetting( $setting);
     }
     public function store(ContactRequest $request){
-        $admin = $this->setting->where('name' ,'From Email')->first();
-        $companyemail =  $this->setting->where('name' ,'Company Email')->first();
-        $companyname =  $this->setting->where('name' ,'Company Name')->first();
+         $data = $request->except('toke');
 
-        Mail::to($admin->value)->send(new AdminEmail($request,$companyname,$companyemail));
-        Mail::to($request->email)->send(new UserEmail($request,$companyname,$companyemail));
+         if($this->contact->create($data)){
+             return redirect()->back()->with('success','Thank You For Messaging Us');
+         }
 
-        return redirect()->back()->with('success','Thank You For Messaging Us');
+        return redirect()->back()->with('Errors','Message cannot send successfully');
 
 
     }

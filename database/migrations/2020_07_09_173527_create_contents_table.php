@@ -22,11 +22,12 @@ class CreateContentsTable extends Migration
             $table->string('image')->nullable()->default(null);
             $table->longText('short_description')->nullable()->default(null);
             $table->longText('description')->nullable()->default(null);
-            $table->integer('display_order')->nullable()->default(null);
+            $table->integer('display_order')->nullable()->default(1);
             $table->unsignedInteger('updated_by')->nullable()->default(null);
             $table->unsignedInteger('created_by')->nullable()->default(null);
             $table->unsignedInteger('deleted_by')->nullable()->default(null);
-            $table->boolean('is_active')->default(1);
+            $table->boolean('is_active')->nullable()->default(0);
+
             $table->nullableTimestamps();
             $table->softDeletes();
 

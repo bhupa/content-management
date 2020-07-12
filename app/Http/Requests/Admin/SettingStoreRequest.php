@@ -24,27 +24,25 @@ class SettingStoreRequest extends FormRequest
      */
     public function rules()
     {
+
+
         if($this->type =='1'){
             return [
-                'name' => 'required|unique:site_settings,name',
-                'slug' => 'required',
+                'name' => 'required|unique:settings,name',
                 'type' => 'required|not_in:0',
                 'url' =>'required|url'
             ];
         }
     else if($this->type == '3'){
         return [
-            'name' => 'required|unique:site_settings,name',
-            'slug' => 'required',
+            'name' => 'required|unique:settings,name',
             'type' => 'required|not_in:0',
-            'image' =>'required',
-            'description'=>'required'
+            'image' =>'required|mimes:jpeg,png,jpg,svg',
         ];
     }
     else{
         return [
-            'name' => 'required|unique:site_settings,name',
-            'slug' => 'required',
+            'name' => 'required|unique:settings,name',
             'type' => 'required|not_in:0',
             'url' =>'required',
         ];

@@ -24,8 +24,12 @@ class ContentUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'nullable',
+            'title' => 'required',
             'description' => 'required',
+            'display_in'=>'in:header,footer,content',
+            'short_description'=>'required',
+            'description'=>'required',
+            'image'=>'nullable|mimes:jpeg,png,jpg,svg',
         ];
     }
 }

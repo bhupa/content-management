@@ -157,7 +157,7 @@
                     <th>Name</th>
                     <th>Status</th>
                     <th>Action</th>
-                    <th></th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -166,7 +166,7 @@
                         <td><?php echo e($index+$contents->firstItem()); ?></td>
                         <td><?php echo e($content->getParentTitle()); ?></td>
                         <td><?php echo e($content->title); ?></td>
-                       
+
                         <td>
                             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('master-policy.perform', ['content', 'changeStatus'])): ?>
                             <a href="javascript:void(0)"
@@ -193,14 +193,14 @@
 
                         <td>
                             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('master-policy.perform', ['content', 'edit'])): ?>
-                            <a href="<?php echo e(route('admin.contents.edit',$content->id)); ?>"
+                            <a href="<?php echo e(route('admin.contents.edit',$content->slug)); ?>"
                                title="Edit-Content"
                                data-toggle="tooltip"
                                class="btn btn-success btn-icon btn-rounded legitRipple">
                                 <i class=" icon-database-edit2"></i>
                             </a>
                             <?php endif; ?>
-                                <?php if($content->edit == 0): ?>
+                                <?php if($content->child->isEmpty() ): ?>
                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('master-policy.perform', ['content', 'delete'])): ?>
                             <a href="javascript:void(0)" id="<?php echo e($content->id); ?>"
                                title="Delete-content"
@@ -211,7 +211,7 @@
                                     <?php endif; ?>
                                 <?php endif; ?>
                         </td>
-                        <td></td>
+
 
                     </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -225,7 +225,7 @@
                     <th>Name</th>
                     <th>Status</th>
                     <th>Action</th>
-                    <th></th>
+
                 </tr>
                 </tfoot>
             </table>

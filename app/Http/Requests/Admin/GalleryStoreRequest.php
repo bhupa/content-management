@@ -25,8 +25,16 @@ class GalleryStoreRequest extends FormRequest
     {
         return [
             'title'=>'required',
-            'image'=>'required',
+            'image'=>'required|mimes:jpeg,png,jpg,svg|dimensions:min_width=2200,min_height=1500',
+
             'description' =>'required'
         ];
+    }
+    public function messages()
+    {
+        return [
+            'image.dimensions' =>'Please upload image min-width:2200 and min-height:1500'
+        ];
+
     }
 }

@@ -158,7 +158,7 @@
                     <th>Name</th>
                     <th>Status</th>
                     <th>Action</th>
-                    <th></th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -167,7 +167,7 @@
                         <td>{{ $index+$contents->firstItem() }}</td>
                         <td>{{ $content->getParentTitle() }}</td>
                         <td>{{ $content->title }}</td>
-                       
+
                         <td>
                             @can('master-policy.perform', ['content', 'changeStatus'])
                             <a href="javascript:void(0)"
@@ -194,14 +194,14 @@
 
                         <td>
                             @can('master-policy.perform', ['content', 'edit'])
-                            <a href="{{ route('admin.contents.edit',$content->id) }}"
+                            <a href="{{ route('admin.contents.edit',$content->slug) }}"
                                title="Edit-Content"
                                data-toggle="tooltip"
                                class="btn btn-success btn-icon btn-rounded legitRipple">
                                 <i class=" icon-database-edit2"></i>
                             </a>
                             @endcan
-                                @if($content->edit == 0)
+                                @if($content->child->isEmpty() )
                                 @can('master-policy.perform', ['content', 'delete'])
                             <a href="javascript:void(0)" id="{{ $content->id  }}"
                                title="Delete-content"
@@ -212,7 +212,7 @@
                                     @endcan
                                 @endif
                         </td>
-                        <td></td>
+
 
                     </tr>
                 @endforeach
@@ -226,7 +226,7 @@
                     <th>Name</th>
                     <th>Status</th>
                     <th>Action</th>
-                    <th></th>
+
                 </tr>
                 </tfoot>
             </table>
