@@ -126,7 +126,7 @@
         <div class="page-header-content">
             <div class="page-title">
                 <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> -
-                    Member</h4>
+                    Members</h4>
             </div>
 
         </div>
@@ -134,7 +134,7 @@
             <ul class="breadcrumb">
                 <li><a href="{{ route('admin.dashboard') }}"><i class="icon-home2 position-left"></i> Home</a>
                 </li>
-                <li class="active">Member</li>
+                <li class="active"> Members</li>
             </ul>
         </div>
     </div>
@@ -142,10 +142,10 @@
 @section('content')
     <div class="panel panel-flat">
         <div class="panel-heading">
-            <h5 class="panel-title"><i class="icon-grid3 position-left"></i>Member</h5>
+            <h5 class="panel-title"><i class="icon-grid3 position-left"></i> Members</h5>
             <div class="heading-elements">
-                @can('master-policy.perform', ['blog_categories', 'add'])
-                    <a href="{{ route('admin.blog.category.create') }}" class="btn btn-default legitRipple pull-right">
+                @can('master-policy.perform', ['member', 'add'])
+                    <a href="{{ route('admin.member.create') }}" class="btn btn-default legitRipple pull-right">
                         <i class="icon-file-plus position-left"></i>
                         Create New
                         <span class="legitRipple-ripple"></span>
@@ -166,73 +166,75 @@
                     <th>Address</th>
                     <th>Status</th>
                     <th style="width: 10%;">Action</th>
-
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="sortable">
+
                 @foreach($members as $key=>$member)
-                <tr id="item-{{ $member->id }}">
-                <td>{{ $key  + $members->firstItem()}}</td>
-                <td>{{ $member->name }}</td>
+                    <tr id="item-{{ $member->id }}">
+                        <td>{{ $key  + $members->firstItem()}}</td>
+                        <td>{{ $member->name }}</td>
 
-                <td>
-                @if(file_exists('storage/'.$member->image) && $member->image !== '')
-                <img src="{{ asset('storage/'.$member->image)}}" class="displayimage" style="width:100px; height:100px; margin-bottom: 15px;" alt=""></br>
-                @endif
-                </td>
-                <td>
-                {{$member->type}}
-                </td>
-                <td>
-                @if(!empty($member->member_type_id))
-                <span class="badge badge-danger"> {{$member->position->name}}</span>
+                        <td>
+                            @if(file_exists('storage/'.$member->image) && $member->image !== '')
+                                <img src="{{ asset('storage/'.$member->image)}}" class="displayimage" style="width:100px; height:100px; margin-bottom: 15px;" alt=""></br>
+                            @endif
+                        </td>
+                        <td>
+                            {{$member->type}}
+                        </td>
+                        <td>
+                            @if(!empty($member->member_type_id))
+                                <span class="badge badge-danger"> {{$member->position->name}}</span>
 
-                @else
-                <span class="badge badge-success">Member</span>
-                @endif
-                </td>
-                <td>
-                {{ \Carbon\Carbon::parse($member->created_at)->toFormattedDateString() }}
-                </td>
-                <td>
-                {{ $member->address }}
-                </td>
+                                @else
+                            <span class="badge badge-success">Member</span>
+                                @endif
+                        </td>
+                        <td>
+                            {{ \Carbon\Carbon::parse($member->created_at)->toFormattedDateString() }}
+                        </td>
+                        <td>
+                            {{ $member->address }}
+                        </td>
 
-                <td>
-                @can('master-policy.perform', ['member', 'changeStatus'])
-                <a href="javascript:void(0)"
-                title="Change-status"
-                data-toggle="tooltip"
-                class="btn btn-primary btn-icon btn-rounded legitRipple change-status"
-                id="{{ $member->id }}">
-                @if($member->is_active == 1)
-                <i class="icon-checkmark3"></i>
-                @else
-                <i class="icon-minus2"></i>
-                @endif
-                </a>
-                @endif
-                </td>
-                <td>
-                @can('master-policy.perform', ['member', 'edit'])
-                <a href="{{ route('admin.member.edit',$member->id) }}"
-                title="Edit-member"
-                data-toggle="tooltip"
-                class="btn btn-success btn-icon btn-rounded legitRipple">
-                <i class=" icon-database-edit2"></i>
-                </a>
-                @endif
-                @can('master-policy.perform', ['member', 'delete'])
-                <a href="javascript:void(0)" id="{{ $member->id  }}"
-                title="Delete-member"
-                data-toggle="tooltip"
-                class="btn btn-danger btn-icon btn-rounded legitRipple delete">
-                <i class="icon-cross2"></i>
-                </a>
-                @endif
-                </td>
-                </tr>
+                        <td>
+                            @can('master-policy.perform', ['member', 'changeStatus'])
+                                <a href="javascript:void(0)"
+                                   title="Change-status"
+                                   data-toggle="tooltip"
+                                   class="btn btn-primary btn-icon btn-rounded legitRipple change-status"
+                                   id="{{ $member->id }}">
+                                    @if($member->is_active == 1)
+                                        <i class="icon-checkmark3"></i>
+                                    @else
+                                        <i class="icon-minus2"></i>
+                                    @endif
+                                </a>
+                            @endif
+                        </td>
+                        <td>
+                            @can('master-policy.perform', ['member', 'edit'])
+                                <a href="{{ route('admin.member.edit',$member->id) }}"
+                                   title="Edit-member"
+                                   data-toggle="tooltip"
+                                   class="btn btn-success btn-icon btn-rounded legitRipple">
+                                    <i class=" icon-database-edit2"></i>
+                                </a>
+                            @endif
+                            @can('master-policy.perform', ['member', 'delete'])
+                                <a href="javascript:void(0)" id="{{ $member->id  }}"
+                                   title="Delete-member"
+                                   data-toggle="tooltip"
+                                   class="btn btn-danger btn-icon btn-rounded legitRipple delete">
+                                    <i class="icon-cross2"></i>
+                                </a>
+                            @endif
+                        </td>
+                    </tr>
                 @endforeach
+
+
 
                 </tbody>
                 <tfoot>
@@ -242,14 +244,14 @@
                     <th>Image</th>
                     <th>Type</th>
                     <th>Position</th>
-                    <th>Date</th>
                     <th>Address</th>
+                    <th>Date</th>
                     <th>Status</th>
                     <th style="width: 10%;">Action</th>
-
                 </tr>
                 </tfoot>
             </table>
+
         </div>
     </div>
 @endsection
