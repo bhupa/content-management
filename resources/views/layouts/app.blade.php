@@ -90,10 +90,16 @@
   <nav class="navbar navbar-expand-lg ">
     <div class="container">
 
-      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      <button class="navbar-toggler pull-left" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="myNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon">
+
+          <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+        </span>
       </button>
-      <div class="navbar-collapse collapse" id="navbarsExample05" style="">
+      <div class="navbar-collapse collapsype="b"navbarsExample05" style="">
         <ul class="navbar-nav ">
           <li class="nav-item">
             <a class="nav-link " href="{{route('home')}}">Home</a>

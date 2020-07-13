@@ -16,7 +16,7 @@
                         <h1><?php echo e($banner->title); ?>  </h1>
 
                         <?php echo str_limit($banner->short_description,'200','.....'); ?> <br>
-                        <a href="<?php echo e(route('banner.show',[$banner->slug])); ?>" class="btn_hover btn_hover_two">Re</a>
+                        <a href="<?php echo e(route('banner.show',[$banner->slug])); ?>" class="btn_hover btn_hover_two">Read More</a>
                     </div>
                 </div>
             </div>

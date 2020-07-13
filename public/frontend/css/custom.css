@@ -873,3 +873,36 @@ button:focus, button:active {
     object-fit: cover;
     padding: 10px;
 }
+.navbar-toggler:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    border: 1px solid #fff;
+}
+.navbar-toggler-icon {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    position: relative;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+.navbar-dark .navbar-toggler-icon span {
+    /*background: #fff;*/
+}
+.navbar-toggler-icon span {
+    background: #fff;
+}
+
+.navbar-toggler-icon  span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    opacity: 1;
+    left: 0;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    transition: 0.25s ease-in-out;
+    background: #fff;
+}
