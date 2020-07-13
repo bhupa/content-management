@@ -33,7 +33,7 @@ class TeamController extends Controller
         $usersUnique = Members::select(DB::raw('count(id) as `created_at`'), DB::raw("DATE_FORMAT(created_at, '%Y') new_date"),  DB::raw('YEAR(created_at) year, MONTH(created_at) year'))
             ->groupby('created_at','year')
             ->where('is_active','1')
-            ->orderBy('created_at','desc')
+            ->orderBy('new_date','desc')
             ->get();
 
 
