@@ -34,4 +34,11 @@ class EventUpdateRequest extends FormRequest
             'location'=>'required'
         ];
     }
+    public function messages()
+    {
+        return [
+            'image.dimensions' =>'Please upload image min-width:1200 and min-height:900'
+        ];
+
+    }
 }
