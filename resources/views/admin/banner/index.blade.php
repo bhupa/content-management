@@ -8,7 +8,7 @@
     <script>
        $(function(){
             $('.defaultTable').dataTable( {
-                "pageLength": 50
+                "pageLength": 10
             } );
             $('#sortable').sortable({
                 axis: 'y',
@@ -228,6 +228,7 @@
                 </tfoot>
             </table>
             {!! $banners->render('vendor.pagination.default') !!}
+
         </div>
     </div>
 @endsection

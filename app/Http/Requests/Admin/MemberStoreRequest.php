@@ -62,7 +62,10 @@ class MemberStoreRequest extends FormRequest
     {
       return [
         'member_type_id.required'=>'Please select the position of the team member',
-          'member.required'=>'if member is select than position field must be empty'
+          'member.required'=>'if member is select than position field must be empty',
+          'image.dimensions' =>'Please upload image min-width:1400 and min-height:1100'
+
       ];
     }
+
 }

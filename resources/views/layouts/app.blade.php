@@ -69,7 +69,7 @@
      </div>
       <div class="top-side-men">
         @foreach($settings as $setting)
-          @if($setting->slug =='menu-banner-side-one')
+          @if($setting->slug =='menu-banner-side-two')
             <img  src="{{asset('storage/'.$setting->value)}}" alt="{{$setting->name}}">
           @endif
         @endforeach

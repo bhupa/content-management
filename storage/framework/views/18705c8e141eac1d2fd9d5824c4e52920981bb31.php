@@ -70,7 +70,7 @@
      </div>
       <div class="top-side-men">
         <?php $__currentLoopData = $settings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $setting): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-          <?php if($setting->slug =='menu-banner-side-one'): ?>
+          <?php if($setting->slug =='menu-banner-side-two'): ?>
             <img  src="<?php echo e(asset('storage/'.$setting->value)); ?>" alt="<?php echo e($setting->name); ?>">
           <?php endif; ?>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -29,7 +29,7 @@ class MembersController extends Controller
     {
 
         auth()->user()->can('master-policy.perform', ['members', 'view']);
-      $members = $this->members->orderBy('display_order', 'asc')->paginate('10');;
+      $members = $this->members->orderBy('display_order', 'asc')->paginate(100);
         return view('admin.member.index')->withMembers($members);
     }
 
