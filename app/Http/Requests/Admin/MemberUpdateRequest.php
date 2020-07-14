@@ -27,7 +27,7 @@ class MemberUpdateRequest extends FormRequest
         if($this->type == 'Executive'){
             $data =[
                 'name'=>'required',
-                'image'=>'required|mimes:jpeg,png,jpg,svg|dimensions:min_width=1400,min_height=1100',
+                'image'=>'nullable|mimes:jpeg,png,jpg,svg|dimensions:min_width=1400,min_height=1100',
 
                 'address'=>'required',
                 'type'=>'in:Executive,Member',
