@@ -87,80 +87,71 @@
 
   </div>
 </div>
-<header role="banner">
-  <nav class="navbar navbar-expand-lg ">
-    <div class="container">
-
-      <button class="navbar-toggler pull-left" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="myNavbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon">
-
-          <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-        </span>
-      </button>
-      <div class="navbar-collapse collapsype="b"navbarsExample05" style="">
-        <ul class="navbar-nav ">
-          <li class="nav-item">
-            <a class="nav-link " href="<?php echo e(route('home')); ?>">Home</a>
-          </li>
-
-          <?php $__currentLoopData = $contents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $content): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <?php if($content->child->isEmpty() && $content->parent_id == '' ): ?>
-
-              <li class="nav-item"  >
-                <a class="nav-link " href="<?php echo e(route('content.show',[$content->slug])); ?>"><?php echo e($content->title); ?></a>
-              </li>
-
-            <?php else: ?>
-              <?php if($content->child->isNotEmpty() && $content->parent_id == '' ): ?>
-                        <?php $sub_menus = $content->child()->pluck('slug')->toArray();?>
-                <li class="nav-item dropdown ">
-                  <a class="nav-link dropdown-toggle" href="javascript:void(0)"><?php echo e($content->title); ?></a>
-                  <div class="dropdown-menu">
-                    <?php $__currentLoopData = $content->child; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $firstchild): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
 
-                      <a class="dropdown-item" href="<?php echo e(route('content.show',[$firstchild->slug])); ?>"><?php echo e($firstchild->title); ?></a>
+<nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand" href="#"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+      <a class="nav-link " href="<?php echo e(route('home')); ?>">Home</a>
+      </li>
+
+      <?php $__currentLoopData = $contents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $content): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <?php if($content->child->isEmpty() && $content->parent_id == '' ): ?>
+
+      <li class="nav-item"  >
+      <a class="nav-link " href="<?php echo e(route('content.show',[$content->slug])); ?>"><?php echo e($content->title); ?></a>
+      </li>
+
+      <?php else: ?>
+      <?php if($content->child->isNotEmpty() && $content->parent_id == '' ): ?>
+      <?php $sub_menus = $content->child()->pluck('slug')->toArray();?>
+      <li class="nav-item dropdown ">
+      <a class="nav-link dropdown-toggle" href="javascript:void(0)"><?php echo e($content->title); ?></a>
+      <div class="dropdown-menu">
+      <?php $__currentLoopData = $content->child; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $firstchild): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
 
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                  </div>
-              <?php endif; ?>
-            <?php endif; ?>
-          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-          
-          
-          
-          
-          
-          
-          
-          
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo e(route('executive-committee.index')); ?>">Executive Committee</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo e(route('event.index')); ?>">Event</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo e(route('blogs.index')); ?>">Blog</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo e(route('gallery.index')); ?>">Gallery</a>
-          </li>
+      <a class="dropdown-item" href="<?php echo e(route('content.show',[$firstchild->slug])); ?>"><?php echo e($firstchild->title); ?></a>
 
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo e(route('contact.index')); ?>">Contact</a>
-          </li>
-        </ul>
+
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
       </div>
-    </div>
-  </nav>
-</header>
+      <?php endif; ?>
+      <?php endif; ?>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="services.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Adoption</a>
+      <div class="dropdown-menu" aria-labelledby="dropdown04">
+      <a class="dropdown-item" href="adoption.html">Adoption</a>
+      <a class="dropdown-item" href="adoption.html">Waiting Children</a>
+      <a class="dropdown-item" href="adoption-how-to.html">How to Adopt</a>
+      </div>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="<?php echo e(route('executive-committee.index')); ?>">Executive Committee</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="<?php echo e(route('event.index')); ?>">Event</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="<?php echo e(route('blogs.index')); ?>">Blog</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="<?php echo e(route('gallery.index')); ?>">Gallery</a>
+      </li>
 
+      <li class="nav-item">
+      <a class="nav-link" href="<?php echo e(route('contact.index')); ?>">Contact</a>
+      </li>
+    </ul>
 
+  </div>
+</nav>
 
 <?php echo $__env->yieldContent('main'); ?>
 

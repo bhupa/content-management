@@ -3,7 +3,7 @@
     background: #00DDFF;
     color: #ffffff;
 }
-header {
+header, .navbar {
     background: #F75990;
 }
 #topbar a {
@@ -905,4 +905,64 @@ button:focus, button:active {
     transform: rotate(0deg);
     transition: 0.25s ease-in-out;
     background: #fff;
+}
+
+
+
+@media (max-width:768px) {
+    .banner_content h1 {
+        font-size: 31px;
+
+    }
+    .banner_content p {
+        text-align: justify;
+        font-size: 16px;
+    }
+    .top-logo {
+        margin-top: 20px;
+    }
+    .top-logo .logo-image img {
+        margin: 0px !important;
+        margin-top: 10px;
+    }
+    .home-about-content {
+        margin-top: 27px;
+    }
+    .home-blog h2, .message h2 {
+        font-size: 31px;
+    }
+    .team-top {
+        margin-bottom: 84px;
+    }
+    .home-team-section {
+        margin-top: 30px;
+    }
+    /*.event .event-img {*/
+        /*position: relative;*/
+        /*float: left;*/
+        /*width: 40%;*/
+        /*border-radius: 10px;*/
+        /*overflow: hidden;*/
+        /*margin-right: 21px;*/
+    /*}*/
+    /*.event .event-content {*/
+        /*padding: 0px;*/
+    /*}*/
+    /*.event {*/
+        /*margin-bottom: 20px;*/
+    /*}*/
+    .home-blog h2::after {
+
+        left: 3%;
+
+    }
+    .home-blog h2::before {
+        right: 4%;
+    }
+    #our-events {
+        padding: 0px;
+    }
+    .gallery-title {
+        text-align: center;
+    }
 }
