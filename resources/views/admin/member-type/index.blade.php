@@ -199,7 +199,7 @@
                 <i class=" icon-database-edit2"></i>
                 </a>
                 @endcan
-                @if(empty($content->member))
+                @if(empty($content->member()))
                 @can('master-policy.perform', ['member-type', 'delete'])
                 <a href="javascript:void(0)" id="{{ $content->id  }}"
                 title="Delete-content"

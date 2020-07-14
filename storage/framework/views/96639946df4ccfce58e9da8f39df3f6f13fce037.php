@@ -198,7 +198,7 @@
                 <i class=" icon-database-edit2"></i>
                 </a>
                 <?php endif; ?>
-                <?php if(empty($content->member)): ?>
+                <?php if(empty($content->member())): ?>
                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('master-policy.perform', ['member-type', 'delete'])): ?>
                 <a href="javascript:void(0)" id="<?php echo e($content->id); ?>"
                 title="Delete-content"
