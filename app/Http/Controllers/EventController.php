@@ -26,8 +26,8 @@ class EventController extends Controller
     public function index()
     {
         $setting = $this->setting->where('slug','banner-image')->first();
-        $events = $this->event->where('is_active','1')->orderBy('created_at','desc')->latest()->take(6)->get();
-       return view('event.index')->withEvents($events)->withSetting($setting);
+        $events = $this->event->where('is_active','1')->orderBy('created_at','desc')->paginate(8);
+        return view('event.index')->withEvents($events)->withSetting($setting);
     }
 
     /**
