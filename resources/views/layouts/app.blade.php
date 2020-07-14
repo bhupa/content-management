@@ -123,14 +123,14 @@
       @endif
       @endif
       @endforeach
-      <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="services.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Adoption</a>
-      <div class="dropdown-menu" aria-labelledby="dropdown04">
-      <a class="dropdown-item" href="adoption.html">Adoption</a>
-      <a class="dropdown-item" href="adoption.html">Waiting Children</a>
-      <a class="dropdown-item" href="adoption-how-to.html">How to Adopt</a>
-      </div>
-      </li>
+      {{--<li class="nav-item dropdown">--}}
+      {{--<a class="nav-link dropdown-toggle" href="services.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Adoption</a>--}}
+      {{--<div class="dropdown-menu" aria-labelledby="dropdown04">--}}
+      {{--<a class="dropdown-item" href="adoption.html">Adoption</a>--}}
+      {{--<a class="dropdown-item" href="adoption.html">Waiting Children</a>--}}
+      {{--<a class="dropdown-item" href="adoption-how-to.html">How to Adopt</a>--}}
+      {{--</div>--}}
+      {{--</li>--}}
       <li class="nav-item">
       <a class="nav-link" href="{{route('executive-committee.index')}}">Executive Committee</a>
       </li>
