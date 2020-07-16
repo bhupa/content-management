@@ -35,14 +35,14 @@
         <div class="page-header-content">
             <div class="page-title">
                 <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> -
-                    Member Type</h4>
+                    Category</h4>
             </div>
         </div>
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
                 <li><a href="{{ route('admin.dashboard') }}"><i class="icon-home2 position-left"></i> Home</a>
                 </li>
-                <li class="active">Member Type</li>
+                <li class="active">Category</li>
             </ul>
         </div>
     </div>
@@ -50,9 +50,9 @@
 @section('content')
     <div class="panel panel-flat">
         <div class="panel-heading">
-            <h5 class="panel-title"><i class="icon-file-plus position-left"></i>Create Member Type</h5>
+            <h5 class="panel-title"><i class="icon-file-plus position-left"></i>Create Blog Category</h5>
             <div class="heading-elements">
-                <a href="{{ route('admin.member-type.index') }}" class="btn btn-default legitRipple pull-right">
+                <a href="{{ route('admin.blog.category.index') }}" class="btn btn-default legitRipple pull-right">
                     <i class="icon-undo2 position-left"></i>
                     Back
                     <span class="legitRipple-ripple"></span>
