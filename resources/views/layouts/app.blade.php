@@ -49,52 +49,54 @@
 </div>
 
 <div class="top-logo">
-  <div class="row m0">
-    <div class="col-md-7">
-      <div class="logo-image">
-        @foreach($settings as $setting)
-          @if($setting->slug =='menu-banner')
-        <img  src="{{asset('storage/'.$setting->value)}}" alt="{{$setting->name}}">
-            @endif
-          @endforeach
-      </div>
-    </div>
-    <div class="col-md-5">
-     <div class="top-side-men">
-       @foreach($settings as $setting)
-         @if($setting->slug =='menu-banner-side-one')
-       <img  src="{{asset('storage/'.$setting->value)}}" alt="{{$setting->name}}">
-         @endif
-         @endforeach
-     </div>
-      <div class="top-side-men">
-        @foreach($settings as $setting)
-          @if($setting->slug =='menu-banner-side-two')
-            <img  src="{{asset('storage/'.$setting->value)}}" alt="{{$setting->name}}">
-          @endif
-        @endforeach
-      </div>
-      {{--<div class="logo-image second-image">--}}
-        {{--<img  src="{{asset('frontend/img/khas2.jpg')}}" alt="">--}}
-      {{--</div>--}}
-    {{--</div>--}}
-    {{--<div class="col-md-3">--}}
-      {{--<div class="logo-image third-image">--}}
-        {{--<img  src="{{asset('frontend/img/khas3.jpg')}}" alt="">--}}
-      {{--</div>--}}
-    </div>
+ <div class="container">
+     <div class="row">
+         <div class="col-md-7">
+             <div class="logo-image">
+                 @foreach($settings as $setting)
+                     @if($setting->slug =='menu-banner')
+                         <img  src="{{asset('storage/'.$setting->value)}}" alt="{{$setting->name}}">
+                     @endif
+                 @endforeach
+             </div>
+         </div>
+         <div class="col-md-5">
+             <div class="top-side-men">
+                 @foreach($settings as $setting)
+                     @if($setting->slug =='menu-banner-side-one')
+                         <img  src="{{asset('storage/'.$setting->value)}}" alt="{{$setting->name}}">
+                     @endif
+                 @endforeach
+             </div>
+             <div class="top-side-men">
+                 @foreach($settings as $setting)
+                     @if($setting->slug =='menu-banner-side-two')
+                         <img  src="{{asset('storage/'.$setting->value)}}" alt="{{$setting->name}}">
+                     @endif
+                 @endforeach
+             </div>
+             {{--<div class="logo-image second-image">--}}
+             {{--<img  src="{{asset('frontend/img/khas2.jpg')}}" alt="">--}}
+             {{--</div>--}}
+             {{--</div>--}}
+             {{--<div class="col-md-3">--}}
+             {{--<div class="logo-image third-image">--}}
+             {{--<img  src="{{asset('frontend/img/khas3.jpg')}}" alt="">--}}
+             {{--</div>--}}
+         </div>
 
-  </div>
+     </div>
+ </div>
 </div>
 
 
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-dark  ">
   <a class="navbar-brand" href="#"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav ">
       <li class="nav-item">
       <a class="nav-link " href="{{route('home')}}">Home</a>
       </li>

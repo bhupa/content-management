@@ -60,7 +60,7 @@
         <div class="row m0">
 
 
-            <div class="col-md-3 features_item">
+            <div class="col-md-4 features_item">
                 @foreach($contents as $content)
                 @if($content->slug == 'our-aims')
                 <h3>{{$content->title}}</h3>
@@ -70,17 +70,17 @@
                     @endif
                     @endforeach
             </div>
-            <div class="col-md-3 features_item">
-                @foreach($contents as $content)
-                @if($content->slug == 'our-goals')
-                    <h3>{{$content->title}}</h3>
+{{--            <div class="col-md-4 features_item">--}}
+{{--                @foreach($contents as $content)--}}
+{{--                @if($content->slug == 'our-goals')--}}
+{{--                    <h3>{{$content->title}}</h3>--}}
 
-                    {!! str_limit($content->short_description,'120','.....') !!}
-                    <a href="{{route('content.show',[$content->slug])}}" class="btn_hover view_btn">View Details</a>
-                @endif
-                @endforeach
-            </div>
-            <div class="col-md-3 features_item">
+{{--                    {!! str_limit($content->short_description,'120','.....') !!}--}}
+{{--                    <a href="{{route('content.show',[$content->slug])}}" class="btn_hover view_btn">View Details</a>--}}
+{{--                @endif--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+            <div class="col-md-4 features_item">
                 @foreach($contents as $content)
                 @if($content->slug == 'our-vision')
                     <h3>{{$content->title}}</h3>
@@ -90,7 +90,7 @@
                 @endif
                 @endforeach
             </div>
-            <div class="col-md-3 features_item">
+            <div class="col-md-4 features_item">
                 @foreach($contents as $content)
                 @if($content->slug == 'our-values')
                     <h3>{{$content->title}}</h3>
@@ -311,6 +311,6 @@
 
 @endsection
 
-@section('script') 
+@section('script')
 
 @endsection

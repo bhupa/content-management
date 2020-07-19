@@ -50,52 +50,54 @@
 </div>
 
 <div class="top-logo">
-  <div class="row m0">
-    <div class="col-md-7">
-      <div class="logo-image">
-        <?php $__currentLoopData = $settings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $setting): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-          <?php if($setting->slug =='menu-banner'): ?>
-        <img  src="<?php echo e(asset('storage/'.$setting->value)); ?>" alt="<?php echo e($setting->name); ?>">
-            <?php endif; ?>
-          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-      </div>
-    </div>
-    <div class="col-md-5">
-     <div class="top-side-men">
-       <?php $__currentLoopData = $settings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $setting): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-         <?php if($setting->slug =='menu-banner-side-one'): ?>
-       <img  src="<?php echo e(asset('storage/'.$setting->value)); ?>" alt="<?php echo e($setting->name); ?>">
-         <?php endif; ?>
-         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-     </div>
-      <div class="top-side-men">
-        <?php $__currentLoopData = $settings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $setting): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-          <?php if($setting->slug =='menu-banner-side-two'): ?>
-            <img  src="<?php echo e(asset('storage/'.$setting->value)); ?>" alt="<?php echo e($setting->name); ?>">
-          <?php endif; ?>
-        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-      </div>
-      
-        
-      
-    
-    
-      
-        
-      
-    </div>
+ <div class="container">
+     <div class="row">
+         <div class="col-md-7">
+             <div class="logo-image">
+                 <?php $__currentLoopData = $settings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $setting): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                     <?php if($setting->slug =='menu-banner'): ?>
+                         <img  src="<?php echo e(asset('storage/'.$setting->value)); ?>" alt="<?php echo e($setting->name); ?>">
+                     <?php endif; ?>
+                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+             </div>
+         </div>
+         <div class="col-md-5">
+             <div class="top-side-men">
+                 <?php $__currentLoopData = $settings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $setting): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                     <?php if($setting->slug =='menu-banner-side-one'): ?>
+                         <img  src="<?php echo e(asset('storage/'.$setting->value)); ?>" alt="<?php echo e($setting->name); ?>">
+                     <?php endif; ?>
+                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+             </div>
+             <div class="top-side-men">
+                 <?php $__currentLoopData = $settings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $setting): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                     <?php if($setting->slug =='menu-banner-side-two'): ?>
+                         <img  src="<?php echo e(asset('storage/'.$setting->value)); ?>" alt="<?php echo e($setting->name); ?>">
+                     <?php endif; ?>
+                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+             </div>
+             
+             
+             
+             
+             
+             
+             
+             
+         </div>
 
-  </div>
+     </div>
+ </div>
 </div>
 
 
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-dark  ">
   <a class="navbar-brand" href="#"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav ">
       <li class="nav-item">
       <a class="nav-link " href="<?php echo e(route('home')); ?>">Home</a>
       </li>
@@ -124,14 +126,14 @@
       <?php endif; ?>
       <?php endif; ?>
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-      <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="services.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Adoption</a>
-      <div class="dropdown-menu" aria-labelledby="dropdown04">
-      <a class="dropdown-item" href="adoption.html">Adoption</a>
-      <a class="dropdown-item" href="adoption.html">Waiting Children</a>
-      <a class="dropdown-item" href="adoption-how-to.html">How to Adopt</a>
-      </div>
-      </li>
+      
+      
+      
+      
+      
+      
+      
+      
       <li class="nav-item">
       <a class="nav-link" href="<?php echo e(route('executive-committee.index')); ?>">Executive Committee</a>
       </li>

@@ -60,7 +60,7 @@
         <div class="row m0">
 
 
-            <div class="col-md-3 features_item">
+            <div class="col-md-4 features_item">
                 <?php $__currentLoopData = $contents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $content): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <?php if($content->slug == 'our-aims'): ?>
                 <h3><?php echo e($content->title); ?></h3>
@@ -71,18 +71,17 @@
                     <?php endif; ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
-            <div class="col-md-3 features_item">
-                <?php $__currentLoopData = $contents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $content): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <?php if($content->slug == 'our-goals'): ?>
-                    <h3><?php echo e($content->title); ?></h3>
 
-                    <?php echo str_limit($content->short_description,'120','.....'); ?>
 
-                    <a href="<?php echo e(route('content.show',[$content->slug])); ?>" class="btn_hover view_btn">View Details</a>
-                <?php endif; ?>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            </div>
-            <div class="col-md-3 features_item">
+
+
+
+
+
+
+
+
+            <div class="col-md-4 features_item">
                 <?php $__currentLoopData = $contents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $content): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <?php if($content->slug == 'our-vision'): ?>
                     <h3><?php echo e($content->title); ?></h3>
@@ -93,7 +92,7 @@
                 <?php endif; ?>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
-            <div class="col-md-3 features_item">
+            <div class="col-md-4 features_item">
                 <?php $__currentLoopData = $contents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $content): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <?php if($content->slug == 'our-values'): ?>
                     <h3><?php echo e($content->title); ?></h3>
@@ -316,7 +315,8 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php $__env->startSection('script'); ?> 
+<?php $__env->startSection('script'); ?>
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

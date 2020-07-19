@@ -14,9 +14,12 @@ header, .navbar {
     /*padding-left: 10%;*/
 }
 .top-logo .logo-image img   {
-    margin: 7px 10px!important;
+    margin: 11px -6px!important;
     height: auto;
     max-width: 100%;
+}
+#navbarText {
+    margin-left: 3%;
 }
 .top-logo .second-image img {
     height: 144px;
