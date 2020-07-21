@@ -8,7 +8,7 @@
     <div id="banner-carsoule" class="owl-carousel owl-theme ">
 
         <?php $__currentLoopData = $banners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $banner): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-         <section class="home-page-banner-area d-flex text-center" style="min-height:570px; background:linear-gradient(to right, rgba(4, 9, 30, 0.8), rgba(4, 9, 30, 0.8)), url('<?php echo e(asset('storage/'.$banner->image)); ?>')">
+         <section class="home-page-banner-area d-flex text-center" style="min-height:570px; background:linear-gradient(to right, rgba(4, 9, 30, 0.3), rgba(4, 9, 30, 0.23)), url('<?php echo e(asset('storage/'.$banner->image)); ?>')">
         <div class="container align-self-center">
             <div class="row">
                 <div class="col-md-12">
