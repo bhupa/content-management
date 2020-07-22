@@ -224,6 +224,11 @@
 
 
 {{--    </section>--}}
+
+    @include('event.list)
+    @include('gallery.list)
+    @include('blog.list)
+
 @endsection
 
 @section('script')
