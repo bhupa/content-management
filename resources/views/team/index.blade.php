@@ -225,9 +225,9 @@
 
 {{--    </section>--}}
 
-    @include('event.list)
-    @include('gallery.list)
-    @include('blog.list)
+    @include('event.list')
+    @include('gallery.list')
+    @include('blog.list')
 
 @endsection
 
