@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Member')
+@section('title', 'Executive Committee')
 @section('header_js')
 @endsection
 @section('main')
@@ -11,12 +11,12 @@
     >
         <div class="custom-header-content">
             <div class="container">
-                <h1 class="page-title">Member</h1>
+                <h1 class="page-title">Executive Committee</h1>
                 <div id="breadcrumb">
                     <div aria-label="Breadcrumbs" class="breadcrumbs breadcrumb-trail">
                         <ul class="trail-items">
                             <li class="trail-item trail-begin"><a href="{{route('home')}}" rel="home"><span>Home</span></a></li>
-                            <li class="trail-item trail-end"><span>Member</span></li>
+                            <li class="trail-item trail-end"><span>Executive Committee</span></li>
                         </ul>
                     </div> <!-- .breadcrumbs -->
                 </div> <!-- #breadcrumb -->
@@ -172,58 +172,58 @@
         </div>
 
     </section>
-    <section class="message team-section team-page"  style="margin-top: 150px;margin-bottom:100px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <h2>Members</h2>
-                </div>
-            </div>
+{{--    <section class="message team-section team-page"  style="margin-top: 150px;margin-bottom:100px;">--}}
+{{--        <div class="container">--}}
+{{--            <div class="row">--}}
+{{--                <div class="col-md-12 text-center">--}}
+{{--                    <h2>Members</h2>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-            <div class="row justify-content-center  second-team-section">
-
-
-                @foreach($members as $key=>$team)
-
-                        <div class="col-md-4">
-                            <div class="team-top">
-                                <div class="team-wrapper">
-                                    @if(file_exists('storage/'.$team->image) && $team->image != '')
-                                        <img src="{{asset('storage/'.$team->image)}}" alt="{{$team->name}}" class="team-image">
-                                    @endif
-
-                                    <div class="content-details">
-                                        <h4>{{$team->name}}</h4>
-                                        <h5>Member</h5>
-                                        <p>{{$team->address}}</p>
-                                    </div>
-
-                                    <ul class="team-social-link">
-                                        <li>
-                                            <a href="@if($team->facebook !== '') {{$team->facebook}} @else # @endif"> <i class="fa fa-facebook"></i> </a>
-                                        </li>
-                                        <li>
-                                            <a href="@if($team->linkedin !== '') {{$team->linkedin}} @else # @endif"> <i class="fa fa-linkedin"></i> </a>
-                                        </li>
-                                        <li>
-                                            <a href="@if($team->twitter !== '') {{$team->twitter}} @else # @endif"> <i class="fa fa-twitter"></i> </a>
-                                        </li>
-                                    </ul>
-                                </div>
+{{--            <div class="row justify-content-center  second-team-section">--}}
 
 
+{{--                @foreach($members as $key=>$team)--}}
+
+{{--                        <div class="col-md-4">--}}
+{{--                            <div class="team-top">--}}
+{{--                                <div class="team-wrapper">--}}
+{{--                                    @if(file_exists('storage/'.$team->image) && $team->image != '')--}}
+{{--                                        <img src="{{asset('storage/'.$team->image)}}" alt="{{$team->name}}" class="team-image">--}}
+{{--                                    @endif--}}
+
+{{--                                    <div class="content-details">--}}
+{{--                                        <h4>{{$team->name}}</h4>--}}
+{{--                                        <h5>Member</h5>--}}
+{{--                                        <p>{{$team->address}}</p>--}}
+{{--                                    </div>--}}
+
+{{--                                    <ul class="team-social-link">--}}
+{{--                                        <li>--}}
+{{--                                            <a href="@if($team->facebook !== '') {{$team->facebook}} @else # @endif"> <i class="fa fa-facebook"></i> </a>--}}
+{{--                                        </li>--}}
+{{--                                        <li>--}}
+{{--                                            <a href="@if($team->linkedin !== '') {{$team->linkedin}} @else # @endif"> <i class="fa fa-linkedin"></i> </a>--}}
+{{--                                        </li>--}}
+{{--                                        <li>--}}
+{{--                                            <a href="@if($team->twitter !== '') {{$team->twitter}} @else # @endif"> <i class="fa fa-twitter"></i> </a>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
 
 
-                            </div>
-                        </div>
-                @endforeach
-                {{--<div class="col-md-4 offset-md-4">.col-md-4 .offset-md-4</div>--}}
-
-            </div>
-        </div>
 
 
-    </section>
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                @endforeach--}}
+{{--                --}}{{--<div class="col-md-4 offset-md-4">.col-md-4 .offset-md-4</div>--}}
+
+{{--            </div>--}}
+{{--        </div>--}}
+
+
+{{--    </section>--}}
 @endsection
 
 @section('script')
