@@ -4,7 +4,7 @@
 @endsection
 @section('main')
 
-    
+
     <!-- .custom-header -->
     <div id="custom-header"
          @if(file_exists('storage/'.$setting->value) && $setting->value != '')
@@ -56,6 +56,8 @@
         </div>
 
     </section>
+    @include('team.list')
+    @include('gallery.list')
 
 
 @endsection

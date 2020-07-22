@@ -59,6 +59,8 @@
     </section>
 
 
+    @include('team.list')
+    @include('event.list')
 @endsection
 
 @section('scripts')

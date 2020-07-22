@@ -102,6 +102,9 @@
                 </div>
               </div>
             </section>
+              @include('team.list')
+              @include('event.list')
+
 
           </main>
           <!-- #main -->

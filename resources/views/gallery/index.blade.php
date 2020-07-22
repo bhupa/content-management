@@ -100,7 +100,8 @@
                     </div>
                 </div>
             </section>
-
+            @include('event.list')
+            @include('team.list')
         </main>
         <!-- #main -->
       </div>
@@ -112,4 +113,4 @@
   </div>
   <!-- .container -->
 </div>
-@endsection 
+@endsection

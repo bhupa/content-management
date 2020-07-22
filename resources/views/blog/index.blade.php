@@ -78,5 +78,7 @@
         </div>
 
     </section>
+    @include('team.list')
+    @include('gallery.list')
 
 @endsection

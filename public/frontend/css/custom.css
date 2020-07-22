@@ -19,7 +19,7 @@ header, .navbar {
     max-width: 100%;
 }
 #navbarText {
-    margin-left: 3%;
+    margin-left: 30px;
 }
 .top-logo .second-image img {
     height: 144px;

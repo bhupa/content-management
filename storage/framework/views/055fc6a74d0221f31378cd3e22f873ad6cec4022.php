@@ -98,7 +98,8 @@
                     </div>
                 </div>
             </section>
-
+            <?php echo $__env->make('event.list', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <?php echo $__env->make('team.list', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
         </main>
         <!-- #main -->
       </div>
@@ -110,5 +111,6 @@
   </div>
   <!-- .container -->
 </div>
-<?php $__env->stopSection(); ?> 
+<?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

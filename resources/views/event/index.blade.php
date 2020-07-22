@@ -77,6 +77,7 @@
         </div>
 
     </section>
-
+@include('team.list')
+    @include('blog.list')
 
 @endsection

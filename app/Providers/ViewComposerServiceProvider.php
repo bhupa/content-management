@@ -67,7 +67,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         );
         view()->composer(
             [
-                'frontend.home','frontend.inc.sidebar',
+                'frontend.home','frontend.inc.sidebar','gallery.list','team.list','blog.list','event.list',
             ],
             'App\Http\ViewComposers\Frontend\BlogComposer'
         );

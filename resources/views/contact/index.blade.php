@@ -83,6 +83,8 @@
             </div>
         </div>
     </section>
+    @include('event.list')
+    @include('blog.list')
 @endsection
 @section('script')
 
