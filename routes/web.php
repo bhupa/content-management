@@ -85,7 +85,7 @@ Route::resource('blogs','BlogController');
 Route::get('/blog', 'BlogController@index')->name('blogs.index');
 Route::get('blog/show/{slug}', 'BlogController@show')->name('blogs.show');
 
-;
+Route::resource('members','MemberController');
 
 
 

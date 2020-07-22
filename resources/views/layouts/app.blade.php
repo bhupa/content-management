@@ -136,6 +136,9 @@
       <li class="nav-item">
       <a class="nav-link" href="{{route('executive-committee.index')}}">Executive Committee</a>
       </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('members.index')}}">Members</a>
+        </li>
       <li class="nav-item">
       <a class="nav-link" href="{{route('event.index')}}">Event</a>
       </li>
