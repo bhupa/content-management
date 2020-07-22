@@ -177,7 +177,7 @@
             dots: false,
             nav: false,
             autoplay:true,
-            autoplayTimeout:3000,
+            // autoplayTimeout:3000,
 
             navText: ["<i class='fa fa-chevron-left '></i>","<i class='fa fa-chevron-right'></i>"],
             responsive: {
