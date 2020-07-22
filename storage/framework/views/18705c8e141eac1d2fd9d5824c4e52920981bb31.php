@@ -176,9 +176,10 @@
             items: 1,
             loop:true,
             dots: false,
-            nav: true,
-            autoplay:false,
+            nav: false,
+            autoplay:true,
             autoplayTimeout:3000,
+            
             navText: ["<i class='fa fa-chevron-left '></i>","<i class='fa fa-chevron-right'></i>"],
             responsive: {
                 480: {
