@@ -83,7 +83,7 @@
                         </div>
                     </div>
 
-                    <div class="more-wrapper">
+                    <div class="pagination-wrapper">
                         <nav class="navigation pagination"> <?php echo e($galleries->links('vendor.pagination.custom')); ?>
 
                             

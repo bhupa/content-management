@@ -42,7 +42,7 @@
                 <div class="row">
                   <div class="row" id="gallery-index-page">
                     <?php $__currentLoopData = $galleryImages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gallery): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                      <div class="col-lg-3 col-md-4 col-xs-6 ">
+                      <div class="col-lg-3 col-md-4 col-xs-6  mb-20">
                         <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="<?php echo e($gallery->gallery->title); ?>"
                            data-image="<?php echo e(asset('storage/'.$gallery->image)); ?>"
                            data-target="#image-gallery">
@@ -83,21 +83,23 @@
                       </div>
                     </div>
                   </div>
+                    <div class="pagination-wrapper">
+                        <div class="more-wrapper">
+                            <nav class="navigation pagination"> <?php echo e($galleryImages->links('vendor.pagination.custom')); ?>
+
+                                
+                                
+                                
+                                
+                                
+                                 </nav>
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="more-wrapper">
-                  <nav class="navigation pagination"> <?php echo e($galleryImages->links('vendor.pagination.custom')); ?>
-
-                    
-                    
-                    
-                    
-                    
-                     </nav>
-                  <br>
-                  <br>
-                  <br>
-                </div>
               </div>
             </section>
               <?php echo $__env->make('team.list', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

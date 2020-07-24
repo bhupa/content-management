@@ -216,6 +216,9 @@ section {
 #our-events {
     /*padding-top: 50px;*/
 }
+#gallery-index-page .card-img {
+    margin-bottom: 30px;
+}
 .pagination-wrapper {
     text-align: center;
 /* margin-top: 43px; */

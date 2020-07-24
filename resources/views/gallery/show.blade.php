@@ -43,7 +43,7 @@
                 <div class="row">
                   <div class="row" id="gallery-index-page">
                     @foreach($galleryImages as $gallery)
-                      <div class="col-lg-3 col-md-4 col-xs-6 ">
+                      <div class="col-lg-3 col-md-4 col-xs-6  mb-20">
                         <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="{{$gallery->gallery->title}}"
                            data-image="{{asset('storage/'.$gallery->image)}}"
                            data-target="#image-gallery">
@@ -84,23 +84,24 @@
                       </div>
                     </div>
                   </div>
+                    <div class="pagination-wrapper">
+                        <div class="more-wrapper">
+                            <nav class="navigation pagination"> {{$galleryImages->links('vendor.pagination.custom')}}
+                                {{--
+                                <div class="nav-links">--}}
+                                {{--<span class="page-numbers current">1</span>--}}
+                                {{--<a class="page-numbers" href="#">2</a>--}}
+                                {{--<a class="page-numbers" href="#">3</a>--}}
+                                {{--<a class="next page-numbers" href="#">Next »</a>--}}
+                                {{--</div>
+                              <!-- .nav-links -->--}} </nav>
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
                 </div>
-                  <div class="pagination-wrapper">
-                <div class="more-wrapper">
-                  <nav class="navigation pagination"> {{$galleryImages->links('vendor.pagination.custom')}}
-                    {{--
-                    <div class="nav-links">--}}
-                    {{--<span class="page-numbers current">1</span>--}}
-                    {{--<a class="page-numbers" href="#">2</a>--}}
-                    {{--<a class="page-numbers" href="#">3</a>--}}
-                    {{--<a class="next page-numbers" href="#">Next »</a>--}}
-                    {{--</div>
-                  <!-- .nav-links -->--}} </nav>
-                  <br>
-                  <br>
-                  <br>
-                </div>
-                  </div>
+
               </div>
             </section>
               @include('team.list')
