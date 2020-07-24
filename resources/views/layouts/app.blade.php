@@ -219,6 +219,30 @@
                 }
             }
         });
+        $('#home-team-carsoule').owlCarousel({
+            items: 4,
+            loop:true,
+            dots: false,
+            nav: false,
+            autoplay:true,
+            // autoplayTimeout:3000,
+
+            navText: ["<i class='fa fa-chevron-left '></i>","<i class='fa fa-chevron-right'></i>"],
+            responsive: {
+                480: {
+                    items: 1
+                },
+                765: {
+                    items: 1
+                },
+                991: {
+                    items: 1
+                },
+                1200: {
+                    items: 3
+                }
+            }
+        });
         $(document).on('change','#executive-select-btn',function(){
             var date = $(this).find('option:selected').val();
             $.ajax({

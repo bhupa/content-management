@@ -112,10 +112,10 @@
             </div>
 
 
-            <div class="row justify-content-center">
+            <div class="row justify-content-center owl-carousel owl-theme " id="home-team-carsoule">
 
                 @foreach($members as $team)
-                    <div class="col-lg-4 col-md-6">
+{{--                    <div class="col-lg-4 col-md-6" >--}}
 
                         <div class="team-top">
                             <div class="team-wrapper">
@@ -173,11 +173,13 @@
                         {{--</div>--}}
                         {{--</div>--}}
                         {{--</div>--}}
-                    </div>
+{{--                    </div>--}}
                 @endforeach
-                    <div class="view-more-btn-wrapper">
-                        <a href="{{route('executive-committee.index')}}" class="btn btn-view-more">View More</a>
-                    </div>
+
+            </div>
+
+            <div class="view-more-btn-wrapper">
+                <a href="{{route('executive-committee.index')}}" class="btn btn-view-more">View More</a>
             </div>
         </div>
 
@@ -192,6 +194,7 @@
             </div>
             <div class="row">
                 @foreach($events as $event)
+
                     <div class="col-12 col-md-6" id="event-height-div">
                         <div class="event">
                             <div class="event-img">

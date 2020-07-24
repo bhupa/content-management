@@ -32,7 +32,7 @@ header, .navbar {
 .btn-view-more {
     background: #00DDFF;
     color: #ffffff;
-    margin: 60px;
+    margin: 20px;
     margin-right: 4px;
     margin-bottom: 4px;
     font-size: 16px;
@@ -214,7 +214,11 @@ section {
     margin-top: 100px;
 }
 #our-events {
-    padding-top: 50px;
+    /*padding-top: 50px;*/
+}
+.message .view-more-btn-wrapper {
+    display: block;
+    text-align: center;
 }
 .home-blog .post-entry .img-wrap:hover img {
     -webkit-transform: scale(1.2);
@@ -766,6 +770,7 @@ h3.contact-title {
 .team-top {
     display: block;
     position: relative;
+    margin-bottom: 100px;
 }
 .team-wrapper {
     width: 300px;

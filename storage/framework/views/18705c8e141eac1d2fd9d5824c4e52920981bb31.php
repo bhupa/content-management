@@ -12,6 +12,24 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?php echo e(asset('frontend/css/owl.carousel.min.css')); ?>">
   <link rel="stylesheet" href="<?php echo e(asset('frontend/css/custom.css')); ?>">
+    <?php if(Request::segment(2) == ''): ?>
+
+        <meta property="og:url"           content="<?php echo e(url('/')); ?>" />
+        <meta property="og:type"          content="website" />
+        <meta name="description" content="Founded May 1960 in London. Founder members: Pashupati SJB Rana, Hemang Dixit, Angur Baba Joshi, S K Malla, Prabal Rana, Surya B Basnyat and others. HM King Birendra, the then Crown Prince, as a student at Eton, was its patron. Thirty eight years of history makes its oldest Nepali orsanisation in the western world. ">
+        <meta name="keywords" content="To promote goodwill and co-operation amongst Nepalese, to preserve Nepali culture and tradition, to voice Nepali aspirations whenever necessary, remaining strictly, non partisan social organisation.">
+        <?php $__currentLoopData = $settings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $setting): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+            <?php if(file_exists('storage/'.$setting->image)  && $setting->image != ''): ?>
+                <meta property="og:image"         content="<?php echo e(asset('storage/'.$setting->image)); ?>" />
+            <?php endif; ?>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <meta property="og:image:width" content="500" />
+        <meta property="og:image:height" content="500" />
+
+    <?php else: ?>
+        <?php echo $__env->yieldContent('facebook_meta'); ?>
+    <?php endif; ?>
   <?php echo $__env->yieldContent('style_css'); ?>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -165,6 +183,9 @@
 
 <!-- start footer -->
 <?php echo $__env->make('layouts.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=569915840369130&autoLogAppEvents=1" nonce="1FuMKci8"></script>
+
 <script src="<?php echo e(asset('frontend/js/jquery-3.3.1.min.js')); ?>" type="text/javascript"></script>
 <script src="<?php echo e(asset('frontend/js/bootstrap.min.js')); ?>" type="text/javascript"></script>
 <script src="<?php echo e(asset('frontend/js/owl.carousel.min.js')); ?>" type="text/javascript"></script>
@@ -196,6 +217,30 @@
                 },
                 1200: {
                     items: 1
+                }
+            }
+        });
+        $('#home-team-carsoule').owlCarousel({
+            items: 4,
+            loop:true,
+            dots: false,
+            nav: false,
+            autoplay:true,
+            // autoplayTimeout:3000,
+
+            navText: ["<i class='fa fa-chevron-left '></i>","<i class='fa fa-chevron-right'></i>"],
+            responsive: {
+                480: {
+                    items: 1
+                },
+                765: {
+                    items: 1
+                },
+                991: {
+                    items: 1
+                },
+                1200: {
+                    items: 3
                 }
             }
         });
@@ -337,6 +382,28 @@
         }
 
     });
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id))
+            return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.3&appId=551922592366337";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+
+    function fb_share(dynamic_link,dynamic_title) {
+        var app_id = '569915840369130';
+        var pageURL="https://www.facebook.com/dialog/feed?app_id=" + app_id + "&link=" + dynamic_link;
+        var w = 600;
+        var h = 400;
+        var left = (screen.width / 2) - (w / 2);
+        var top = (screen.height / 2) - (h / 2);
+        window.open(pageURL, dynamic_title, 'toolbar=no, location=no, directories=no, status=no, menubar=yes, scrollbars=no, resizable=no, copyhistory=no, width=' + 800 + ', height=' + 650 + ', top=' + top + ', left=' + left)
+        return false;
+    }
+
 
 </script>
 
