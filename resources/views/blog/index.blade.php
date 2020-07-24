@@ -57,7 +57,7 @@
 
                 @endforeach
 
-                    <div style="text-align:center; margin-top: 40px">
+                    <div class="pagination-wrapper">
                     <div class="more-wrapper">
                         <nav class="navigation pagination"> {{$blogs->links('vendor.pagination.custom')}}
                             {{--

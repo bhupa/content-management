@@ -28,7 +28,7 @@
 
     <section class="message team-section team-page" >
         <div class="container">
-            <div class="row mb-5">
+            <div class="row ">
                 <div class="col-md-12 text-center">
                     <h2>Members</h2>
                 </div>
@@ -70,6 +70,7 @@
                             </div>
                     @endforeach
                     {{--<div class="col-md-4 offset-md-4">.col-md-4 .offset-md-4</div>--}}
+                        <div class="pagination-wrapper">
                         <div class="more-wrapper">
                             <nav class="navigation pagination"> {{$members->links('vendor.pagination.custom')}}
                                 {{--
@@ -83,6 +84,7 @@
                             <br>
                             <br>
                             <br>
+                        </div>
                         </div>
                 </div>
             </div>

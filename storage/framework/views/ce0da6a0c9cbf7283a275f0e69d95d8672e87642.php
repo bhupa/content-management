@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <div style="text-align:center; margin-top: 40px">
+                    <div class="pagination-wrapper">
                         <div class="more-wrapper">
                             <nav class="navigation pagination"> <?php echo e($events->links('vendor.pagination.custom')); ?>
 

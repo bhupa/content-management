@@ -7,10 +7,11 @@
         </div>
 
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center owl-carousel owl-theme " id="home-team-carsoule">
 
-            @foreach($members as $team)
-                <div class="col-lg-4 col-md-6">
+
+        @foreach($members as $team)
+{{--                <div class="col-lg-4 col-md-6">--}}
 
                     <div class="team-top">
                         <div class="team-wrapper">
@@ -40,7 +41,7 @@
 
 
 
-                    </div>
+{{--                    </div>--}}
                     {{--<div class="single_volenteer">--}}
                     {{--<div class="volenteer_thumb">--}}
                     {{--@if(file_exists('storage/'.$team->image) && $team->image != '')--}}
@@ -70,9 +71,10 @@
                     {{--</div>--}}
                 </div>
             @endforeach
-                <div class="view-more-btn-wrapper">
-                    <a href="{{route('executive-committee.index')}}" class="btn btn-view-more">View More</a>
-                </div>
+
+        </div>
+        <div class="view-more-btn-wrapper">
+            <a href="{{route('executive-committee.index')}}" class="btn btn-view-more">View More</a>
         </div>
     </div>
 

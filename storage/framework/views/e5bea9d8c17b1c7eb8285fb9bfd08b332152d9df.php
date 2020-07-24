@@ -7,10 +7,11 @@
         </div>
 
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center owl-carousel owl-theme " id="home-team-carsoule">
 
-            <?php $__currentLoopData = $members; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $team): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="col-lg-4 col-md-6">
+
+        <?php $__currentLoopData = $members; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $team): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
 
                     <div class="team-top">
                         <div class="team-wrapper">
@@ -40,7 +41,7 @@
 
 
 
-                    </div>
+
                     
                     
                     
@@ -70,6 +71,10 @@
                     
                 </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+        </div>
+        <div class="view-more-btn-wrapper">
+            <a href="<?php echo e(route('executive-committee.index')); ?>" class="btn btn-view-more">View More</a>
         </div>
     </div>
 

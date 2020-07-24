@@ -39,7 +39,7 @@ class BlogComposer {
 
 
         $year = Carbon::now()->format('Y');
-        $members = $this->member->where('type','Executive')->whereYear('created_at',$year)->orderBy('display_order','asc')->take(3)->get();
+        $members = $this->member->where('type','Executive')->whereYear('created_at',$year)->orderBy('display_order','asc')->get();
 
         $contents = $this->content->where('is_active','1')->where('display_in','content')->get();
 

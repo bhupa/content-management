@@ -85,7 +85,7 @@
                     </div>
                   </div>
                 </div>
-
+                  <div class="pagination-wrapper">
                 <div class="more-wrapper">
                   <nav class="navigation pagination"> {{$galleryImages->links('vendor.pagination.custom')}}
                     {{--
@@ -100,6 +100,7 @@
                   <br>
                   <br>
                 </div>
+                  </div>
               </div>
             </section>
               @include('team.list')
