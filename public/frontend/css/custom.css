@@ -18,8 +18,8 @@ header, .navbar {
     height: auto;
     max-width: 100%;
 }
-#navbarText {
-    margin-left: 30px;
+#navbarText ul {
+    margin-left: -28px;
 }
 .top-logo .second-image img {
     height: 144px;
@@ -28,6 +28,28 @@ header, .navbar {
 .top-logo .third-image img {
     height: 144px;
     width: 100%
+}
+.btn-view-more {
+    background: #00DDFF;
+    color: #ffffff;
+    margin: 60px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    font-size: 16px;
+    font-weight: 400;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    border-radius: 30px;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+    padding: 8px 20px;
+}
+.btn-view-more:hover {
+    background: #ed578f;
+    color: #ffffff;
+    transition: 0.3s;
 }
 .logo-center {
     font-size: 28px;
@@ -913,6 +935,9 @@ button:focus, button:active {
 
 
 @media (max-width:768px) {
+    #navbarText ul {
+        margin-left: 0px;
+    }
     .banner_content h1 {
         font-size: 31px;
 

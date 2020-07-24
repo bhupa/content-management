@@ -110,7 +110,7 @@ Route::group(['middleware' => ['auth:admin', 'preventBackHistory'], 'prefix' => 
 
 
 
-    
+
 
 
 
@@ -216,9 +216,16 @@ Route::group(['middleware' => ['auth:admin', 'preventBackHistory'], 'prefix' => 
 
 
 
+    Route::resource('contact', 'ContactController', ['as' => 'admin']);
+    Route::get('/create', 'ContactController@create')->name('admin.contact.create');
+    Route::get('/', 'ContactController@index')->name('admin.contact.index');
+    Route::get('/show/{id}', 'ContactController@show')->name('admin.contact.show');
+    Route::get('/contact/{id}/edit', 'ContactController@edit')->name('admin.contact.edit');
+//    Route::post('/{id}/update', 'ProjectController@update')->name('admin.project.update');
+    Route::delete('/{id}/', 'ContactController@destroy')->name('admin.contact.destroy');
 
 
-     
+
 
 
 });

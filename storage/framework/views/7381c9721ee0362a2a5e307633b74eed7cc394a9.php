@@ -178,6 +178,9 @@
                         
                     </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <div class="view-more-btn-wrapper">
+                        <a href="<?php echo e(route('executive-committee.index')); ?>" class="btn btn-view-more">View More</a>
+                    </div>
             </div>
         </div>
 

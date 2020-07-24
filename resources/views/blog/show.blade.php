@@ -1,5 +1,20 @@
 @extends('layouts.app')
 @section('title', $blog->title)
+@section('facebook_meta')
+
+    <meta property="og:url"           content="{{route('event.show',[$blog->slug])}}" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="{{ $blog->title}}" />
+    <meta property="og:description"   content="{{ $blog->short_description}}" />
+    @if(file_exists('storage/'.$event->image) && $blog->image != '')
+        <meta property="og:image"         content="{{asset('storage/'.$blog->image)}}" />
+    @else
+        <meta property="og:image"         content="https://dummyimage.com/600x340/ed3833/1e1edc.png&text=Khassamaj-UK" />
+    @endif
+    <meta property="og:image:width" content="500" />
+    <meta property="og:image:height" content="500" />
+
+@stop
 @section('header_js')
 @endsection
 @section('main')
@@ -34,6 +49,16 @@
                 <div class="col-md-8">
                     <div class="single-page-content">
                         <h1>{{$blog->title}}</h1>
+
+                        <ul class="event-meta-single-page">
+                            <li><i class="fa fa-clock-o"></i> {{ \Carbon\Carbon::parse($blog->date)->toFormattedDateString() }}</li>
+                            <li>
+                                <a  class="btn_hover view-more-btn" href="javascript:void(0)" onclick="fb_share('{{route('blog.show',[$blog->slug])}}', '{{ $event->title}}')">
+                                    Share
+                                </a>
+                            </li>
+                        </ul>
+
 
                         <div class="single-page-img">
                             @if(file_exists('storage/'.$blog->image) && $blog->image != '')

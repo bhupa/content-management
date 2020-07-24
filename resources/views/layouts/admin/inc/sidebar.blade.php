@@ -90,7 +90,14 @@
                             </a>
                         </li>
                     @endcan
-
+                    @can('master-policy.perform', ['contact', 'view'])
+                        <li class="{{ $secondParam == 'contact' ? 'active':'' }}">
+                            <a href="{{ route('admin.contact.index') }}">
+                                <i class="icon-stats-bars"></i>
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                    @endcan
                     @can('master-policy.perform', ['content', 'view'])
                         <li class="{{ $secondParam == 'contents' ? 'active':'' }}">
                             <a href="{{ route('admin.contents.index') }}">
@@ -148,7 +155,7 @@
 
 
 
-                   
+
 
                   {{--  @can('master-policy.perform', ['notice', 'view'])--}}
                       {{--      <li class="{{ $secondParam == 'notice' ? 'active':'' }}">--}}
@@ -194,14 +201,14 @@
                                                             </a>
                                                         </li>
                                                     @endcan
-                    @can('master-policy.perform', ['testimonial', 'view'])
-                        <li class="{{ $secondParam == 'testimonial' ? 'active':'' }}">
-                            <a href="{{ route('admin.testimonials.index') }}">
-                                <i class=" icon-vcard"></i>
-                                <span>Testimonial</span>
-                            </a>
-                        </li>
-                    @endcan
+{{--                    @can('master-policy.perform', ['testimonial', 'view'])--}}
+{{--                        <li class="{{ $secondParam == 'testimonial' ? 'active':'' }}">--}}
+{{--                            <a href="{{ route('admin.testimonials.index') }}">--}}
+{{--                                <i class=" icon-vcard"></i>--}}
+{{--                                <span>Testimonial</span>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                    @endcan--}}
 
                     @can('master-policy.perform', ['member-type', 'view'])
                         <li class="{{ $thirdParam == 'member-type' ? 'active':'' }}">
@@ -238,7 +245,7 @@
                             </a>
                         </li> --}}
                   {{--  @endcan --}}
-                  
+
 
                 </ul>
             </div>

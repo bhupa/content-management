@@ -1,5 +1,20 @@
 @extends('layouts.app')
 @section('title', $event->title)
+@section('facebook_meta')
+
+    <meta property="og:url"           content="{{route('event.show',[$event->slug])}}" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="{{ $event->title}}" />
+    <meta property="og:description"   content="{{ $event->short_description}}" />
+    @if(file_exists('storage/'.$event->image) && $event->image != '')
+        <meta property="og:image"         content="{{asset('storage/'.$event->image)}}" />
+    @else
+        <meta property="og:image"         content="https://dummyimage.com/600x340/ed3833/1e1edc.png&text=Khassamaj-UK" />
+    @endif
+    <meta property="og:image:width" content="500" />
+    <meta property="og:image:height" content="500" />
+
+@stop
 @section('header_js')
 @endsection
 @section('main')
@@ -38,6 +53,11 @@
                         <ul class="event-meta-single-page">
                             <li><i class="fa fa-clock-o"></i> {{ \Carbon\Carbon::parse($event->date)->toFormattedDateString() }}</li>
                             <li><i class="fa fa-map-marker"></i> {{$event->location}}</li>
+                            <li>
+                                <a  class="btn_hover view-more-btn" href="javascript:void(0)" onclick="fb_share('{{route('event.show',[$event->slug])}}', '{{ $event->title}}')">
+                                    Share
+                                </a>
+                            </li>
                         </ul>
 
                         <div class="single-page-img">

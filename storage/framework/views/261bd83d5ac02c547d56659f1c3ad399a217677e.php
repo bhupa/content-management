@@ -90,7 +90,14 @@
                             </a>
                         </li>
                     <?php endif; ?>
-
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('master-policy.perform', ['contact', 'view'])): ?>
+                        <li class="<?php echo e($secondParam == 'contact' ? 'active':''); ?>">
+                            <a href="<?php echo e(route('admin.contact.index')); ?>">
+                                <i class="icon-stats-bars"></i>
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('master-policy.perform', ['content', 'view'])): ?>
                         <li class="<?php echo e($secondParam == 'contents' ? 'active':''); ?>">
                             <a href="<?php echo e(route('admin.contents.index')); ?>">
@@ -148,7 +155,7 @@
 
 
 
-                   
+
 
                   
                       
@@ -183,14 +190,14 @@
                                                             </a>
                                                         </li>
                                                     <?php endif; ?>
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('master-policy.perform', ['testimonial', 'view'])): ?>
-                        <li class="<?php echo e($secondParam == 'testimonial' ? 'active':''); ?>">
-                            <a href="<?php echo e(route('admin.testimonials.index')); ?>">
-                                <i class=" icon-vcard"></i>
-                                <span>Testimonial</span>
-                            </a>
-                        </li>
-                    <?php endif; ?>
+
+
+
+
+
+
+
+
 
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('master-policy.perform', ['member-type', 'view'])): ?>
                         <li class="<?php echo e($thirdParam == 'member-type' ? 'active':''); ?>">
@@ -217,7 +224,7 @@
                  
                   
                   
-                  
+
 
                 </ul>
             </div>

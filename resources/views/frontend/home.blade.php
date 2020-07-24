@@ -175,6 +175,9 @@
                         {{--</div>--}}
                     </div>
                 @endforeach
+                    <div class="view-more-btn-wrapper">
+                        <a href="{{route('executive-committee.index')}}" class="btn btn-view-more">View More</a>
+                    </div>
             </div>
         </div>
 

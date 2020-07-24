@@ -12,6 +12,24 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{asset('frontend/css/owl.carousel.min.css')}}">
   <link rel="stylesheet" href="{{asset('frontend/css/custom.css')}}">
+    @if(Request::segment(2) == '')
+
+        <meta property="og:url"           content="{{url('/')}}" />
+        <meta property="og:type"          content="website" />
+        <meta name="description" content="Founded May 1960 in London. Founder members: Pashupati SJB Rana, Hemang Dixit, Angur Baba Joshi, S K Malla, Prabal Rana, Surya B Basnyat and others. HM King Birendra, the then Crown Prince, as a student at Eton, was its patron. Thirty eight years of history makes its oldest Nepali orsanisation in the western world. ">
+        <meta name="keywords" content="To promote goodwill and co-operation amongst Nepalese, to preserve Nepali culture and tradition, to voice Nepali aspirations whenever necessary, remaining strictly, non partisan social organisation.">
+        @foreach($settings as $setting)
+
+            @if(file_exists('storage/'.$setting->image)  && $setting->image != '')
+                <meta property="og:image"         content="{{asset('storage/'.$setting->image)}}" />
+            @endif
+        @endforeach
+        <meta property="og:image:width" content="500" />
+        <meta property="og:image:height" content="500" />
+
+    @else
+        @yield('facebook_meta')
+    @endif
   @yield('style_css')
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -91,7 +109,9 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-dark  ">
+    <div class="container">
   <a class="navbar-brand" href="#"></a>
+
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -155,12 +175,16 @@
     </ul>
 
   </div>
+    </div>
 </nav>
 
 @yield('main')
 
 <!-- start footer -->
 @include('layouts.footer')
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=569915840369130&autoLogAppEvents=1" nonce="1FuMKci8"></script>
+
 <script src="{{asset('frontend/js/jquery-3.3.1.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('frontend/js/bootstrap.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('frontend/js/owl.carousel.min.js')}}" type="text/javascript"></script>
@@ -333,6 +357,28 @@
         }
 
     });
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id))
+            return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.3&appId=551922592366337";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+
+    function fb_share(dynamic_link,dynamic_title) {
+        var app_id = '569915840369130';
+        var pageURL="https://www.facebook.com/dialog/feed?app_id=" + app_id + "&link=" + dynamic_link;
+        var w = 600;
+        var h = 400;
+        var left = (screen.width / 2) - (w / 2);
+        var top = (screen.height / 2) - (h / 2);
+        window.open(pageURL, dynamic_title, 'toolbar=no, location=no, directories=no, status=no, menubar=yes, scrollbars=no, resizable=no, copyhistory=no, width=' + 800 + ', height=' + 650 + ', top=' + top + ', left=' + left)
+        return false;
+    }
+
 
 </script>
 
