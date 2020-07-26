@@ -1,5 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Blog')
+@section('title', 'Event')
+
 @section('header_js')
 @endsection
 @section('main')

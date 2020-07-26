@@ -2,11 +2,11 @@
 @section('title', $blog->title)
 @section('facebook_meta')
 
-    <meta property="og:url"           content="{{route('event.show',[$blog->slug])}}" />
+    <meta property="og:url"           content="{{route('blogs.show',[$blog->slug])}}" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="{{ $blog->title}}" />
     <meta property="og:description"   content="{{ $blog->short_description}}" />
-    @if(file_exists('storage/'.$event->image) && $blog->image != '')
+    @if(file_exists('storage/'.$blog->image) && $blog->image != '')
         <meta property="og:image"         content="{{asset('storage/'.$blog->image)}}" />
     @else
         <meta property="og:image"         content="https://dummyimage.com/600x340/ed3833/1e1edc.png&text=Khassamaj-UK" />
@@ -53,7 +53,7 @@
                         <ul class="event-meta-single-page">
                             <li><i class="fa fa-clock-o"></i> {{ \Carbon\Carbon::parse($blog->date)->toFormattedDateString() }}</li>
                             <li>
-                                <a  class="btn_hover view-more-btn" href="javascript:void(0)" onclick="fb_share('{{route('blog.show',[$blog->slug])}}', '{{ $event->title}}')">
+                                <a  class="btn_hover view-more-btn" href="javascript:void(0)" onclick="fb_share('{{route('blogs.show',[$blog->slug])}}', '{{ $blog->title}}')">
                                     Share
                                 </a>
                             </li>

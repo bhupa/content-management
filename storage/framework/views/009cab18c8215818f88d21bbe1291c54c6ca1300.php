@@ -1,4 +1,19 @@
 <?php $__env->startSection('title', $blog->title); ?>
+<?php $__env->startSection('facebook_meta'); ?>
+
+    <meta property="og:url"           content="<?php echo e(route('blogs.show',[$blog->slug])); ?>" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="<?php echo e($blog->title); ?>" />
+    <meta property="og:description"   content="<?php echo e($blog->short_description); ?>" />
+    <?php if(file_exists('storage/'.$blog->image) && $blog->image != ''): ?>
+        <meta property="og:image"         content="<?php echo e(asset('storage/'.$blog->image)); ?>" />
+    <?php else: ?>
+        <meta property="og:image"         content="https://dummyimage.com/600x340/ed3833/1e1edc.png&text=Khassamaj-UK" />
+    <?php endif; ?>
+    <meta property="og:image:width" content="500" />
+    <meta property="og:image:height" content="500" />
+
+<?php $__env->stopSection(); ?>
 <?php $__env->startSection('header_js'); ?>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('main'); ?>
@@ -33,6 +48,16 @@
                 <div class="col-md-8">
                     <div class="single-page-content">
                         <h1><?php echo e($blog->title); ?></h1>
+
+                        <ul class="event-meta-single-page">
+                            <li><i class="fa fa-clock-o"></i> <?php echo e(\Carbon\Carbon::parse($blog->date)->toFormattedDateString()); ?></li>
+                            <li>
+                                <a  class="btn_hover view-more-btn" href="javascript:void(0)" onclick="fb_share('<?php echo e(route('blogs.show',[$blog->slug])); ?>', '<?php echo e($blog->title); ?>')">
+                                    Share
+                                </a>
+                            </li>
+                        </ul>
+
 
                         <div class="single-page-img">
                             <?php if(file_exists('storage/'.$blog->image) && $blog->image != ''): ?>
