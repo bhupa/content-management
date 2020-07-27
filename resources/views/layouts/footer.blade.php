@@ -75,9 +75,9 @@
       </div>
     </div>
     <p class="text-center">
-      Copyright ©<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript">document.write(new Date().getFullYear());</script> All rights reserved |  by <a href="{{route('home')}}" target="_blank">Khassamaj Uk</a>
+        Copyright © {{date('Y')}} khassamaj Uk.  All rights reserved |  Developed By
 
-        |  Design & Develop <a href="http://www.genstechnology.com/" target="_blank">Gens Technology</a></p>
+        <a href="http://www.genstechnology.com/" target="_blank">Gens Technology</a></p>
 
 
   </div>
